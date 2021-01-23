@@ -1,0 +1,115 @@
+body {
+  background-color: rgb(255, 255, 255);
+  font-family: "EB Garamond", serif;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+/* Container for cards */
+
+.container {
+  margin-top: 50px;
+  min-height: 100vh;
+  width: 90%;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+/* Search divs  */
+.search--div {
+  width: 100%;
+  border: 1px solid red;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cards */
+.card {
+  border-radius: 5px;
+  width: 19.5%;
+  height: 310px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 500ms;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+/* Class for cards that have no images  */
+.card--noImage {
+  background-image: url(https://images-na.ssl-images-amazon.com/images/I/61AGZ37D7eL._AC_SL1039_.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 310px;
+  width: 19.5%;
+}
+
+/* Text for card with no images */
+.card--noImageText {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-size: 38px;
+  font-weight: 600;
+  width: 230px;
+  position: relative;
+  top: 115px;
+  margin: 0;
+}
+
+/* Class for images */
+.image {
+  height: 300px;
+}
+.del {
+  position: relative;
+  left: -100px;
+  top: -300px;
+}
+.favorite {
+  position: relative;
+  left: -56px;
+  top: -321px;
+}
+.show {
+  margin-top: 25px;
+}
+
+/* Buttons for no image cards when creating them inside of create card function I have to make them 2 times because they were acting weird in favorite mode or in seeach mode*/
+.no--image--delOne {
+  position: relative;
+  top: -268px;
+  left: -105px;
+}
+
+.no--image--favOne {
+  position: relative;
+  top: -289px;
+  left: -61px;
+}
+.no--image--del {
+  position: relative;
+  top: -290px;
+  left: -105px;
+}
+
+.hidden {
+  display: none;
+}
