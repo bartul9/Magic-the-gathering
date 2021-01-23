@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- My styles -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- My scripts -->
+    <script defer src="/app.js"></script>
+    <title>Magic the gathering</title>
+  </head>
+  <body>
+    <h1>Magic the Gathering</h1>
+    <div class="search--div">
+      <label for="search--name">Search by Name  </label>
+      <input type="text" id="search--name" name="search--name" /><button
+        class="name--btn"
+      >
+        Search
+      </button></div> <div class="search--div">
+        <label for="search--type">Search for: "Rare", "Common", "Uncommon" </label>
+        <input type="text" id="search--type" name="search--type" /><button
+          class="type--btn"
+        >
+          Search
+        </button>
+      </div>
+     <button class="show">Show Favorites</button>
+    <main class="container">
+   <div class="card hidden">  <button class="del btn">X</button>
+            <div class="image"><img id="card--image" src="" alt="" /></div>
+            <h2 class="name"></h2> 
+            <h3><span class="rarity">Rarity: </span> </h3>
+            <h3><span class="type">Type: </span> </h3>
+            <p class="text"><span class="original">Original text: </span></p>
+            </div>
+    </main
+  </body>
+</html>
