@@ -10,6 +10,7 @@ const card = document.querySelectorAll(".card");
 const del = document.querySelectorAll(".del");
 const show = document.querySelector(".show");
 
+
 // Create new acc inputs and buttons
 
 const createUsername = document.querySelector("#createUsername");
@@ -23,6 +24,13 @@ const password = document.querySelector("#password");
 const loginBtn = document.querySelector(".login--btn");
 
 ///////////////////////////////////////////////////////////////////////////////
+
+// Navabr scroll function
+
+window.addEventListener("scroll", function () {
+  let header = document.querySelector("header");
+  header.classList.toggle("sticky", window.scrollY > 0);
+});
 
 // Array for keeping the fetched card information on Array position 1
 const arr = [];
