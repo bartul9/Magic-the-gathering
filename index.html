@@ -17,14 +17,30 @@
     <title>Magic the gathering</title>
   </head>
   <body>
-    <h1>Magic the Gathering</h1>
+    <h1 class="css-text-mask">Magic the <br> gathering</h1>
+    <div class="search--div hidden">
+      <label for="createUsername">New Username:  </label>
+      <input type="text" id="createUsername" name="createUsername" />  <label for="createPassword">New Password:  </label>
+      <input type="password" id="createPassword" name="createPassword" /><button
+        class="create--btn"
+      >
+        Create Acc
+      </button></div>
+    <div class="search--div">
+      <label for="username">Username:  </label>
+      <input type="text" id="username" name="username" />  <label for="password">Password:  </label>
+      <input type="password" id="password" name="password" /><button
+        class="login--btn"
+      >
+        Login
+      </button></div>
     <div class="search--div">
       <label for="search--name">Search by Name  </label>
       <input type="text" id="search--name" name="search--name" /><button
         class="name--btn"
       >
         Search
-      </button></div> <div class="search--div">
+      </button>
         <label for="search--type">Search for: "Rare", "Common", "Uncommon" </label>
         <input type="text" id="search--type" name="search--type" /><button
           class="type--btn"
