@@ -10,10 +10,19 @@ const card = document.querySelectorAll(".card");
 const del = document.querySelectorAll(".del");
 const show = document.querySelector(".show");
 
-///////////////////////////////////////////////////////////////////////////////
+// Create new acc inputs and buttons
 
-// Array for keeping favorite cards
-const favoriteObject = [];
+const createUsername = document.querySelector("#createUsername");
+const createPassword = document.querySelector("#createPassword");
+const createBtn = document.querySelector(".create--btn");
+
+// Login inputs and button
+
+const username = document.querySelector("#username");
+const password = document.querySelector("#password");
+const loginBtn = document.querySelector(".login--btn");
+
+///////////////////////////////////////////////////////////////////////////////
 
 // Array for keeping the fetched card information on Array position 1
 const arr = [];
@@ -21,21 +30,24 @@ const arr = [];
 // Filtered array for rarity cards
 let rareCards = [];
 
-// Array for name that we are seeking
+// Array for name that we are seeking in the moment
 let nameArr = [];
+
+// Users array
+
+const users = [];
 
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
 fetch("https://api.magicthegathering.io/v1/cards")
   .then((res) => res.json())
-  .then((x) => (arr[0] = x));
+  .then((x) => arr.push(x));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 
-// FUnction for making all small letters when searching for name or rarity
-
 // Show favourite cards
 // Since there is a lot class changes between createFavorite and createCardsFinal i'll leave them like this in two functions even though they are pretty similliar I decided to leave them in two functions
+
 const createFavorite = function (i) {
   //Creating elements
   let newCardFav = document.createElement("div");
@@ -52,14 +64,14 @@ const createFavorite = function (i) {
   delBtn.classList = "del";
   delBtn.innerText = "X";
 
-  imageFav.src = `${favoriteObject[i].imageUrl}`;
+  imageFav.src = `${activeUser[0].userFavoriteCards[i].imageUrl}`;
 
   // Checking if image exists, if not then I put another image !!! also need to make function for this !!!
-  if (!favoriteObject[i].imageUrl) {
+  if (!activeUser[0].userFavoriteCards[i].imageUrl) {
     newCardFav.classList.add("card--noImage");
     let noneCardText = document.createElement("h2");
     noneCardText.classList.add("card--noImageText");
-    noneCardText.textContent = favoriteObject[i].name;
+    noneCardText.textContent = activeUser[0].userFavoriteCards[i].name;
     newCardFav.append(noneCardText);
     delBtn.classList.remove("del");
     delBtn.classList.add("no--image--del");
@@ -88,8 +100,7 @@ show.addEventListener("click", function () {
   // Make container empty before showing the favorite cards
   container.innerHTML = "";
   // Check if favorite array
-  console.log(favoriteObject);
-  favoriteObject.forEach((x, i) => {
+  activeUser[0].userFavoriteCards.forEach((x, i) => {
     createFavorite(i);
   });
 });
@@ -147,8 +158,7 @@ const createCardFinal = function (objPath, num) {
 
   // Favorite selected card
   favorite.addEventListener("click", function () {
-    favoriteObject.push(objPath[num]);
-    console.log(favoriteObject);
+    activeUser[0].userFavoriteCards.push(objPath[num]);
   });
 
   container.append(newCard);
@@ -181,6 +191,49 @@ typeBtn.addEventListener("click", function () {
       rareCards.push(x);
     }
   });
-  console.log(rareCards);
   rareCards.forEach((x, i) => createCardFinal(rareCards, i));
+});
+
+////////////////////////////////////////////////////////////////////////
+
+// Class for every new created users
+
+class UsersCl {
+  constructor(username, password) {
+    this.username = username;
+    this.password = password;
+    this.userFavoriteCards = [];
+    this.cardSet = [];
+  }
+}
+
+// Users created by me for app building use
+
+let userOne = new UsersCl("bartul_9", "jasamkralj222");
+let userTwo = new UsersCl("mike", "1234");
+users.push(userOne, userTwo);
+
+let activeUser = [];
+
+// When user clicks Create I create object with his name in it and password and push it to ussers array
+
+createBtn.addEventListener("click", function () {
+  let newUser = new UsersCl(createUsername.value, createPassword.value);
+  users.push(newUser);
+  console.log(users);
+});
+
+// When user logs in change active users to user that logged in, and show his favorite cards
+
+loginBtn.addEventListener("click", function () {
+  container.innerHTML = "";
+  users.forEach((user) => {
+    if (user.username === username.value && user.password === password.value) {
+      activeUser[0] = user;
+      activeUser[0].userFavoriteCards.forEach((x, i) => {
+        createFavorite(i);
+      });
+    }
+  });
+  console.log(activeUser);
 });
