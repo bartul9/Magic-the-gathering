@@ -6,16 +6,40 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: black;
+  color: white;
 }
 
-h1 {
-  font-size: 3rem;
-  text-align: center;
+.css-text-mask {
+  font-size: 165px;
+  font-family: Impact, Charcoal, sans-serif;
+  font-weight: bold;
+  letter-spacing: 15px;
+  background-image: url("https://www.desktopbackground.org/download/1920x1080/2015/09/23/1015599_was-bored-made-this-double-screen-ravnica-guilds-wallpapers-magictcg_3840x1080_h.jpg");
+  background-position: bottom;
+  background-size: cover;
+  -webkit-animation: animatedBackground 75s linear infinite normal;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #7a7a7a;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #0000;
+}
+
+@-webkit-keyframes animatedBackground {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -500px;
+  }
 }
 
 /* Container for cards */
 
 .container {
+  border-radius: 10px;
+  padding-top: 15px;
   margin-top: 50px;
   min-height: 100vh;
   width: 90%;
@@ -25,6 +49,7 @@ h1 {
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  background-color: white;
 }
 
 /* Search divs  */
@@ -40,7 +65,7 @@ h1 {
 /* Cards */
 .card {
   border-radius: 5px;
-  width: 19.5%;
+  width: 230px;
   height: 310px;
   display: flex;
   flex-direction: column;
@@ -59,7 +84,7 @@ h1 {
   background-position: center;
   background-size: cover;
   height: 310px;
-  width: 19.5%;
+  width: 230px;
 }
 
 /* Text for card with no images */
