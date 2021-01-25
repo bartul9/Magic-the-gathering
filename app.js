@@ -9,6 +9,8 @@ const inputName = document.querySelector("#search--name");
 const card = document.querySelectorAll(".card");
 const del = document.querySelectorAll(".del");
 const show = document.querySelector(".show");
+const allCards = document.querySelector(".showAll");
+const logoutBtn = document.querySelector("#logout");
 
 // Create new acc inputs and buttons
 
@@ -22,7 +24,29 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const loginBtn = document.querySelector(".login--btn");
 
+//  Create account modal inputs
+
+const modalCreate = document.getElementById("myModalCreate");
+const btnModalCreate = document.querySelector(".modalBtnCreate");
+const spanModal = document.getElementsByClassName("close")[0];
+
+// Login modal inputs
+
+const btnModalLogin = document.querySelector(".modalBtnLogin");
+const modalLogin = document.getElementById("myModalLogin");
+const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
+
 ///////////////////////////////////////////////////////////////////////////////
+
+// Function for turning first letter to uppercase and rest to lowercase
+
+const convertString = function (str) {
+  let arrStr = str.split("");
+  let arrStr2 = arrStr[0].toUpperCase();
+  let arrStr3 =
+    arrStr2 + arrStr.splice(1, arrStr.length).join("").toLowerCase();
+  return arrStr3;
+};
 
 // Navabr scroll function
 
@@ -92,10 +116,9 @@ const createFavorite = function (i) {
   delBtn.addEventListener("click", function () {
     // So here I added class of hidden to deleted card, and also I delete selected card from array, and if array.length is equal to 0 then i make sure that the last item is deleted and I make arr = empty array
     newCardFav.classList.add("hidden");
-    favoriteObject.splice(i, 1);
-    console.log(favoriteObject);
-    if (favoriteObject.length === 0) {
-      favoriteObject = [];
+    activeUser[0].userFavoriteCards.splice(i, 1);
+    if (activeUser[0].userFavoriteCards.length === 0) {
+      activeUser[0].userFavoriteCards = [];
     }
   });
 
@@ -152,11 +175,16 @@ const createCardFinal = function (objPath, num) {
     favorite.classList.add("no--image--favOne");
   }
 
-  // Appending created elements to card
-  newCard.append(imageDiv);
-  newCard.append(newBtn);
-  newCard.append(favorite);
-  imageDiv.append(image);
+  // If there is active user create all images with buttons for favorite cards and for deleting card, else just create cards without buttons
+  if (activeUser[0]) {
+    newCard.append(imageDiv);
+    newCard.append(newBtn);
+    newCard.append(favorite);
+    imageDiv.append(image);
+  } else {
+    newCard.append(imageDiv);
+    imageDiv.append(image);
+  }
 
   // Delete selected card
   newBtn.addEventListener("click", function () {
@@ -171,17 +199,33 @@ const createCardFinal = function (objPath, num) {
   container.append(newCard);
 };
 
+// Function for showing all cards avalible
+
+allCards.addEventListener("click", function () {
+  container.innerHTML = "";
+  if (activeUser[0]) {
+    for (let i = 0; i < activeUser[0].length; i++) {
+      for (let y = 0; y < arr[0].cards.length; y++) {
+        if (activeUser[0][i].name === arr[0].cards[y].name) {
+          console.log(y);
+        }
+      }
+    }
+  }
+  arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+});
+
 //////////////////////////////////////////////////////////////////////
 // Here I search card by name, so I putted name in array by unshift method, and then show card on position one from that array
 nameBtn.addEventListener("click", function () {
   container.innerHTML = "";
-  let input = inputName.value;
+  let input = convertString(inputName.value);
+  inputName.value = "";
   arr[0].cards.forEach((x) => {
     if (x.name === input) {
       nameArr.unshift(x);
       if (nameArr.length > 40) {
         nameArr.splice(1, nameArr.length);
-        console.log(nameArr);
       }
     }
   });
@@ -194,11 +238,12 @@ typeBtn.addEventListener("click", function () {
   rareCards = [];
   container.innerHTML = "";
   arr[0].cards.forEach((x) => {
-    if (x.rarity === inputType.value) {
+    if (x.rarity === convertString(inputType.value)) {
       rareCards.push(x);
     }
   });
   rareCards.forEach((x, i) => createCardFinal(rareCards, i));
+  inputType.value = "";
 });
 
 ////////////////////////////////////////////////////////////////////////
@@ -227,15 +272,20 @@ let activeUser = [];
 createBtn.addEventListener("click", function () {
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
+  modalCreate.style.display = "none";
   console.log(users);
 });
 
-// When user logs in change active users to user that logged in, and show his favorite cards
+// When user logs in change active users to user that logged in, and show his favorite cards, also close model window on log in
 
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   users.forEach((user) => {
     if (user.username === username.value && user.password === password.value) {
+      modalLogin.style.display = "none";
+      btnModalCreate.classList.add("hidden");
+      btnModalLogin.classList.add("hidden");
+      logoutBtn.classList.remove("hidden");
       activeUser[0] = user;
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createFavorite(i);
@@ -245,16 +295,19 @@ loginBtn.addEventListener("click", function () {
   console.log(activeUser);
 });
 
+////////////////////////////////////////////////////////////////////////////////////
+// User logs out, reset active user, put all things as they were before user logged in
+
+logoutBtn.addEventListener("click", function () {
+  container.innerHTML = "";
+  activeUser = [];
+  logoutBtn.classList.add("hidden");
+  btnModalCreate.classList.remove("hidden");
+  btnModalLogin.classList.remove("hidden");
+});
+
 ///////////////////////////////////////////////////////////////////////////////////////
-// Modal window
-
-const modalCreate = document.getElementById("myModalCreate");
-
-// Get the button that opens the modal
-const btnModalCreate = document.querySelector(".modalBtnCreate");
-
-// Get the <span> element that closes the modal
-const spanModal = document.getElementsByClassName("close")[0];
+// Modal window when creatin acc !!!!!!!!!!!!
 
 // When the user clicks the button, open the modal
 btnModalCreate.onclick = function () {
@@ -275,15 +328,6 @@ window.onclick = function (e) {
 
 //////////////////////////////////////////////////////////////////////////////
 //// Modal for logging  in !!!!!!!!!!
-
-//Button for oppening modal
-const btnModalLogin = document.querySelector(".modalBtnLogin");
-
-// Modal selected
-const modalLogin = document.getElementById("myModalLogin");
-
-// Get the <span> element that closes the modal
-const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
 
 // When the user clicks the button, open the modal
 btnModalLogin.onclick = function () {
