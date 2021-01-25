@@ -99,6 +99,7 @@ header .logo {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: #0000;
+  transition: 500ms;
 }
 
 @-webkit-keyframes animatedBackground {
@@ -130,8 +131,7 @@ header .logo {
 /* Search divs and buttons inside them */
 .search--div {
   width: 100%;
-  border: 1px solid red;
-  height: 35vh;
+  height: 20vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,6 +148,8 @@ header .logo {
   font-weight: 600;
   transition: 500ms;
   margin: 20px;
+  position: relative;
+  top: 15px;
   background-color: black;
   color: white;
 }
@@ -168,13 +170,15 @@ header .logo {
   background-position: center;
   display: flex;
   flex-direction: row;
+  transition: 1000ms;
 }
 .section--2 {
-  margin-top: 50px;
   width: 100%;
-  height: 350px;
+  height: 150px;
   display: flex;
   flex-direction: row;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 /* Cards */
@@ -291,6 +295,8 @@ header .logo {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  transition: 500ms;
+  opacity: 0;
 }
 
 /* Modal Content */
@@ -302,7 +308,7 @@ header .logo {
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 40%;
+  width: 300px;
   height: 230px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
@@ -337,6 +343,7 @@ header .logo {
   transition: 500ms;
   background-color: black;
   color: white;
+  opacity: 1;
 }
 
 .create--btn:hover {
@@ -349,9 +356,9 @@ header .logo {
 .close {
   color: rgb(255, 255, 255);
   position: relative;
-  left: 240px;
+  left: 130px;
   font-size: 40px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .close:hover,
@@ -375,7 +382,8 @@ header .logo {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  transition: 1s;
+  opacity: 0;
+  transition: 500ms;
 }
 
 /* Modal Content */
@@ -387,7 +395,7 @@ header .logo {
   margin: auto;
   padding: 0;
   border: 1px solid #888;
-  width: 40%;
+  width: 300px;
   height: 230px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
@@ -421,6 +429,7 @@ header .logo {
   transition: 500ms;
   background-color: black;
   color: white;
+  opacity: 1;
 }
 
 .login--btn:hover {
@@ -433,9 +442,9 @@ header .logo {
 .closeLogin {
   color: rgb(255, 255, 255);
   position: relative;
-  left: 240px;
+  left: 130px;
   font-size: 40px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .closeLogin:hover,
@@ -465,4 +474,49 @@ header .logo {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .css-text-mask {
+    font-size: 110px;
+    letter-spacing: 5px;
+  }
+}
+
+@media (max-width: 570px) {
+  .css-text-mask {
+    font-size: 60px;
+    letter-spacing: 0;
+  }
+  .section--2 {
+    flex-direction: column;
+    margin-bottom: 200px;
+  }
+  .search--div {
+    height: 100px;
+  }
+  .modal-content {
+    width: 260px;
+  }
+  .modal-login {
+    width: 260px;
+  }
+  .closeLogin {
+    left: 110px;
+  }
+  .close {
+    left: 110px;
+  }
+  .section--1 {
+    background-image: url(https://picserio.com/data/out/173/magic-the-gathering-wallpapers_3901265.jpg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@media (max-width: 300px) {
+  .css-text-mask {
+    font-size: 40px;
+  }
 }
