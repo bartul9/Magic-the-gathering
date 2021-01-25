@@ -278,13 +278,17 @@ createBtn.addEventListener("click", function () {
 
 // When user logs in change active users to user that logged in, and show his favorite cards, also close model window on log in
 
+const section1 = document.querySelector(".section--1");
+
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   users.forEach((user) => {
     if (user.username === username.value && user.password === password.value) {
       modalLogin.style.display = "none";
-      btnModalCreate.classList.add("hidden");
-      btnModalLogin.classList.add("hidden");
+      btnModalCreate.style.opacity = 0;
+      btnModalLogin.style.opacity = 0;
+      section1.style.marginTop = "-50px";
+
       logoutBtn.classList.remove("hidden");
       activeUser[0] = user;
       activeUser[0].userFavoriteCards.forEach((x, i) => {
@@ -302,8 +306,11 @@ logoutBtn.addEventListener("click", function () {
   container.innerHTML = "";
   activeUser = [];
   logoutBtn.classList.add("hidden");
-  btnModalCreate.classList.remove("hidden");
-  btnModalLogin.classList.remove("hidden");
+  section1.style.marginTop = "50px";
+  setTimeout(() => {
+    btnModalCreate.style.opacity = 1;
+    btnModalLogin.style.opacity = 1;
+  }, 200);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -312,17 +319,22 @@ logoutBtn.addEventListener("click", function () {
 // When the user clicks the button, open the modal
 btnModalCreate.onclick = function () {
   modalCreate.style.display = "block";
+  setTimeout(() => {
+    modalCreate.style.opacity = 1;
+  }, 50);
 };
 
 // When the user clicks on <span> (x), close the modal
 spanModal.onclick = function () {
   modalCreate.style.display = "none";
+  modalCreate.style.opacity = 0;
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (e) {
   if (e.target == modalCreate) {
     modalCreate.style.display = "none";
+    modalLogin.style.opacity = 0;
   }
 };
 
@@ -332,16 +344,21 @@ window.onclick = function (e) {
 // When the user clicks the button, open the modal
 btnModalLogin.onclick = function () {
   modalLogin.style.display = "block";
+  setTimeout(() => {
+    modalLogin.style.opacity = 1;
+  }, 50);
 };
 
 // When the user clicks on <span> (x), close the modal
 spanModalLogin.onclick = function () {
   modalLogin.style.display = "none";
+  modalLogin.style.opacity = 0;
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   if (event.target == modalLogin) {
     modalLogin.style.display = "none";
+    modalLogin.style.opacity = 0;
   }
 };
