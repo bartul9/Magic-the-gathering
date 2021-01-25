@@ -11,6 +11,8 @@ const del = document.querySelectorAll(".del");
 const show = document.querySelector(".show");
 const allCards = document.querySelector(".showAll");
 const logoutBtn = document.querySelector("#logout");
+const searchOptionsBtn = document.querySelector(".searchOptionBtn");
+const sectionSearch = document.querySelector(".section--2");
 
 // Create new acc inputs and buttons
 
@@ -71,7 +73,8 @@ const users = [];
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
 fetch("https://api.magicthegathering.io/v1/cards")
   .then((res) => res.json())
-  .then((x) => arr.push(x));
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -203,15 +206,6 @@ const createCardFinal = function (objPath, num) {
 
 allCards.addEventListener("click", function () {
   container.innerHTML = "";
-  if (activeUser[0]) {
-    for (let i = 0; i < activeUser[0].length; i++) {
-      for (let y = 0; y < arr[0].cards.length; y++) {
-        if (activeUser[0][i].name === arr[0].cards[y].name) {
-          console.log(y);
-        }
-      }
-    }
-  }
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
@@ -311,6 +305,14 @@ logoutBtn.addEventListener("click", function () {
     btnModalCreate.style.opacity = 1;
     btnModalLogin.style.opacity = 1;
   }, 200);
+});
+
+////////////////////////////////////////////////////////////////////////////////
+// Btn for opening search options
+
+searchOptionsBtn.addEventListener("click", function () {
+  sectionSearch.style.opacity = 1;
+  searchOptionsBtn.classList.add("hidden");
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
