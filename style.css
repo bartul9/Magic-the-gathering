@@ -160,6 +160,11 @@ header .logo {
   color: black;
 }
 
+.searchOptionBtn {
+  position: relative;
+  top: -120px;
+}
+
 /* Sections in order */
 .section--1 {
   margin-top: 50px;
@@ -174,11 +179,14 @@ header .logo {
 }
 .section--2 {
   width: 100%;
-  height: 150px;
+  height: 250px;
   display: flex;
   flex-direction: row;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0px;
+  opacity: 0;
+  transition: 1s;
 }
 
 /* Cards */
@@ -325,9 +333,11 @@ header .logo {
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: rgb(255, 41, 41);
   justify-content: center;
   align-items: center;
+  font-size: 25px;
+  letter-spacing: 1px;
 }
 
 .create--btn {
@@ -411,9 +421,11 @@ header .logo {
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: rgb(255, 41, 41);
   justify-content: center;
   align-items: center;
+  font-size: 25px;
+  letter-spacing: 1px;
 }
 
 .login--btn {
@@ -490,10 +502,23 @@ header .logo {
   }
   .section--2 {
     flex-direction: column;
-    margin-bottom: 200px;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
   .search--div {
     height: 100px;
+    margin: 15px;
+  }
+  .showBtns {
+    margin: 5px;
+  }
+  .searchOptionBtn {
+    top: -200px;
+  }
+
+  .btnSearch {
+    position: relative;
+    top: -10px;
   }
   .modal-content {
     width: 260px;
@@ -508,7 +533,6 @@ header .logo {
     left: 110px;
   }
   .section--1 {
-    background-image: url(https://picserio.com/data/out/173/magic-the-gathering-wallpapers_3901265.jpg);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
