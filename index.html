@@ -28,22 +28,51 @@
 
     <!-- H1 with nice animation -->
     <h1 class="css-text-mask">Magic the <br> gathering</h1>
-    <div class="search--div hidden">
-      <label for="createUsername">New Username:  </label>
-      <input type="text" id="createUsername" name="createUsername" />  <label for="createPassword">New Password:  </label>
-      <input type="password" id="createPassword" name="createPassword" /><button
-        class="create--btn"
-      >
-        Create Acc
-      </button></div>
-    <div class="search--div">
-      <label for="username">Username:  </label>
-      <input type="text" id="username" name="username" />  <label for="password">Password:  </label>
-      <input type="password" id="password" name="password" /><button
-        class="login--btn"
-      >
-        Login
-      </button></div>
+
+   
+<!-- Trigger/Open The Modal -->
+<button class="modalBtnCreate btn">Create Account</button>
+
+<!-- The modal for creating new Account -->
+<div id="myModalCreate">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="createAcc--div">
+      <span class="close">&times;</span>
+      <label for="createUsername">Username:  </label>
+    <input type="text" id="createUsername" name="createUsername" /> 
+    <label for="createPassword">Password:  </label>
+    <input type="password" id="createPassword" name="createPassword" />
+    <button
+    class="create--btn">
+    Create Account</button>
+  </div>
+    </div>
+  </div>
+
+<!-- Trigger/Open The Modal -->
+<button class="modalBtnLogin btn">Login</button>
+
+<!-- The modal for login -->
+<div id="myModalLogin">
+  <!-- Modal content -->
+  <div class="modal-login">
+      <div class="login--div">
+        <span class="closeLogin">&times;</span>
+        <label for="username">Username:  </label>
+        <input type="text" id="username" name="username" />  <label for="password">Password:  </label>
+        <input type="password" id="password" name="password" /><button
+          class="login--btn"
+        >
+          Login
+        </button></div>
+    </div>
+  </div>
+ 
+   
+  <section class="section section--1"> 
+   
+   
     <div class="search--div">
       <label for="search--name">Search by Name  </label>
       <input type="text" id="search--name" name="search--name" /><button
@@ -58,7 +87,7 @@
           Search
         </button>
       </div>
-     <button class="show">Show Favorites</button>
+    </section> <button class="show">Show Favorites</button>
     <main class="container section">
    <div class="card hidden">  <button class="del btn">X</button>
             <div class="image"><img id="card--image" src="" alt="" /></div>
