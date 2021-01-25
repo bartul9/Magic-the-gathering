@@ -10,7 +10,6 @@ const card = document.querySelectorAll(".card");
 const del = document.querySelectorAll(".del");
 const show = document.querySelector(".show");
 
-
 // Create new acc inputs and buttons
 
 const createUsername = document.querySelector("#createUsername");
@@ -245,3 +244,60 @@ loginBtn.addEventListener("click", function () {
   });
   console.log(activeUser);
 });
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Modal window
+
+const modalCreate = document.getElementById("myModalCreate");
+
+// Get the button that opens the modal
+const btnModalCreate = document.querySelector(".modalBtnCreate");
+
+// Get the <span> element that closes the modal
+const spanModal = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+btnModalCreate.onclick = function () {
+  modalCreate.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+spanModal.onclick = function () {
+  modalCreate.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (e) {
+  if (e.target == modalCreate) {
+    modalCreate.style.display = "none";
+  }
+};
+
+//////////////////////////////////////////////////////////////////////////////
+//// Modal for logging  in !!!!!!!!!!
+
+//Button for oppening modal
+const btnModalLogin = document.querySelector(".modalBtnLogin");
+
+// Modal selected
+const modalLogin = document.getElementById("myModalLogin");
+
+// Get the <span> element that closes the modal
+const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
+
+// When the user clicks the button, open the modal
+btnModalLogin.onclick = function () {
+  modalLogin.style.display = "block";
+};
+
+// When the user clicks on <span> (x), close the modal
+spanModalLogin.onclick = function () {
+  modalLogin.style.display = "none";
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == modalLogin) {
+    modalLogin.style.display = "none";
+  }
+};
