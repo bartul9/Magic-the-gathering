@@ -69,6 +69,19 @@ header .logo {
   transition: 0.6;
 }
 
+#logout {
+  font-size: 28px;
+  font-weight: 600;
+  color: rgb(211, 40, 245);
+  list-style: none;
+  transition: 500ms;
+}
+
+#logout:hover {
+  cursor: pointer;
+  color: rgb(135, 0, 168);
+}
+
 /* Heading and its animation */
 .css-text-mask {
   font-size: 170px;
@@ -102,9 +115,9 @@ header .logo {
 .container {
   border-radius: 10px;
   padding-top: 15px;
-  margin-top: 50px;
-  min-height: 100vh;
-  width: 90%;
+  height: 100vh;
+  overflow: auto;
+  width: 98%;
   border: 3px solid rgb(139, 139, 139);
   display: flex;
   flex-direction: row;
@@ -114,6 +127,7 @@ header .logo {
   background-color: white;
 }
 
+/* Search divs and buttons inside them */
 .search--div {
   width: 100%;
   border: 1px solid red;
@@ -124,14 +138,41 @@ header .logo {
   flex-direction: column;
 }
 
-.type--btn {
-  margin-top: 10px;
+.btnSearch {
+  width: 150px;
+  height: 25px;
+  outline: none;
+  border: 1px solid rgb(136, 136, 136);
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 500ms;
+  margin: 20px;
+  background-color: black;
+  color: white;
 }
 
+.btnSearch:hover {
+  background-color: white;
+  cursor: pointer;
+  color: black;
+}
+
+/* Sections in order */
 .section--1 {
+  margin-top: 50px;
   width: 100%;
   height: 350px;
-  border: 1px solid yellow;
+  background-image: url(https://picserio.com/data/out/173/magic-the-gathering-wallpapers_3901265.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+}
+.section--2 {
+  margin-top: 50px;
+  width: 100%;
+  height: 350px;
   display: flex;
   flex-direction: row;
 }
@@ -173,7 +214,29 @@ header .logo {
   margin: 0;
 }
 
-/* Class for images */
+/* Show buttons, show all and show favorite cards */
+
+.showBtns {
+  width: 150px;
+  height: 25px;
+  outline: none;
+  border: 1px solid rgb(136, 136, 136);
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 500ms;
+  margin: 20px;
+  background-color: black;
+  color: white;
+}
+
+.showBtns:hover {
+  background-color: white;
+  cursor: pointer;
+  color: black;
+}
+
+/* Class for images(cards ) and buttons for them*/
 .image {
   height: 300px;
 }
@@ -211,9 +274,10 @@ header .logo {
 
 .hidden {
   display: none;
+  transition: 500ms;
 }
 
-/* Modal window */
+/* Modal for create new account */
 
 #myModalCreate {
   display: none; /* Hidden by default */
@@ -243,7 +307,7 @@ header .logo {
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
     0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  background-image: url(https://i.pinimg.com/originals/82/32/15/8232157f8d4e09717bf71b9a5e7d2929.jpg);
+  background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
   background-position: center;
   background-size: cover;
 }
@@ -255,7 +319,7 @@ header .logo {
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   justify-content: center;
   align-items: center;
 }
@@ -271,15 +335,17 @@ header .logo {
   font-size: 17px;
   font-weight: 600;
   transition: 500ms;
+  background-color: black;
+  color: white;
 }
 
 .create--btn:hover {
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   cursor: pointer;
 }
 
-/* The Close Button */
+/* The Close Button for create acc modal */
 .close {
   color: rgb(255, 255, 255);
   position: relative;
@@ -290,12 +356,12 @@ header .logo {
 
 .close:hover,
 .close:focus {
-  color: #000;
+  color: rgb(156, 156, 156);
   text-decoration: none;
   cursor: pointer;
 }
 
-/* Modal login */
+/* Modal for login */
 
 #myModalLogin {
   display: none; /* Hidden by default */
@@ -309,6 +375,7 @@ header .logo {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  transition: 1s;
 }
 
 /* Modal Content */
@@ -330,7 +397,6 @@ header .logo {
   background-size: cover;
 }
 
-/* Create acc div in modal */
 .login--div {
   position: relative;
   top: -10px;
@@ -353,11 +419,13 @@ header .logo {
   font-size: 17px;
   font-weight: 600;
   transition: 500ms;
+  background-color: black;
+  color: white;
 }
 
 .login--btn:hover {
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   cursor: pointer;
 }
 
@@ -374,5 +442,27 @@ header .logo {
 .closeLogin:focus {
   color: rgb(129, 129, 129);
   text-decoration: none;
+  cursor: pointer;
+}
+
+/* Modal open buttons */
+
+.btnModal {
+  width: 200px;
+  height: 30px;
+  outline: none;
+  border: 1px solid rgb(136, 136, 136);
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 500ms;
+  margin-top: 25px;
+  background-color: black;
+  color: white;
+}
+
+.btnModal:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   cursor: pointer;
 }
