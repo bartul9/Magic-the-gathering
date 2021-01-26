@@ -109,7 +109,7 @@ header .logo {
 
 .container {
   position: relative;
-  top: -150px;
+  top: -130px;
   border-radius: 10px;
   padding-top: 15px;
   height: 0vh;
@@ -158,16 +158,13 @@ header .logo {
   color: black;
 }
 
-.searchOptionBtn {
-}
-
 /* About heading */
 
 .aboutHeading {
-  margin-top: 100px;
-  font-size: 45px;
+  font-size: 50px;
   letter-spacing: 2px;
-  color: rgb(175, 6, 6);
+  color: rgb(9, 179, 74);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
 /* Sections in order */
@@ -196,6 +193,12 @@ header .logo {
   flex-direction: column;
   position: relative;
   top: -250px;
+  width: 100%;
+  background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 /* Cards */
@@ -297,50 +300,39 @@ header .logo {
   left: -105px;
 }
 
+/* --------------------------------------------------- */
+
 .hidden {
   display: none;
   transition: 500ms;
 }
 
-.footer--picture {
-  width: 100%;
-  background-image: url(/imgs/magic-the-gathering-2.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 320px;
-}
-
 .about--text {
+  width: 90%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .about {
+  margin-top: -15px;
   text-align: center;
-  font-size: 20px;
-  width: 80%;
+  font-size: 26px;
+  width: 70%;
+  padding: 5px;
+  color: rgb(243, 198, 0);
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
+  font-weight: 700;
+  font-style: italic;
+}
+.text {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-#aboutImgOne {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 70%;
-  border: 1px solid red;
-}
-#aboutImgTwo {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 70%;
-  border: 1px solid red;
-}
-#aboutImgThree {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 70%;
-  border: 1px solid red;
-}
 /* --------------------------------------------------------------------- */
 /* Modal for create new account */
 
@@ -533,7 +525,7 @@ header .logo {
   right: 100%;
   top: -180px;
   transition: 600ms;
-  color: rgb(0, 179, 60);
+  color: rgb(253, 1, 1);
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
@@ -547,8 +539,8 @@ header .logo {
   font-weight: 600;
   transition: 500ms;
   margin-top: 25px;
-  background-color: black;
-  color: white;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   position: relative;
   top: -120px;
   left: 0;
@@ -566,11 +558,16 @@ header .logo {
   background-color: black;
   color: white;
   position: relative;
-  top: -65px;
+  top: -80px;
   left: 0;
 }
 
-.btnModal,
+.btnModal:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
 .btnModal2:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
@@ -598,14 +595,6 @@ header .logo {
     font-size: 110px;
     letter-spacing: 5px;
   }
-  .footer--picture {
-    width: 100%;
-    background-image: url(https://vistapointe.net/images/magic-the-gathering-2.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 250px;
-  }
 }
 
 @media (max-width: 570px) {
@@ -621,24 +610,35 @@ header .logo {
   }
   .search--div {
     height: 100px;
-    margin: 15px;
     align-items: center;
     justify-content: center;
   }
 
   .searchByName {
     position: relative;
-    top: 20px;
+    top: -55px;
   }
 
   .showBtns {
     margin: 5px;
   }
+  .searchBtnsAll {
+    position: relative;
+    top: -50px;
+  }
+
+  .searchByRarity {
+    position: relative;
+    top: -25px;
+  }
   .searchOptionBtn {
-    top: -300px;
+    top: -50px;
   }
   .modalBtnLogin {
-    top: -150px;
+    top: -100px;
+  }
+  .modalBtnCreate {
+    top: 25px;
   }
 
   .btnSearch {
@@ -661,6 +661,17 @@ header .logo {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+  }
+  .text {
+    width: 100%;
+  }
+  .about {
+    width: 100%;
+    font-size: 18px;
+    padding: 5px;
+  }
+  .aboutImages {
+    width: 100%;
   }
 }
 
