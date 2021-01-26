@@ -288,8 +288,9 @@ createBtn.addEventListener("click", function () {
   btnModalLogin.style.left = "-100%";
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   welcomeMsg.style.right = "0";
+  welcomeMsg.style.opacity = 1;
   createUsername.value = createPassword.value = "";
-  welcomeMsg.style.top = "-150px";
+  welcomeMsg.style.top = "-170px";
   console.log(users);
 });
 
@@ -311,6 +312,7 @@ loginBtn.addEventListener("click", function () {
       activeUser[0] = user;
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
       welcomeMsg.style.right = "0";
+      welcomeMsg.style.opacity = 1;
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createFavorite(i);
       });
@@ -333,7 +335,7 @@ logoutBtn.addEventListener("click", function () {
   activeUser = [];
   logoutBtn.classList.add("hidden");
   sectionSearch.style.opacity = 0;
-  welcomeMsg.textContent = "";
+  welcomeMsg.style.opacity = 0;
   welcomeMsg.style.right = "100%";
   setTimeout(() => {
     sectionSearch.style.left = "-100%";
