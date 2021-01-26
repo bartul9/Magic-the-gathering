@@ -13,7 +13,6 @@ body {
 /* Navbar and its properities */
 header {
   position: fixed;
-  top: 0;
   left: 0;
   width: 100%;
   display: flex;
@@ -22,6 +21,7 @@ header {
   transition: 0.6s;
   padding: 40px, 100px;
   z-index: 100000;
+  opacity: 0;
 }
 
 header.sticky {
@@ -83,37 +83,33 @@ header .logo {
 }
 
 /* Heading and its animation */
-.css-text-mask {
-  font-size: 170px;
-  position: relative;
-  top: -20px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
+
+.headingOne {
+  font-size: 150px;
   letter-spacing: 5px;
-  background-image: url("https://i.pinimg.com/originals/a7/de/a4/a7dea480f6d7901147417ba7b7eded70.png");
-  background-position: bottom;
-  background-size: cover;
-  -webkit-animation: animatedBackground 100s linear infinite normal;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #7a7a7a;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: #0000;
-  transition: 500ms;
+  text-align: center;
+  color: rgb(9, 179, 74);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
-@-webkit-keyframes animatedBackground {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 -500px;
-  }
+.heading--section {
+  background-color: white;
+  background-image: url(https://dw9to29mmj727.cloudfront.net/promo/2016/5336-SeriesHeaders_Tier01_Magic_2000x800.jpg);
+  width: 100%;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Container for cards */
 
 .container {
+  position: relative;
+  top: -150px;
   border-radius: 10px;
   padding-top: 15px;
   height: 0vh;
@@ -163,8 +159,6 @@ header .logo {
 }
 
 .searchOptionBtn {
-  position: relative;
-  top: -100px;
 }
 
 /* About heading */
@@ -177,15 +171,7 @@ header .logo {
 }
 
 /* Sections in order */
-.section--1 {
-  margin-top: 50px;
-  width: 100%;
-  height: 350px;
-  background-image: url(https://picserio.com/data/out/173/magic-the-gathering-wallpapers_3901265.jpg);
-  background-size: cover;
-  background-position: center;
-  transition: 1000ms;
-}
+
 .section--2 {
   width: 100%;
   height: 250px;
@@ -197,6 +183,7 @@ header .logo {
   opacity: 0;
   transition: 0.4s;
   position: relative;
+  top: -150px;
   left: -100%;
 }
 
@@ -207,7 +194,8 @@ header .logo {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 50px;
+  position: relative;
+  top: -250px;
 }
 
 /* Cards */
@@ -246,6 +234,10 @@ header .logo {
   top: 115px;
   margin: 0;
 }
+
+/* #mobileImg {
+  width: 100%;
+} */
 
 /* Show buttons, show all and show favorite cards */
 
@@ -534,6 +526,17 @@ header .logo {
   left: 0%;
 } */
 
+.welcomeMsg {
+  font-size: 50px;
+  font-weight: 700;
+  position: relative;
+  right: 100%;
+  top: -180px;
+  transition: 600ms;
+  color: rgb(0, 179, 60);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
+
 .btnModal {
   width: 200px;
   height: 30px;
@@ -546,16 +549,52 @@ header .logo {
   margin-top: 25px;
   background-color: black;
   color: white;
+  position: relative;
+  top: -120px;
+  left: 0;
+}
+.btnModal2 {
+  width: 200px;
+  height: 30px;
+  outline: none;
+  border: 1px solid rgb(136, 136, 136);
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  transition: 500ms;
+  margin-top: 25px;
+  background-color: black;
+  color: white;
+  position: relative;
+  top: -65px;
+  left: 0;
 }
 
-.btnModal:hover {
+.btnModal,
+.btnModal2:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
 
 @media (max-width: 900px) {
-  .css-text-mask {
+  .navbar {
+    flex-direction: column;
+  }
+  header .logo {
+    margin: 0;
+    display: none;
+  }
+  .nav--ul {
+    margin-right: 0;
+    padding: 0;
+  }
+
+  .nav--li {
+    margin-left: 10px;
+  }
+
+  .headingOne {
     font-size: 110px;
     letter-spacing: 5px;
   }
@@ -570,25 +609,36 @@ header .logo {
 }
 
 @media (max-width: 570px) {
-  .css-text-mask {
+  .headingOne {
     font-size: 90px;
     letter-spacing: 0;
+    top: 0px;
   }
   .section--2 {
     flex-direction: column;
-    margin-top: 50px;
     margin-bottom: 50px;
+    top: -70px;
   }
   .search--div {
     height: 100px;
     margin: 15px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .searchByName {
+    position: relative;
+    top: 20px;
   }
 
   .showBtns {
     margin: 5px;
   }
   .searchOptionBtn {
-    top: -220px;
+    top: -300px;
+  }
+  .modalBtnLogin {
+    top: -150px;
   }
 
   .btnSearch {
@@ -615,13 +665,13 @@ header .logo {
 }
 
 @media (max-width: 430px) {
-  .css-text-mask {
+  .headingOne {
     font-size: 70px;
   }
 }
 
 @media (max-width: 350px) {
-  .css-text-mask {
-    font-size: 40px;
+  .headingOne {
+    font-size: 60px;
   }
 }
