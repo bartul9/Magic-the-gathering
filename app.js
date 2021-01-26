@@ -13,7 +13,11 @@ const allCards = document.querySelector(".showAll");
 const logoutBtn = document.querySelector("#logout");
 const searchOptionsBtn = document.querySelector(".searchOptionBtn");
 const sectionSearch = document.querySelector(".section--2");
+const section3 = document.querySelector(".section--3");
 const closeSearchBtn = document.querySelector(".closeSearchBtn");
+const welcomeMsg = document.querySelector(".welcomeMsg");
+const header = document.querySelector("header");
+const headingSection = document.querySelector(".headingSection");
 
 // Create new acc inputs and buttons
 
@@ -54,8 +58,10 @@ const convertString = function (str) {
 // Navabr scroll function
 
 window.addEventListener("scroll", function () {
-  let header = document.querySelector("header");
   header.classList.toggle("sticky", window.scrollY > 0);
+  if (window.scrollY > 0) {
+    header.style.opacity = 1;
+  } else header.style.opacity = 0;
 });
 
 // Array for keeping the fetched card information on Array position 1
@@ -266,6 +272,13 @@ let activeUser = [];
 
 createBtn.addEventListener("click", function () {
   container.innerHTML = "";
+  if (createUsername.value === "" || createPassword.value === "") {
+    createUsername.value = createPassword.value = "";
+    createBtn.textContent = "Wrong input";
+    setTimeout(() => (createBtn.textContent = "Create Account"), 1500);
+    return;
+  }
+  createBtn.textContent = "Create Acc";
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
   activeUser[0] = newUser;
@@ -273,27 +286,40 @@ createBtn.addEventListener("click", function () {
   logoutBtn.classList.remove("hidden");
   btnModalCreate.style.left = "-100%";
   btnModalLogin.style.left = "-100%";
-  section1.style.marginTop = "-85px";
+  welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
+  welcomeMsg.style.right = "0";
+  createUsername.value = createPassword.value = "";
+  welcomeMsg.style.top = "-150px";
   console.log(users);
 });
 
-// When user logs in change active users to user that logged in, and show his favorite cards, also close model window on log in
-
-const section1 = document.querySelector(".section--1");
+// When user logs in change active users to user that logged in, and show his favorite cards, also close model window on log in and change all the other stuff that needs to be changed
 
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   users.forEach((user) => {
     if (user.username === username.value && user.password === password.value) {
+      username.value = password.value = "";
       modalLogin.style.display = "none";
-      btnModalCreate.style.left = "-100%";
-      btnModalLogin.style.left = "-100%";
-      section1.style.marginTop = "-85px";
+      btnModalCreate.style.opacity = 0;
+      btnModalLogin.style.opacity = 0;
+      setTimeout(() => {
+        btnModalCreate.style.left = "100%";
+        btnModalLogin.style.left = "100%";
+      }, 200);
       logoutBtn.classList.remove("hidden");
       activeUser[0] = user;
+      welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
+      welcomeMsg.style.right = "0";
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createFavorite(i);
       });
+    } else {
+      username.value = password.value = "";
+      loginBtn.textContent = "Wrong Input";
+      setTimeout(() => {
+        loginBtn.textContent = "Login";
+      }, 1500);
     }
   });
   console.log(activeUser);
@@ -306,13 +332,14 @@ logoutBtn.addEventListener("click", function () {
   container.innerHTML = "";
   activeUser = [];
   logoutBtn.classList.add("hidden");
-  section1.style.marginTop = "50px";
   sectionSearch.style.opacity = 0;
-
+  welcomeMsg.textContent = "";
+  welcomeMsg.style.right = "100%";
   setTimeout(() => {
     sectionSearch.style.left = "-100%";
   }, 500);
-
+  btnModalCreate.style.left = 0;
+  btnModalLogin.style.left = 0;
   container.style.transition = "500ms";
   container.style.opacity = 0;
   container.style.height = 0;
@@ -331,6 +358,7 @@ searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
+  section3.style.top = 0;
   container.style.opacity = 1;
   container.style.height = "100vh";
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
@@ -346,6 +374,7 @@ closeSearchBtn.addEventListener("click", function () {
     sectionSearch.style.left = "-100%";
   }, 500);
   container.style.transition = "500ms";
+  section3.style.top = "-250px";
   container.style.opacity = 0;
   container.style.height = 0;
   searchOptionsBtn.classList.remove("hidden");
