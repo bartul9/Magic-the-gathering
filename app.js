@@ -13,6 +13,7 @@ const allCards = document.querySelector(".showAll");
 const logoutBtn = document.querySelector("#logout");
 const searchOptionsBtn = document.querySelector(".searchOptionBtn");
 const sectionSearch = document.querySelector(".section--2");
+const closeSearchBtn = document.querySelector(".closeSearchBtn");
 
 // Create new acc inputs and buttons
 
@@ -264,9 +265,15 @@ let activeUser = [];
 // When user clicks Create I create object with his name in it and password and push it to ussers array
 
 createBtn.addEventListener("click", function () {
+  container.innerHTML = "";
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
+  activeUser[0] = newUser;
   modalCreate.style.display = "none";
+  logoutBtn.classList.remove("hidden");
+  btnModalCreate.style.left = "-100%";
+  btnModalLogin.style.left = "-100%";
+  section1.style.marginTop = "-85px";
   console.log(users);
 });
 
@@ -279,10 +286,9 @@ loginBtn.addEventListener("click", function () {
   users.forEach((user) => {
     if (user.username === username.value && user.password === password.value) {
       modalLogin.style.display = "none";
-      btnModalCreate.style.opacity = 0;
-      btnModalLogin.style.opacity = 0;
-      section1.style.marginTop = "-50px";
-
+      btnModalCreate.style.left = "-100%";
+      btnModalLogin.style.left = "-100%";
+      section1.style.marginTop = "-85px";
       logoutBtn.classList.remove("hidden");
       activeUser[0] = user;
       activeUser[0].userFavoriteCards.forEach((x, i) => {
@@ -301,6 +307,17 @@ logoutBtn.addEventListener("click", function () {
   activeUser = [];
   logoutBtn.classList.add("hidden");
   section1.style.marginTop = "50px";
+  sectionSearch.style.opacity = 0;
+
+  setTimeout(() => {
+    sectionSearch.style.left = "-100%";
+  }, 500);
+
+  container.style.transition = "500ms";
+  container.style.opacity = 0;
+  container.style.height = 0;
+  searchOptionsBtn.classList.remove("hidden");
+
   setTimeout(() => {
     btnModalCreate.style.opacity = 1;
     btnModalLogin.style.opacity = 1;
@@ -312,7 +329,26 @@ logoutBtn.addEventListener("click", function () {
 
 searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
+  sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
+  container.style.opacity = 1;
+  container.style.height = "100vh";
+  arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+});
+
+//////////////////////////////////////////
+// Btn  for closing search options
+
+closeSearchBtn.addEventListener("click", function () {
+  container.innerHTML = "";
+  sectionSearch.style.opacity = 0;
+  setTimeout(() => {
+    sectionSearch.style.left = "-100%";
+  }, 500);
+  container.style.transition = "500ms";
+  container.style.opacity = 0;
+  container.style.height = 0;
+  searchOptionsBtn.classList.remove("hidden");
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////
