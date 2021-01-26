@@ -18,6 +18,7 @@ const closeSearchBtn = document.querySelector(".closeSearchBtn");
 const welcomeMsg = document.querySelector(".welcomeMsg");
 const header = document.querySelector("header");
 const headingSection = document.querySelector(".headingSection");
+const backToTop = document.querySelector(".back-to-top-link");
 
 // Create new acc inputs and buttons
 
@@ -61,8 +62,14 @@ window.addEventListener("scroll", function () {
   header.classList.toggle("sticky", window.scrollY > 0);
   if (window.scrollY > 0) {
     header.style.opacity = 1;
-  } else header.style.opacity = 0;
+    backToTop.style.opacity = 1;
+  } else {
+    header.style.opacity = 0;
+    backToTop.style.opacity = 0;
+  }
 });
+
+// Function for duplicates from create acc and login
 
 // Array for keeping the fetched card information on Array position 1
 const arr = [];
@@ -281,14 +288,15 @@ createBtn.addEventListener("click", function () {
   createBtn.textContent = "Create Acc";
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
-  activeUser[0] = newUser;
   modalCreate.style.display = "none";
-  logoutBtn.classList.remove("hidden");
   btnModalCreate.style.left = "-100%";
   btnModalLogin.style.left = "-100%";
-  welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   welcomeMsg.style.right = "0";
   welcomeMsg.style.opacity = 1;
+  logoutBtn.classList.remove("hidden");
+  activeUser[0] = newUser;
+
+  welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
   console.log(users);
@@ -304,15 +312,17 @@ loginBtn.addEventListener("click", function () {
       modalLogin.style.display = "none";
       btnModalCreate.style.opacity = 0;
       btnModalLogin.style.opacity = 0;
+      welcomeMsg.style.right = "0";
+      welcomeMsg.style.opacity = 1;
+      activeUser[0] = user;
+      logoutBtn.classList.remove("hidden");
+
       setTimeout(() => {
         btnModalCreate.style.left = "100%";
         btnModalLogin.style.left = "100%";
-      }, 200);
-      logoutBtn.classList.remove("hidden");
-      activeUser[0] = user;
+      }, 400);
+
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
-      welcomeMsg.style.right = "0";
-      welcomeMsg.style.opacity = 1;
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createFavorite(i);
       });
@@ -324,7 +334,6 @@ loginBtn.addEventListener("click", function () {
       }, 1500);
     }
   });
-  console.log(activeUser);
 });
 
 ////////////////////////////////////////////////////////////////////////////////////
