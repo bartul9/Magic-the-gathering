@@ -19,7 +19,7 @@
   <body>
     <!-- Nice navbar -->
 
-    <header>
+    <header class="navbar">
       <a href="#" class="logo">MAGIC</a>
       <ul class="nav--ul">
         <li class="nav--li"><a href="">Home</a></li>
@@ -30,13 +30,23 @@
     </header>
 
     <!-- H1 with nice animation -->
-    <h1 class="css-text-mask">
-      Magic the <br />
-      gathering
-    </h1>
+    <section class="heading--section">
+      <h1 class="headingOne">
+        Magic the <br />
+        gathering
+      </h1>
+      <!-- <img
+        id="mobileImg"
+        src="https://dw9to29mmj727.cloudfront.net/promo/2016/5336-SeriesHeaders_Tier01_Magic_2000x800.jpg"
+        alt=""
+      /> --><button class="modalBtnCreate btnModal">Create Account</button>
+      <!-- Trigger/Open The Modal -->
+      <button class="modalBtnLogin btnModal">Login</button>
+    </section>
 
     <!-- Trigger/Open The Modal -->
-    <button class="modalBtnCreate btnModal">Create Account</button>
+
+    <p class="welcomeMsg">Welcome back</p>
 
     <!-- The modal for creating new Account -->
     <div id="myModalCreate">
@@ -52,9 +62,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Trigger/Open The Modal -->
-    <button class="modalBtnLogin btnModal">Login</button>
 
     <!-- The modal for login -->
     <div id="myModalLogin">
@@ -73,12 +80,10 @@
         </div>
       </div>
     </div>
-
-    <section class="section section--1"></section>
-
+    <button class="btnModal2 searchOptionBtn">Search</button>
     <!-- Section with search divs  -->
     <section class="section section--2">
-      <div class="search--div">
+      <div class="search--div searchByName">
         <label for="search--name">Search by Name </label>
         <input type="text" id="search--name" name="search--name" /><button
           class="name--btn btnSearch"
@@ -101,7 +106,6 @@
         </button>
       </div>
     </section>
-    <button class="btnModal searchOptionBtn">Search</button>
 
     <!-- Main container with cards -->
     <main class="container section">
