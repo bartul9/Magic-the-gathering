@@ -227,11 +227,6 @@ header .logo {
   background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
   background-size: cover;
   transition-timing-function: ease-out;
-  border-bottom: 3px solid black;
-  border-top: 3px solid black;
-}
-
-.footer--one:hover {
 }
 
 /* Cards */
@@ -794,8 +789,6 @@ header .logo {
   background-image: url(https://images.wallpapersden.com/image/download/aurelia-magic-the-gathering_bGVqbWeUmZqaraWkpJRmbmdlrWZnZWU.jpg);
   background-size: cover;
   background-position: center;
-  border-bottom: 3px solid black;
-  border-top: 3px solid black;
 }
 
 .testimonials {
