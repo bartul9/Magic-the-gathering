@@ -28,9 +28,8 @@
     <header class="navbar">
       <a href="#" class="logo">MAGIC</a>
       <ul class="nav--ul">
-        <li class="nav--li"><a href="">Home</a></li>
-        <li class="nav--li"><a href="">About</a></li>
-        <li class="nav--li"><a href="">Contact</a></li>
+        <li class="nav--li"><a href="#searchBtn">Search</a></li>
+        <li class="nav--li"><a href="#about">About</a></li>
         <li class="hidden" id="logout">Logout</li>
       </ul>
     </header>
@@ -47,7 +46,7 @@
         alt=""
       /> --><button class="modalBtnCreate btnModal">Create Account</button>
       <!-- Trigger/Open The Modal -->
-      <button class="modalBtnLogin btnModal">Login</button>
+      <button id="searchBtn" class="modalBtnLogin btnModal">Login</button>
     </section>
 
     <!-- Trigger/Open The Modal -->
@@ -86,6 +85,7 @@
         </div>
       </div>
     </div>
+
     <button class="btnModal2 searchOptionBtn">Search</button>
     <!-- Section with search divs  -->
     <section class="section section--2">
@@ -127,7 +127,7 @@
     </main>
 
     <!-- Footer with contact and credentials -->
-    <section id="demo" class="section footer--one">
+    <section id="about" class="section footer--one">
       <div class="cardBackImg"></div>
     </section>
 
@@ -152,5 +152,23 @@
         </p>
       </div>
     </div>
+
+    <!-- The modal for cards -->
+    <div id="cardsModal">
+      <!-- Modal content -->
+      <div class="modal--cards">
+        <span class="closeCardsModal">&times;</span>
+        <p class="paragrafCards cardName"></p>
+
+        <p class="paragrafCards cardRarity"></p>
+        <p class="paragrafCards cardType"></p>
+
+        <p class="paragrafCards cardSet"></p>
+
+        <p class="paragrafCards cardOriginalText"></p>
+      </div>
+    </div>
+
+    <a id="topPage" href="#top">Top of the Page</a>
   </body>
 </html>
