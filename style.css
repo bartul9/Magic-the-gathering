@@ -966,14 +966,13 @@ header .logo {
   .section--2 {
     flex-direction: column;
     margin-bottom: 50px;
-    top: 10px;
+    top: 25px;
   }
   .search--div {
     height: 100px;
     align-items: center;
     justify-content: center;
     position: relative;
-    top: -50px;
   }
 
   .searchByName {
@@ -994,7 +993,7 @@ header .logo {
     top: -25px;
   }
   .searchOptionBtn {
-    top: -50px;
+    top: 10px;
   }
   .modalBtnLogin {
     top: -100px;
