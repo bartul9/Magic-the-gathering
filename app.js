@@ -13,12 +13,13 @@ const allCards = document.querySelector(".showAll");
 const logoutBtn = document.querySelector("#logout");
 const searchOptionsBtn = document.querySelector(".searchOptionBtn");
 const sectionSearch = document.querySelector(".section--2");
-const section3 = document.querySelector(".section--3");
 const closeSearchBtn = document.querySelector(".closeSearchBtn");
 const welcomeMsg = document.querySelector(".welcomeMsg");
 const header = document.querySelector("header");
 const headingSection = document.querySelector(".headingSection");
 const backToTop = document.querySelector(".back-to-top-link");
+const footer = document.querySelector(".footer--one");
+const section4 = document.querySelector(".section--4");
 
 // Create new acc inputs and buttons
 
@@ -43,6 +44,12 @@ const spanModal = document.getElementsByClassName("close")[0];
 const btnModalLogin = document.querySelector(".modalBtnLogin");
 const modalLogin = document.getElementById("myModalLogin");
 const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
+
+//  Card back about modal
+
+const cardBackAbout = document.querySelector(".cardBackImg");
+const aboutModal = document.querySelector("#myModalAbout");
+const closeAbout = document.querySelector(".closeAbout");
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -369,9 +376,10 @@ searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
-  section3.style.top = 0;
   container.style.opacity = 1;
   container.style.height = "100vh";
+  footer.style.top = 0;
+  section4.style.top = "100px";
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
@@ -385,7 +393,8 @@ closeSearchBtn.addEventListener("click", function () {
     sectionSearch.style.left = "-100%";
   }, 500);
   container.style.transition = "500ms";
-  section3.style.top = "-250px";
+  section4.style.top = "0";
+  footer.style.top = "-245px";
   container.style.opacity = 0;
   container.style.height = 0;
   searchOptionsBtn.classList.remove("hidden");
@@ -412,7 +421,7 @@ spanModal.onclick = function () {
 window.onclick = function (e) {
   if (e.target == modalCreate) {
     modalCreate.style.display = "none";
-    modalLogin.style.opacity = 0;
+    modalCreate.style.opacity = 0;
   }
 };
 
@@ -438,5 +447,28 @@ window.onclick = function (event) {
   if (event.target == modalLogin) {
     modalLogin.style.display = "none";
     modalLogin.style.opacity = 0;
+  }
+};
+
+// Modal for about game
+
+cardBackAbout.onclick = function () {
+  aboutModal.style.display = "block";
+  setTimeout(() => {
+    aboutModal.style.opacity = 1;
+  }, 50);
+};
+
+// When the user clicks on <span> (x), close the modal
+closeAbout.onclick = function () {
+  aboutModal.style.display = "none";
+  aboutModal.style.opacity = 0;
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == aboutModal) {
+    aboutModal.style.display = "none";
+    aboutModal.style.opacity = 0;
   }
 };
