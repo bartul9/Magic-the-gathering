@@ -20,6 +20,15 @@ const headingSection = document.querySelector(".headingSection");
 const backToTop = document.querySelector(".back-to-top-link");
 const footer = document.querySelector(".footer--one");
 const section4 = document.querySelector(".section--4");
+const testimonials = document.querySelector(".testimonials");
+
+// Selectors for card modal
+
+const cardName = document.querySelector(".cardName");
+const cardRarity = document.querySelector(".cardRarity");
+const cardType = document.querySelector(".cardType");
+const cardSet = document.querySelector(".cardSet");
+const cardOriginalText = document.querySelector(".cardOriginalText");
 
 // Create new acc inputs and buttons
 
@@ -101,19 +110,25 @@ fetch("https://api.magicthegathering.io/v1/cards")
 // Show favourite cards
 // Since there is a lot class changes between createFavorite and createCardsFinal i'll leave them like this in two functions even though they are pretty similliar I decided to leave them in two functions
 
+// Function for card modal text content
+
+const cardModalText = function (path, i) {};
+
+// ////////////////////////////////////////////////////
+
 const createFavorite = function (i) {
   //Creating elements
-  let newCardFav = document.createElement("div");
+  const newCardFav = document.createElement("div");
   newCardFav.classList.add("card");
 
-  let imageFavDiv = document.createElement("div");
+  const imageFavDiv = document.createElement("div");
   imageFavDiv.classList.add("image");
 
-  let imageFav = document.createElement("img");
+  const imageFav = document.createElement("img");
   imageFav.id = "card--image";
 
   // Delete button
-  let delBtn = document.createElement("button");
+  const delBtn = document.createElement("button");
   delBtn.classList = "del";
   delBtn.innerText = "X";
 
@@ -122,13 +137,37 @@ const createFavorite = function (i) {
   // Checking if image exists, if not then I put another image !!! also need to make function for this !!!
   if (!activeUser[0].userFavoriteCards[i].imageUrl) {
     newCardFav.classList.add("card--noImage");
-    let noneCardText = document.createElement("h2");
+    const noneCardText = document.createElement("h2");
     noneCardText.classList.add("card--noImageText");
     noneCardText.textContent = activeUser[0].userFavoriteCards[i].name;
     newCardFav.append(noneCardText);
     delBtn.classList.remove("del");
     delBtn.classList.add("no--image--del");
   }
+
+  newCardFav.addEventListener("click", function () {
+    console.log("click");
+    cardsModal.style.display = "block";
+    setTimeout(() => {
+      cardsModal.style.opacity = 1;
+    }, 50);
+  });
+
+  imageFav.addEventListener("click", function () {
+    console.log("click");
+    cardsModal.style.display = "block";
+    cardName.textContent = activeUser[0].userFavoriteCards[i].name;
+    cardRarity.textContent = activeUser[0].userFavoriteCards[i].rarity;
+    cardType.textContent = activeUser[0].userFavoriteCards[i].type;
+    cardSet.textContent = activeUser[0].userFavoriteCards[i].set;
+    cardOriginalText.textContent =
+      activeUser[0].userFavoriteCards[i].originalText;
+    setTimeout(() => {
+      cardsModal.style.opacity = 1;
+    }, 50);
+  });
+
+  cardModalText(activeUser[0], i);
 
   newCardFav.append(imageFavDiv);
   newCardFav.append(delBtn);
@@ -163,22 +202,18 @@ show.addEventListener("click", function () {
 
 const createCardFinal = function (objPath, num) {
   // Creating card element by element, adding classes to them, and appending them to each other
-  let newCard = document.createElement("div");
+  const newCard = document.createElement("div");
   newCard.classList.add("card");
-
-  let imageDiv = document.createElement("div");
+  const imageDiv = document.createElement("div");
   imageDiv.classList.add("image");
-
-  let image = document.createElement("img");
+  const image = document.createElement("img");
   image.id = "card--image";
-
   //Favorite button
-  let favorite = document.createElement("button");
+  const favorite = document.createElement("button");
   favorite.classList.add("favorite");
   favorite.innerText = "Favorite";
-
   // Delete button
-  let newBtn = document.createElement("button");
+  const newBtn = document.createElement("button");
   newBtn.classList = "del";
   newBtn.innerText = "X";
 
@@ -187,7 +222,7 @@ const createCardFinal = function (objPath, num) {
   // Here I check if image exists, if not I put everything in new elements, and classes.. A lot of code, that also exists in other function, but it is what it is. It works, even thought it looks ugly
   if (!objPath[num].imageUrl) {
     newCard.classList.add("card--noImage");
-    let noneCardText = document.createElement("h2");
+    const noneCardText = document.createElement("h2");
     noneCardText.classList.add("card--noImageText");
     noneCardText.textContent = objPath[num].name;
     newCard.append(noneCardText);
@@ -208,6 +243,19 @@ const createCardFinal = function (objPath, num) {
     imageDiv.append(image);
   }
 
+  image.addEventListener("click", function () {
+    console.log("click");
+    cardsModal.style.display = "block";
+    cardName.textContent = objPath[num].name;
+    cardRarity.textContent = objPath[num].rarity;
+    cardType.textContent = objPath[num].type;
+    cardSet.textContent = objPath[num].set;
+    cardOriginalText.textContent = objPath[num].originalText;
+    setTimeout(() => {
+      cardsModal.style.opacity = 1;
+    }, 50);
+  });
+
   // Delete selected card
   newBtn.addEventListener("click", function () {
     newCard.classList.add("hidden");
@@ -225,7 +273,9 @@ const createCardFinal = function (objPath, num) {
 
 allCards.addEventListener("click", function () {
   container.innerHTML = "";
-  arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+  arr[0].cards.forEach((x, i) => {
+    createCardFinal(arr[0].cards, i);
+  });
 });
 
 //////////////////////////////////////////////////////////////////////
@@ -300,7 +350,9 @@ createBtn.addEventListener("click", function () {
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
   activeUser[0] = newUser;
-
+  activeUser[0].userFavoriteCards.forEach((x, i) => {
+    createFavorite(i);
+  });
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
@@ -359,6 +411,8 @@ logoutBtn.addEventListener("click", function () {
   container.style.transition = "500ms";
   container.style.opacity = 0;
   container.style.height = 0;
+  footer.style.top = "-245px";
+  section4.style.top = "0";
   searchOptionsBtn.classList.remove("hidden");
 
   setTimeout(() => {
@@ -459,7 +513,7 @@ window.onclick = function (event) {
   }
 };
 
-// Modal for about game
+// Modal for about
 
 cardBackAbout.onclick = function () {
   aboutModal.style.display = "block";
@@ -482,4 +536,45 @@ window.onclick = function (event) {
   }
 };
 
-// Footer one on mouse enter
+// Cards modal window
+
+const cardsModal = document.querySelector("#cardsModal");
+const closeCardsModal = document.querySelector(".closeCardsModal");
+
+// Modal cards
+
+// When the user clicks on <span> (x), close the modal
+closeCardsModal.onclick = function () {
+  cardsModal.style.display = "none";
+  cardsModal.style.opacity = 0;
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  if (event.target == cardsModal) {
+    cardsModal.style.display = "none";
+    cardsModal.style.opacity = 0;
+  }
+};
+
+// Testimonials change
+
+const testimonialsImageArray = [
+  "https://crystal-cdn3.crystalcommerce.com/photos/6344442/large/en_oYewlmYojE.png",
+  "https://i.pinimg.com/474x/d3/1f/b0/d31fb0b245a7fb1e3b3cc0e1e642d47f.jpg",
+  "https://media.wizards.com/legacy/magic/images/mtgcom/fcpics/latest/dl16_large.jpg",
+  "https://media.magic.wizards.com/image_legacy_migration/magic/images/mtgcom/fcpics/play/zm28_vvocl8l9i5fmibb3.jpg",
+  "https://crystal-cdn3.crystalcommerce.com/photos/4203323/large/undergrowthchampion.jpg",
+  "https://cdn1.mtggoldfish.com/images/gf/Corpsejack%2BMenace%2B%255BRTR%255D.jpg",
+  "https://www.sadrobot.co.za/wp-content/uploads/2013/06/MM0471.jpeg",
+];
+
+let clickCount = 0;
+
+testimonials.addEventListener("click", function () {
+  if (clickCount === testimonialsImageArray.length - 1) {
+    clickCount = -1;
+  }
+  clickCount++;
+  testimonials.style.backgroundImage = `url(${testimonialsImageArray[clickCount]})`;
+});
