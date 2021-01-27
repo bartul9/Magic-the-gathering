@@ -161,12 +161,13 @@ header .logo {
 
 /* About heading */
 
-.aboutHeading {
-  font-size: 50px;
+/* #aboutHeading {
+  font-size: 55px;
   letter-spacing: 2px;
   color: rgb(255, 255, 255);
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
-}
+  transform: skewY(6.5deg);
+} */
 
 /* Sections in order */
 
@@ -193,6 +194,7 @@ header .logo {
   align-items: center;
   flex-direction: column;
   position: relative;
+  margin-bottom: 50px;
   width: 100%;
 
   /* background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
@@ -203,15 +205,28 @@ header .logo {
 }
 
 .footer--one {
-  background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 80%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  top: -245px;
+  transition: 1s;
+  opacity: 1;
+  transform: skewY(-7deg);
+  background-color: rgb(255, 255, 255);
+  background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
+  background-size: cover;
+  transition-timing-function: ease-out;
+}
+
+.footer--one:hover {
+  width: 30%;
+  height: 80vh;
 }
 
 /* Cards */
@@ -345,14 +360,25 @@ header .logo {
 /* ************ */
 
 /* Testimonials */
-.testimonial {
+.cardBackImg {
+  border-radius: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50vh;
-  border: 1px solid red;
+  height: 49vh;
+  background-image: url(https://nyxathidgoestotown.files.wordpress.com/2015/01/10-scourge-of-valkas.jpg?w=584);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 230px;
+  transform: skewY(6.7deg);
+  transition: 1s;
+}
 
-  width: 40%;
+.cardBackImg:hover {
+  cursor: pointer;
+  position: relative;
+  transform: rotateX(20deg);
 }
 
 /* --------------------------------------------------- */
@@ -360,32 +386,6 @@ header .logo {
 .hidden {
   display: none;
   transition: 500ms;
-}
-
-.about--text {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.about {
-  margin-top: -15px;
-  text-align: center;
-  font-size: 26px;
-  width: 70%;
-  padding: 5px;
-  color: rgb(9, 179, 74);
-  text-shadow: 2px 2px 2px rgb(0, 0, 0);
-  font-weight: 700;
-  font-style: italic;
-}
-.text {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 /* --------------------------------------------------------------------- */
@@ -629,7 +629,106 @@ header .logo {
   cursor: pointer;
 }
 
+/* Modal about */
+
+#myModalAbout {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: -20px;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  opacity: 0;
+  transition: 500ms;
+}
+
+.section--4 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 0px;
+  transition: 1s;
+  opacity: 1;
+  transform: skewY(-7deg);
+  background-color: rgb(255, 255, 255);
+}
+
+/* Modal Content */
+.modal-about {
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  font-size: 20px;
+  position: relative;
+  top: 100px;
+  background-color: #000000;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 70%;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
+    0 6px 20px 0 rgba(155, 155, 155, 0.19);
+  /* background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
+  background-position: center;
+  background-size: cover; */
+}
+#h3About {
+  color: rgb(9, 179, 74);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  font-size: 35px;
+}
+
+.closeAbout {
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  font-weight: 700;
+  position: relative;
+  top: 35px;
+}
+
+.closeAbout:hover,
+.closeAbout:focus {
+  color: rgb(129, 129, 129);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.about--text {
+  font-size: 19px;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+  top: -20px;
+}
+
 @media (max-width: 900px) {
+  #h3About {
+    display: none;
+  }
+  .closeAbout {
+    display: none;
+  }
+
+  .about--text {
+    color: rgb(9, 179, 74);
+    text-shadow: 2px 2px 2px rgb(0, 0, 0);
+    top: 0;
+  }
   .navbar {
     flex-direction: column;
   }
@@ -653,6 +752,9 @@ header .logo {
 }
 
 @media (max-width: 570px) {
+  .about--text {
+    font-size: 17px;
+  }
   .headingOne {
     font-size: 90px;
     letter-spacing: 0;
@@ -710,6 +812,9 @@ header .logo {
   .closeLogin {
     left: 110px;
   }
+  .footer--one {
+    width: 100%;
+  }
   .close {
     left: 110px;
   }
@@ -729,11 +834,20 @@ header .logo {
   .aboutImages {
     width: 100%;
   }
+  #aboutHeading {
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 430px) {
+  .modal-about {
+    height: 350px;
+  }
   .headingOne {
     font-size: 70px;
+  }
+  .about--text {
+    font-size: 14px;
   }
 }
 
