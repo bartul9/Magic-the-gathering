@@ -364,7 +364,9 @@ createBtn.addEventListener("click", function () {
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   users.forEach((user) => {
+    console.log(user);
     if (user.username === username.value && user.password === password.value) {
+      console.log(user);
       username.value = password.value = "";
       modalLogin.style.display = "none";
       btnModalCreate.style.opacity = 0;
@@ -383,14 +385,13 @@ loginBtn.addEventListener("click", function () {
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createFavorite(i);
       });
-    } else {
-      username.value = password.value = "";
-      loginBtn.textContent = "Wrong Input";
-      setTimeout(() => {
-        loginBtn.textContent = "Login";
-      }, 1500);
     }
   });
+  username.value = password.value = "";
+  loginBtn.textContent = "Wrong Input";
+  setTimeout(() => {
+    loginBtn.textContent = "Login";
+  }, 1500);
 });
 
 ////////////////////////////////////////////////////////////////////////////////////
