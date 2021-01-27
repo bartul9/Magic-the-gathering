@@ -69,10 +69,8 @@ window.addEventListener("scroll", function () {
   header.classList.toggle("sticky", window.scrollY > 0);
   if (window.scrollY > 0) {
     header.style.opacity = 1;
-    backToTop.style.opacity = 1;
   } else {
     header.style.opacity = 0;
-    backToTop.style.opacity = 0;
   }
 });
 
@@ -379,7 +377,18 @@ searchOptionsBtn.addEventListener("click", function () {
   container.style.opacity = 1;
   container.style.height = "100vh";
   footer.style.top = 0;
-  section4.style.top = "100px";
+  section4.style.top = "155px";
+  if (!arr[0]) {
+    console.log("hello");
+    let spinner = document.createElement("div");
+    spinner.classList.add("loader");
+    container.append(spinner);
+    setTimeout(() => {
+      container.innerHTML = "";
+      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+    }, 5000);
+  }
+
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
@@ -472,3 +481,5 @@ window.onclick = function (event) {
     aboutModal.style.opacity = 0;
   }
 };
+
+// Footer one on mouse enter
