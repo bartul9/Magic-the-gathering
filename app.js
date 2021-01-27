@@ -88,6 +88,8 @@ window.addEventListener("scroll", function () {
 // Array for keeping the fetched card information on Array position 1
 const arr = [];
 
+const arrFinal = arr[0];
+
 // Filtered array for rarity cards
 let rareCards = [];
 
@@ -100,6 +102,21 @@ const users = [];
 
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
 fetch("https://api.magicthegathering.io/v1/cards")
+  .then((res) => res.json())
+  .then((x) => arr.push(...x))
+  .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
   .then((res) => res.json())
   .then((x) => arr.push(x))
   .catch((err) => console.log(err));
@@ -136,13 +153,13 @@ const createFavorite = function (i) {
 
   // Checking if image exists, if not then I put another image !!! also need to make function for this !!!
   if (!activeUser[0].userFavoriteCards[i].imageUrl) {
-    newCardFav.classList.add("card--noImage");
-    const noneCardText = document.createElement("h2");
-    noneCardText.classList.add("card--noImageText");
-    noneCardText.textContent = activeUser[0].userFavoriteCards[i].name;
-    newCardFav.append(noneCardText);
-    delBtn.classList.remove("del");
-    delBtn.classList.add("no--image--del");
+    newCardFav.classList.add("hidden");
+    // const noneCardText = document.createElement("h2");
+    // noneCardText.classList.add("card--noImageText");
+    // noneCardText.textContent = activeUser[0].userFavoriteCards[i].name;
+    // newCardFav.append(noneCardText);
+    // delBtn.classList.remove("del");
+    // delBtn.classList.add("no--image--del");
   }
 
   newCardFav.addEventListener("click", function () {
@@ -221,15 +238,15 @@ const createCardFinal = function (objPath, num) {
 
   // Here I check if image exists, if not I put everything in new elements, and classes.. A lot of code, that also exists in other function, but it is what it is. It works, even thought it looks ugly
   if (!objPath[num].imageUrl) {
-    newCard.classList.add("card--noImage");
-    const noneCardText = document.createElement("h2");
-    noneCardText.classList.add("card--noImageText");
-    noneCardText.textContent = objPath[num].name;
-    newCard.append(noneCardText);
-    newBtn.classList.remove("del");
-    newBtn.classList.add("no--image--delOne");
-    favorite.classList.remove("favorite");
-    favorite.classList.add("no--image--favOne");
+    newCard.classList.add("hidden");
+    // noneCardText = document.createElement("h2");
+    // noneCardText.classList.add("card--noImageText");
+    // noneCardText.textContent = objPath[num].name;
+    // newCard.append(noneCardText);
+    // newBtn.classList.remove("del");
+    // newBtn.classList.add("no--image--delOne");
+    // favorite.classList.remove("favorite");
+    // favorite.classList.add("no--image--favOne");
   }
 
   // If there is active user create all images with buttons for favorite cards and for deleting card, else just create cards without buttons
@@ -350,9 +367,7 @@ createBtn.addEventListener("click", function () {
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
   activeUser[0] = newUser;
-  activeUser[0].userFavoriteCards.forEach((x, i) => {
-    createFavorite(i);
-  });
+
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
@@ -382,9 +397,6 @@ loginBtn.addEventListener("click", function () {
       }, 400);
 
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
-      activeUser[0].userFavoriteCards.forEach((x, i) => {
-        createFavorite(i);
-      });
     }
   });
   username.value = password.value = "";
@@ -440,7 +452,7 @@ searchOptionsBtn.addEventListener("click", function () {
     container.append(spinner);
     setTimeout(() => {
       container.innerHTML = "";
-      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+      arr.cards.forEach((x, i) => createCardFinal(arr.cards, i));
     }, 5000);
   }
 
