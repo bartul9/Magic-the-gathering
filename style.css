@@ -8,6 +8,7 @@ body {
   align-items: center;
   background-color: black;
   color: white;
+  overflow-x: hidden;
 }
 
 /* Navbar and its properities */
@@ -345,6 +346,17 @@ header .logo {
   margin-top: 25px;
 }
 
+/* card clikc */
+
+.cardClick {
+  display: inline;
+  left: 0;
+  position: relative;
+  border: 1px solid red;
+  height: 450px;
+  width: 150px;
+}
+
 /* Buttons for no image cards when creating them inside of create card function I have to make them 2 times because they were acting weird in favorite mode or in seeach mode*/
 .no--image--delOne {
   position: relative;
@@ -379,8 +391,8 @@ header .logo {
   width: 230px;
   transform: skewY(6.7deg);
   transition: 1s;
-  -webkit-box-shadow: 0px 4px 6px 5px rgba(0, 119, 255, 0.658);
-  box-shadow: 0px 4px 6px 5px rgba(0, 119, 255, 0.678);
+  -webkit-box-shadow: 0px 4px 6px 5px rgba(4, 94, 230, 0.658);
+  box-shadow: 0px 4px 6px 5px rgba(0, 105, 243, 0.678);
   background-color: black;
 }
 
@@ -392,11 +404,118 @@ header .logo {
   opacity: 0.5;
 }
 
+#topPage {
+  position: relative;
+  bottom: -200px;
+  text-decoration: none;
+  font-size: 22px;
+  color: white;
+  transition: 1s;
+}
+
+#topPage:hover {
+  letter-spacing: 1px;
+  border-bottom: 1px solid blue;
+}
+
 /* --------------------------------------------------- */
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.5);
+}
 
 .hidden {
   display: none;
   transition: 500ms;
+}
+
+/* ----------------  */
+
+/* Cards modal */
+#cardsModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  transition: 500ms;
+  opacity: 0;
+}
+
+/* Modal Content */
+.modal--cards {
+  overflow: auto;
+  overflow-x: hidden;
+  font-size: 20px;
+  position: relative;
+  top: 100px;
+  background-color: #000000;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 350px;
+  height: 330px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
+    0 6px 20px 0 rgba(155, 155, 155, 0.19);
+}
+
+.closeCardsModal {
+  color: rgb(255, 255, 255);
+  position: relative;
+  right: -305px;
+  top: -10px;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.closeCardsModal:hover,
+.closeCardsModal:focus {
+  color: rgb(156, 156, 156);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.paragrafCards {
+  top: -50px;
+  position: relative;
+  text-align: center;
+}
+.cardType {
+  color: rgb(0, 214, 64);
+  font-size: 22px;
+}
+.cardName {
+  color: red;
+  font-size: 25px;
+}
+.cardSet {
+  color: rgb(255, 255, 255);
+}
+.cardOriginalText {
+  color: blue;
+  padding: 15px;
+}
+.cardRarity {
+  color: yellow;
 }
 
 /* --------------------------------------------------------------------- */
@@ -679,6 +798,33 @@ header .logo {
   background-position: center;
 }
 
+.testimonials {
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 49vh;
+  background-image: url(https://www.celjaded.com/wp-content/uploads/2017/11/CelJaded-Magic-The-Gathering-Card-Phyrexian-Obliterator.jpg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 230px;
+  transform: skewY(-7deg);
+  transition: 1s;
+  -webkit-box-shadow: 0px 4px 6px 5px rgba(253, 253, 253, 0.658);
+  box-shadow: 0px 4px 6px 5px rgba(255, 255, 255, 0.678);
+  background-color: rgb(255, 255, 255);
+  top: 0px;
+  position: relative;
+}
+.testimonials:hover {
+  cursor: pointer;
+  position: relative;
+  transform: rotateX(20deg);
+  transform: rotateY(10deg);
+  opacity: 0.5;
+}
+
 /* Modal Content */
 .modal-about {
   display: flex;
@@ -763,6 +909,13 @@ header .logo {
 }
 
 @media (max-width: 900px) {
+  #logout {
+    margin-left: 10px;
+  }
+  .welcomeMsg {
+    font-size: 35px;
+    text-align: center;
+  }
   #h3About {
     display: none;
   }
@@ -801,6 +954,9 @@ header .logo {
   .about--text {
     font-size: 17px;
   }
+  .container {
+    top: 0px;
+  }
   .headingOne {
     font-size: 90px;
     letter-spacing: 0;
@@ -810,12 +966,14 @@ header .logo {
   .section--2 {
     flex-direction: column;
     margin-bottom: 50px;
-    top: -100px;
+    top: 10px;
   }
   .search--div {
     height: 100px;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: -50px;
   }
 
   .searchByName {
@@ -860,6 +1018,8 @@ header .logo {
   }
   .footer--one {
     width: 100%;
+    margin-top: 50px;
+    margin-bottom: 0;
   }
   .close {
     left: 110px;
@@ -886,6 +1046,17 @@ header .logo {
 }
 
 @media (max-width: 430px) {
+  .welcomeMsg {
+    font-size: 28px;
+  }
+  .nav--li {
+    margin-left: 0px;
+  }
+  #logout {
+    position: relative;
+    right: 10px;
+    margin-right: 5px;
+  }
   .modal-about {
     height: 350px;
   }
