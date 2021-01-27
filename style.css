@@ -22,7 +22,7 @@ header {
   padding: 40px, 100px;
   z-index: 100000;
   opacity: 0;
-  border-bottom: 1px solid green;
+  border-bottom: 1px solid rgb(0, 119, 255);
 }
 
 header.sticky {
@@ -86,11 +86,13 @@ header .logo {
 /* Heading and its animation */
 
 .headingOne {
+  opacity: 1;
   font-size: 150px;
   letter-spacing: 5px;
   text-align: center;
-  color: rgb(9, 179, 74);
-  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  color: rgb(0, 119, 255);
+  /* color: rgb(9, 179, 74); */
+  text-shadow: 5px 5px 5px rgb(0, 0, 0);
 }
 
 .heading--section {
@@ -117,7 +119,7 @@ header .logo {
   opacity: 0;
   overflow: auto;
   width: 98%;
-  border: 3px solid rgb(139, 139, 139);
+  border: 3px solid rgb(255, 255, 255);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -135,6 +137,12 @@ header .logo {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.addClass {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-top: 5px solid rgba(255, 255, 255, 0.25);
+  border-bottom: 5px solid rgba(255, 255, 255, 0.25);
 }
 
 .btnSearch {
@@ -208,7 +216,7 @@ header .logo {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -225,8 +233,6 @@ header .logo {
 }
 
 .footer--one:hover {
-  width: 30%;
-  height: 80vh;
 }
 
 /* Cards */
@@ -373,12 +379,17 @@ header .logo {
   width: 230px;
   transform: skewY(6.7deg);
   transition: 1s;
+  -webkit-box-shadow: 0px 4px 6px 5px rgba(0, 119, 255, 0.658);
+  box-shadow: 0px 4px 6px 5px rgba(0, 119, 255, 0.678);
+  background-color: black;
 }
 
 .cardBackImg:hover {
   cursor: pointer;
   position: relative;
   transform: rotateX(20deg);
+  transform: rotateY(10deg);
+  opacity: 0.5;
 }
 
 /* --------------------------------------------------- */
@@ -648,10 +659,11 @@ header .logo {
 }
 
 .section--4 {
+  margin-top: 65px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 70%;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -660,8 +672,11 @@ header .logo {
   top: 0px;
   transition: 1s;
   opacity: 1;
-  transform: skewY(-7deg);
+  transform: skewY(7deg);
   background-color: rgb(255, 255, 255);
+  background-image: url(https://images.wallpapersden.com/image/download/aurelia-magic-the-gathering_bGVqbWeUmZqaraWkpJRmbmdlrWZnZWU.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 /* Modal Content */
@@ -714,6 +729,37 @@ header .logo {
   text-align: center;
   position: relative;
   top: -20px;
+}
+
+/* Spinner wheel */
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @media (max-width: 900px) {
