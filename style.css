@@ -115,7 +115,7 @@ header .logo {
   position: relative;
   top: -130px;
   border-radius: 10px;
-  padding-top: 15px;
+  padding-top: 25px;
   height: 0vh;
   opacity: 0;
   overflow: auto;
@@ -245,22 +245,6 @@ header .logo {
   cursor: pointer;
 }
 
-/* Fvorite cards */
-
-.card2 {
-  border-radius: 5px;
-  width: 230px;
-  height: 310px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: 500ms;
-  margin-bottom: 20px;
-}
-
-.card2:hover {
-  cursor: pointer;
-}
 /* Class for cards that have no images  */
 .card--noImage {
   background-image: url(https://images-na.ssl-images-amazon.com/images/I/61AGZ37D7eL._AC_SL1039_.jpg);
@@ -290,31 +274,7 @@ header .logo {
     scroll-behavior: smooth;
   }
 }
-.back-to-top-link {
-  display: inline-block;
-  text-decoration: none;
-  font-size: 2rem;
-  line-height: 3rem;
-  text-align: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background-color: rgb(255, 255, 255);
-  padding: 0.25rem;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-image: url(https://cdn.onlinewebfonts.com/svg/img_121556.png);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  opacity: 0;
-  transition: 1s;
-}
 
-.back-to-top-link:hover {
-  background-color: rgb(9, 179, 74);
-}
 /* Show buttons, show all and show favorite cards */
 
 .showBtns {
@@ -339,20 +299,55 @@ header .logo {
 
 /* Class for images(cards ) and buttons for them*/
 .image {
+  width: 230px;
   height: 300px;
+  transition: 500ms;
 }
-.image2 {
+
+.card {
+  width: 230px;
+  transition: 500ms;
   height: 300px;
+  margin-bottom: 50px;
 }
+
+.card:hover {
+  opacity: 0.9;
+  transform: skewY(7deg);
+}
+.image:hover {
+  opacity: 0.9;
+  transform: skewY(3deg);
+}
+
 .del {
   position: relative;
-  left: -100px;
-  top: -300px;
+  left: 96px;
+  top: -303px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
+
+.cardBtn {
+  background-color: #000000;
+  color: white;
+
+  outline: none;
+  transition: 500ms;
+}
+
+.cardBtn:hover {
+  background-color: white;
+  color: #000000;
+  cursor: pointer;
+}
+
 .favorite {
   position: relative;
-  left: -56px;
-  top: -321px;
+  left: 56px;
+  top: -324px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 .show {
   margin-top: 25px;
@@ -373,24 +368,6 @@ header .logo {
   border: 1px solid red;
   height: 450px;
   width: 150px;
-}
-
-/* Buttons for no image cards when creating them inside of create card function I have to make them 2 times because they were acting weird in favorite mode or in seeach mode*/
-.no--image--delOne {
-  position: relative;
-  top: -268px;
-  left: -105px;
-}
-
-.no--image--favOne {
-  position: relative;
-  top: -289px;
-  left: -61px;
-}
-.no--image--del {
-  position: relative;
-  top: -290px;
-  left: -105px;
 }
 
 /* ************ */
@@ -462,6 +439,82 @@ header .logo {
 /* ----------------  */
 
 /* Cards modal */
+
+.cardImageBig {
+  position: relative;
+  left: 122px;
+  width: 100px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  outline: none;
+  height: 25px;
+  bottom: 15px;
+  border: none;
+  transition: 500ms;
+  border: 1px solid silver;
+}
+
+.cardImageBig:hover {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+#imageModal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(155, 155, 155); /* Fallback color */
+  background-color: rgba(165, 165, 165, 0.4); /* Black w/ opacity */
+  transition: 500ms;
+  opacity: 0;
+}
+
+/* Modal Content */
+.image--modal {
+  overflow: auto;
+  overflow-x: hidden;
+  font-size: 20px;
+  position: relative;
+  top: 70px;
+  background-color: #000000;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 272px;
+  height: 380px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
+    0 6px 20px 0 rgba(155, 155, 155, 0.19);
+}
+
+.closeImageModal {
+  color: rgb(0, 81, 255);
+  position: relative;
+  right: -243px;
+  top: -23px;
+  font-size: 45px;
+  font-weight: 700;
+}
+
+.closeImageModal:hover,
+.closeImageModal:focus {
+  color: rgb(156, 156, 156);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ----------------------------- */
+
 #cardsModal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
