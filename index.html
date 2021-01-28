@@ -105,11 +105,14 @@
 
       <div class="search--div searchByRarity">
         <label for="search--type">Search by rarity </label>
-        <input type="text" id="search--type" name="search--type" /><button
-          class="type--btn btnSearch"
-        >
-          Search
-        </button>
+        <!-- <input type="text" id="search--type" name="search--type" /> -->
+        <select id="search--type" name="rCommon">
+          <option value="Common">Common</option>
+          <option value="Uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="Mythic">Mythic</option>
+        </select>
+        <button class="type--btn btnSearch">Search</button>
       </div>
     </section>
 
@@ -171,6 +174,8 @@
       </div>
     </div>
 
-    <a id="topPage" href="#top">Top of the Page</a>
+    <a href="#top"
+      ><img id="topPageImg" src="/imgs/arrow_up back to top.png" alt=""
+    /></a>
   </body>
 </html>
