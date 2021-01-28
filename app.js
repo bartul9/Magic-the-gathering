@@ -22,6 +22,8 @@ const footer = document.querySelector(".footer--one");
 const section4 = document.querySelector(".section--4");
 const testimonials = document.querySelector(".testimonials");
 const cardImageBtn = document.querySelector(".cardImageBig");
+const previousBtn = document.querySelector(".previous");
+const nextBtn = document.querySelector(".next");
 
 // Selectors for card modal
 
@@ -125,6 +127,47 @@ fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
   .then((res) => res.json())
   .then((x) => arr.push(x))
   .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=1")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=2")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
+
+fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=3")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
+
+// Page slider
+
+let pageCount = 0;
+
+nextBtn.addEventListener("click", function () {
+  if (pageCount === arr.length - 1) {
+    pageCount = -1;
+  }
+  pageCount++;
+  container.innerHTML = "";
+  arr[pageCount].cards.forEach((x, i) => {
+    createCardFinal(arr[pageCount].cards, i);
+  });
+});
+
+previousBtn.addEventListener("click", function () {
+  if (pageCount === 0) {
+    pageCount = arr.length;
+  }
+  pageCount--;
+  container.innerHTML = "";
+  arr[pageCount].cards.forEach((x, i) => {
+    createCardFinal(arr[pageCount].cards, i);
+  });
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -253,14 +296,17 @@ nameBtn.addEventListener("click", function () {
 
 //////////////////////////////////////////////////////////////////////
 // Show all cards by rarity. So here I putted all cards thet I look for in new array then I simply loop over that array and show cards
+
 typeBtn.addEventListener("click", function () {
   rareCards = [];
   container.innerHTML = "";
-  arr[0].cards.forEach((x) => {
-    if (x.rarity === convertString(inputType.value)) {
-      rareCards.push(x);
-    }
-  });
+  arr.forEach((y) =>
+    y.cards.forEach((x) => {
+      if (x.rarity === convertString(inputType.value)) {
+        rareCards.push(x);
+      }
+    })
+  );
   rareCards.forEach((x, i) => createCardFinal(rareCards, i));
   inputType.value = "";
 });
@@ -382,6 +428,8 @@ searchOptionsBtn.addEventListener("click", function () {
   searchOptionsBtn.classList.add("hidden");
   container.style.opacity = 1;
   container.style.height = "100vh";
+  previousBtn.style.left = 0;
+  nextBtn.style.left = 0;
   footer.style.top = 0;
   section4.style.top = "155px";
   if (!arr[0]) {
@@ -409,6 +457,8 @@ closeSearchBtn.addEventListener("click", function () {
   }, 500);
   container.style.transition = "500ms";
   section4.style.top = "0";
+  previousBtn.style.left = "-100%";
+  nextBtn.style.left = "100%";
   footer.style.top = "-245px";
   container.style.opacity = 0;
   container.style.height = 0;
