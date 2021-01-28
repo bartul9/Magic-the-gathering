@@ -253,27 +253,6 @@ header .logo {
   cursor: pointer;
 }
 
-/* Class for cards that have no images  */
-.card--noImage {
-  background-image: url(https://images-na.ssl-images-amazon.com/images/I/61AGZ37D7eL._AC_SL1039_.jpg);
-  background-position: center;
-  background-size: cover;
-  height: 310px;
-  width: 230px;
-}
-
-/* Text for card with no images */
-.card--noImageText {
-  color: rgb(255, 255, 255);
-  text-align: center;
-  font-size: 38px;
-  font-weight: 600;
-  width: 230px;
-  position: relative;
-  top: 115px;
-  margin: 0;
-}
-
 /* --------------- */
 /* Return to top icon */
 
@@ -380,16 +359,17 @@ header .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 49vh;
-  background-image: url(https://nyxathidgoestotown.files.wordpress.com/2015/01/10-scourge-of-valkas.jpg?w=584);
+  height: 319px;
+  background-image: url(/imgs/2.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 230px;
+  width: 229px;
   transform: skewY(6.7deg);
   transition: 1s;
-  -webkit-box-shadow: 0px 4px 6px 5px rgba(4, 94, 230, 0.658);
-  box-shadow: 0px 4px 6px 5px rgba(0, 105, 243, 0.678);
+  -webkit-box-shadow: 0px 0px 10px 6px #ffffff;
+  box-shadow: 0px 0px 10px 6px #ffffff;
+  border: 1px solid silver;
   background-color: black;
 }
 
@@ -530,6 +510,10 @@ header .logo {
   opacity: 0;
 }
 
+#search--type {
+  width: 180px;
+  height: 21px;
+}
 /* Modal Content */
 .modal--cards {
   overflow: auto;
@@ -537,7 +521,7 @@ header .logo {
   font-size: 20px;
   position: relative;
   top: 100px;
-  background-color: #000000;
+  background-color: #000000ec;
   margin: auto;
   padding: 0;
   border: 1px solid #888;
@@ -617,27 +601,27 @@ header .logo {
   padding: 0;
   border: 1px solid #888;
   width: 300px;
-  height: 230px;
+  height: 240px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
     0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  /* background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
+  background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
   background-position: center;
-  background-size: cover; */
+  background-size: cover;
 }
 
 /* Create acc div in modal */
 .createAcc--div {
   position: relative;
-  top: -10px;
+  top: 0px;
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: rgb(53, 158, 255);
   justify-content: center;
   align-items: center;
   font-size: 25px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .create--btn {
@@ -667,6 +651,7 @@ header .logo {
   color: rgb(255, 255, 255);
   position: relative;
   left: 130px;
+  top: -10px;
   font-size: 40px;
   font-weight: 700;
 }
@@ -706,22 +691,22 @@ header .logo {
   padding: 0;
   border: 1px solid #888;
   width: 300px;
-  height: 230px;
+  height: 240px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
     0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  /* background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
-  background-position: center;
-  background-size: cover; */
+  background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
+  background-position: bottom;
+  background-size: cover;
 }
 
 .login--div {
   position: relative;
-  top: -10px;
+  top: 0px;
   font-weight: 600;
   display: flex;
   flex-direction: column;
-  color: rgb(255, 255, 255);
+  color: rgb(53, 158, 255);
   justify-content: center;
   align-items: center;
   font-size: 25px;
@@ -755,6 +740,7 @@ header .logo {
   color: rgb(255, 255, 255);
   position: relative;
   left: 130px;
+  top: -10px;
   font-size: 40px;
   font-weight: 700;
 }
@@ -873,20 +859,34 @@ header .logo {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 49vh;
+  height: 319px;
   background-image: url(https://www.celjaded.com/wp-content/uploads/2017/11/CelJaded-Magic-The-Gathering-Card-Phyrexian-Obliterator.jpg);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  width: 230px;
+  width: 229px;
   transform: skewY(-7deg);
   transition: 1s;
-  -webkit-box-shadow: 0px 4px 6px 5px rgba(253, 253, 253, 0.658);
-  box-shadow: 0px 4px 6px 5px rgba(255, 255, 255, 0.678);
-  background-color: rgb(255, 255, 255);
+  -webkit-box-shadow: 0px 0px 10px 6px #ffffff;
+  box-shadow: 0px 0px 10px 6px #ffffff;
+  /* background-color: rgb(0, 0, 0); */
   top: 0px;
   position: relative;
 }
+
+#topPageImg {
+  color: white;
+  width: 60px;
+  height: 50px;
+  position: relative;
+  bottom: -50px;
+  transition: 250ms;
+}
+
+#topPageImg:hover {
+  bottom: -45px;
+}
+
 .testimonials:hover {
   cursor: pointer;
   position: relative;
