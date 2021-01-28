@@ -21,6 +21,7 @@ const backToTop = document.querySelector(".back-to-top-link");
 const footer = document.querySelector(".footer--one");
 const section4 = document.querySelector(".section--4");
 const testimonials = document.querySelector(".testimonials");
+const cardImageBtn = document.querySelector(".cardImageBig");
 
 // Selectors for card modal
 
@@ -62,6 +63,8 @@ const closeAbout = document.querySelector(".closeAbout");
 
 ///////////////////////////////////////////////////////////////////////////////
 
+//////////////////
+
 // Function for turning first letter to uppercase and rest to lowercase
 
 const convertString = function (str) {
@@ -98,11 +101,15 @@ let nameArr = [];
 
 const users = [];
 
+// Arr for active users
+
+let activeUser = [];
+
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
-fetch("https://api.magicthegathering.io/v1/cards")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+// fetch("https://api.magicthegathering.io/v1/cards")
+//   .then((res) => res.json())
+//   .then((x) => arr.push(x))
+//   .catch((err) => console.log(err));
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
   .then((res) => res.json())
@@ -129,8 +136,6 @@ fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
 
 const cardModalText = function (path, i) {};
 
-// ////////////////////////////////////////////////////
-
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -143,13 +148,16 @@ const createCardFinal = function (objPath, num) {
   imageDiv.classList.add("image");
   const image = document.createElement("img");
   image.id = "card--image";
+
   //Favorite button
   const favorite = document.createElement("button");
   favorite.classList.add("favorite");
+  favorite.classList.add("cardBtn");
   favorite.innerText = "Favorite";
   // Delete button
   const newBtn = document.createElement("button");
   newBtn.classList = "del";
+  newBtn.classList.add("cardBtn");
   newBtn.innerText = "X";
 
   image.src = `${objPath[num].imageUrl}`;
@@ -170,9 +178,13 @@ const createCardFinal = function (objPath, num) {
     imageDiv.append(image);
   }
 
-  activeUser[0].userFavoriteCards.forEach((x) =>
-    favorite.classList.add("hidden")
-  );
+  // if (activeUser[0]) {
+  //   if (activeUser[0].userFavoriteCards) {
+  //     activeUser[0].userFavoriteCards.forEach((x) =>
+  //       favorite.classList.add("hidden")
+  //     );
+  //   }
+  // }
 
   image.addEventListener("click", function () {
     console.log("click");
@@ -188,8 +200,10 @@ const createCardFinal = function (objPath, num) {
   });
 
   // Delete selected card
+  // I have to fix this
   newBtn.addEventListener("click", function () {
     newCard.classList.add("hidden");
+    activeUser[0].userFavoriteCards.splice(i, 1);
   });
 
   // Favorite selected card
@@ -270,8 +284,6 @@ let userOne = new UsersCl("bartul_9", "jasamkralj222");
 let userTwo = new UsersCl("mike", "1234");
 users.push(userOne, userTwo);
 
-let activeUser = [];
-
 // When user clicks Create I create object with his name in it and password and push it to ussers array
 
 createBtn.addEventListener("click", function () {
@@ -315,7 +327,9 @@ loginBtn.addEventListener("click", function () {
       welcomeMsg.style.opacity = 1;
       activeUser[0] = user;
       logoutBtn.classList.remove("hidden");
-
+      activeUser[0].userFavoriteCards.forEach((x, i) => {
+        createCardFinal(activeUser[0].userFavoriteCards, i);
+      });
       setTimeout(() => {
         btnModalCreate.style.left = "100%";
         btnModalLogin.style.left = "100%";
@@ -378,7 +392,7 @@ searchOptionsBtn.addEventListener("click", function () {
     setTimeout(() => {
       container.innerHTML = "";
       arr.cards.forEach((x, i) => createCardFinal(arr.cards, i));
-    }, 5000);
+    }, 6000);
   }
 
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
@@ -400,6 +414,38 @@ closeSearchBtn.addEventListener("click", function () {
   container.style.height = 0;
   searchOptionsBtn.classList.remove("hidden");
 });
+
+///////////////////////////////////////////////
+
+// Modal for cards image
+
+window.onclick = function (event) {
+  if (event.target == cardsModal) {
+    imageModal.style.display = "none";
+    imageModal.style.opacity = 0;
+  }
+};
+
+// Cards modal window
+
+const cardsModal = document.querySelector("#cardsModal");
+const closeCardsModal = document.querySelector(".closeCardsModal");
+
+// Modal cards
+
+// When the user clicks on <span> (x), close the modal
+closeCardsModal.onclick = function () {
+  cardsModal.style.display = "none";
+  cardsModal.style.opacity = 0;
+};
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (e) {
+  if (e.target == cardsModal) {
+    cardsModal.style.display = "none";
+    cardsModal.style.opacity = 0;
+  }
+};
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Modal window when creatin acc !!!!!!!!!!!!
@@ -471,27 +517,6 @@ window.onclick = function (event) {
   if (event.target == aboutModal) {
     aboutModal.style.display = "none";
     aboutModal.style.opacity = 0;
-  }
-};
-
-// Cards modal window
-
-const cardsModal = document.querySelector("#cardsModal");
-const closeCardsModal = document.querySelector(".closeCardsModal");
-
-// Modal cards
-
-// When the user clicks on <span> (x), close the modal
-closeCardsModal.onclick = function () {
-  cardsModal.style.display = "none";
-  cardsModal.style.opacity = 0;
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == cardsModal) {
-    cardsModal.style.display = "none";
-    cardsModal.style.opacity = 0;
   }
 };
 
