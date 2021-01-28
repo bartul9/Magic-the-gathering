@@ -25,6 +25,9 @@ const cardImageBtn = document.querySelector(".cardImageBig");
 const previousBtn = document.querySelector(".previous");
 const nextBtn = document.querySelector(".next");
 const topPage = document.querySelector("#topPageImg");
+const cardArtist = document.querySelector(".cardArtist");
+const searchSet = document.querySelector("#search--set");
+const setBtn = document.querySelector(".set--btn");
 
 // Selectors for card modal
 
@@ -253,13 +256,24 @@ const createCardFinal = function (objPath, num) {
 
   // Click on image and open modal with informations about clicked card
   image.addEventListener("click", function () {
+    if (objPath[num].rarity === "Rare") {
+      cardRarity.style.color = "gold";
+    } else if (objPath[num].rarity === "Common") {
+      cardRarity.style.color = "white";
+    } else if (objPath[num].rarity === "Uncommon") {
+      cardRarity.style.color = "lightgreen";
+    } else if (objPath[num].rarity === "Mythic") {
+      cardRarity.style.color = "purple";
+    }
+
     console.log("click");
     cardsModal.style.display = "block";
     cardName.textContent = objPath[num].name;
     cardRarity.textContent = objPath[num].rarity;
     cardType.textContent = objPath[num].type;
-    cardSet.textContent = objPath[num].set;
+    cardSet.textContent = objPath[num].setName;
     cardOriginalText.textContent = objPath[num].originalText;
+    cardArtist.textContent = objPath[num].artist;
     setTimeout(() => {
       cardsModal.style.opacity = 1;
     }, 50);
@@ -313,6 +327,24 @@ show.addEventListener("click", function () {
     createCardFinal(activeUser[0].userFavoriteCards, i);
     favorite.classList.add("hidden");
   });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Set Btn
+
+const setArr = [];
+let setPage = -1;
+
+setBtn.addEventListener("click", function () {
+  setPage++;
+  let setInput = searchSet.value.slice(0, 2).toLowerCase();
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${setInput}&page=${setPage}`
+  )
+    .then((res) => res.json())
+    .then((x) => setArr.push(x))
+    .catch((err) => console.log(err));
+  console.log(setArr);
 });
 
 //////////////////////////////////////////////////////////////////////
@@ -373,7 +405,7 @@ users.push(userOne, userTwo);
 // Cretae acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
 createBtn.addEventListener("click", function () {
-  container.innerHTML = "";
+  closeSearchLogout();
   if (createUsername.value === "" || createPassword.value === "") {
     createUsername.value = createPassword.value = "";
     createBtn.textContent = "Wrong input";
@@ -401,7 +433,7 @@ createBtn.addEventListener("click", function () {
 // User logs in => When user logs in, I change active users to user that logged in, and show his favorite cards, also close modal window on log in and change all the other stuff that needs to be changed, also I check if input is valid, if not i display nice message in button
 
 loginBtn.addEventListener("click", function () {
-  container.innerHTML = "";
+  closeSearchLogout();
   users.forEach((user) => {
     console.log(user);
     if (user.username === username.value && user.password === password.value) {
