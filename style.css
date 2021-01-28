@@ -9,7 +9,7 @@ body {
   background-color: black;
   color: white;
   overflow-x: hidden;
-
+  background-position: center;
   background-image: url(https://cdn.hipwallpaper.com/i/1/29/BHXVTP.jpg);
   /* background-image: url(https://cdn.hipwallpaper.com/i/35/82/G8sxbp.png); */
   /* background-image: url(https://c.wallhere.com/photos/4a/78/Magic_The_Gathering_Trading_Card_Games-12217.jpg!d); */
@@ -152,6 +152,9 @@ header .logo {
   flex-direction: column;
   position: relative;
   top: 30px;
+  color: rgb(0, 0, 0);
+  font-size: 23px;
+  font-weight: 400;
 }
 
 .searchBtnsAll {
@@ -434,13 +437,15 @@ header .logo {
   text-align: center;
   width: 40%;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 21px;
   transition: 500ms;
   font-style: italic;
   color: #ffffff;
 }
 
 #mySing {
+  position: relative;
+  top: 10px;
   font-size: 26px;
   font-weight: 500;
   color: #000000;
@@ -593,11 +598,19 @@ header .logo {
   color: rgb(255, 255, 255);
 }
 .cardOriginalText {
-  color: blue;
+  color: rgb(255, 145, 0);
   padding: 15px;
+  font-size: 19px;
 }
 .cardRarity {
   color: yellow;
+  font-size: 35px;
+}
+
+.cardArtist {
+  font-style: italic;
+  font-size: 17px;
+  color: #3498db;
 }
 
 /* --------------------------------------------------------------------- */
@@ -1003,6 +1016,10 @@ header .logo {
 }
 
 @media (max-width: 900px) {
+  .thankYouMessage {
+    width: 90%;
+    font-size: 20px;
+  }
   #logout {
     margin-left: 10px;
   }
@@ -1045,6 +1062,10 @@ header .logo {
 }
 
 @media (max-width: 570px) {
+  .thankYouMessage {
+    width: 100%;
+    font-size: 19px;
+  }
   .pageButtons {
     top: -20px;
   }
