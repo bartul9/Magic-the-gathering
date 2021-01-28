@@ -24,6 +24,7 @@ const testimonials = document.querySelector(".testimonials");
 const cardImageBtn = document.querySelector(".cardImageBig");
 const previousBtn = document.querySelector(".previous");
 const nextBtn = document.querySelector(".next");
+const topPage = document.querySelector("#topPageImg");
 
 // Selectors for card modal
 
@@ -47,14 +48,14 @@ const loginBtn = document.querySelector(".login--btn");
 
 //  Create account modal inputs
 
-const modalCreate = document.getElementById("myModalCreate");
+const mymodalCreate = document.querySelector("#myModalCreate");
 const btnModalCreate = document.querySelector(".modalBtnCreate");
 const spanModal = document.getElementsByClassName("close")[0];
 
 // Login modal inputs
 
 const btnModalLogin = document.querySelector(".modalBtnLogin");
-const modalLogin = document.getElementById("myModalLogin");
+const mymodalLogin = document.querySelector("#myModalLogin");
 const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
 
 //  Card back about modal
@@ -63,11 +64,37 @@ const cardBackAbout = document.querySelector(".cardBackImg");
 const aboutModal = document.querySelector("#myModalAbout");
 const closeAbout = document.querySelector(".closeAbout");
 
+// Modal for more info about cards
+
+const cardsModal = document.querySelector("#cardsModal");
+const closeCardsModal = document.querySelector(".closeCardsModal");
+
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////
 
-// Function for turning first letter to uppercase and rest to lowercase
+/////////////////////////////////////////////////////////////////////////////
+// Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
+
+const closeSearchLogout = function () {
+  footer.style.top = "-245px";
+  nextBtn.style.left = "-100%";
+  topPage.style.bottom = "-100px";
+  previousBtn.style.left = "-100%";
+  section4.style.top = "0";
+  container.style.transition = "500ms";
+  container.innerHTML = "";
+  sectionSearch.style.opacity = 0;
+  container.style.opacity = 0;
+  container.style.height = 0;
+  searchOptionsBtn.classList.remove("hidden");
+  setTimeout(() => {
+    sectionSearch.style.left = "-100%";
+  }, 500);
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Function for turning first letter to uppercase and rest to lowercase => I dont need this for now, probably gonna delite it !!!!!!!!!!!!!
 
 const convertString = function (str) {
   let arrStr = str.split("");
@@ -77,7 +104,8 @@ const convertString = function (str) {
   return arrStr3;
 };
 
-// Navabr scroll function
+//////////////////////////////////////////////////////////////////////////////
+// Navabr scroll function => navbar animation
 
 window.addEventListener("scroll", function () {
   header.classList.toggle("sticky", window.scrollY > 0);
@@ -88,15 +116,13 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// Function for duplicates from create acc and login
-
-// Array for keeping the fetched card information on Array position 1
+// Array for keeping the fetched card information in array, so I can work with them
 const arr = [];
 
 // Filtered array for rarity cards
 let rareCards = [];
 
-// Array for name that we are seeking in the moment
+// Array for name that we are seeking
 let nameArr = [];
 
 // Users array
@@ -106,6 +132,9 @@ const users = [];
 // Arr for active users
 
 let activeUser = [];
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// Fetch methods for api=> I need to reorganize this, and alow user to search cards from API by sets, or names
 
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
 // fetch("https://api.magicthegathering.io/v1/cards")
@@ -143,7 +172,8 @@ fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=3")
   .then((x) => arr.push(x))
   .catch((err) => console.log(err));
 
-// Page slider
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
 
 let pageCount = 1;
 
@@ -177,19 +207,12 @@ previousBtn.addEventListener("click", function () {
   });
 });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
+// My main function for creating cards => Here I create elements, give them classes and append them to main element, when user clicks on, I create cards thath he wants and append them all to container.
 
-// Show favourite cards
-// Since there is a lot class changes between createFavorite and createCardsFinal i'll leave them like this in two functions even though they are pretty similliar I decided to leave them in two functions
-
-// Function for card modal text content
-
-const cardModalText = function (path, i) {};
-
-///////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
+// I had to pull this variable out so when I show favorite cards I can add class hidden to favorite button
+let favorite;
 
 const createCardFinal = function (objPath, num) {
   // Creating card element by element, adding classes to them, and appending them to each other
@@ -199,9 +222,8 @@ const createCardFinal = function (objPath, num) {
   imageDiv.classList.add("image");
   const image = document.createElement("img");
   image.id = "card--image";
-
   //Favorite button
-  const favorite = document.createElement("button");
+  favorite = document.createElement("button");
   favorite.classList.add("favorite");
   favorite.classList.add("cardBtn");
   favorite.innerText = "Favorite";
@@ -213,7 +235,7 @@ const createCardFinal = function (objPath, num) {
 
   image.src = `${objPath[num].imageUrl}`;
 
-  // Here I check if image exists, if not I put everything in new elements, and classes.. A lot of code, that also exists in other function, but it is what it is. It works, even thought it looks ugly
+  // Here I check if image exists, if not that card is not created
   if (!objPath[num].imageUrl) {
     newCard.classList.add("hidden");
   }
@@ -229,14 +251,7 @@ const createCardFinal = function (objPath, num) {
     imageDiv.append(image);
   }
 
-  // if (activeUser[0]) {
-  //   if (activeUser[0].userFavoriteCards) {
-  //     activeUser[0].userFavoriteCards.forEach((x) =>
-  //       favorite.classList.add("hidden")
-  //     );
-  //   }
-  // }
-
+  // Click on image and open modal with informations about clicked card
   image.addEventListener("click", function () {
     console.log("click");
     cardsModal.style.display = "block";
@@ -249,15 +264,28 @@ const createCardFinal = function (objPath, num) {
       cardsModal.style.opacity = 1;
     }, 50);
   });
+  // When the user clicks on <span> (x), close the modal
+  closeCardsModal.onclick = function () {
+    cardsModal.style.display = "none";
+    cardsModal.style.opacity = 0;
+  };
 
-  // Delete selected card
-  // I have to fix this
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (e) {
+    if (e.target === cardsModal) {
+      cardsModal.style.display = "none";
+      cardsModal.style.opacity = 0;
+    }
+  };
+
+  // Delete selected favorite card => So here I putted all favorited cards to array in users object, and if you whant to delete them I make it like this. Since I had some bugs with splice method, I decided to turn deleted card element to 0, and then filter array and remove all zeros, so that way I am sure they are deleated
   newBtn.addEventListener("click", function () {
     newCard.classList.add("hidden");
-    activeUser[0].userFavoriteCards.splice(i, 1);
+    activeUser[0].userFavoriteCards[num] = 0;
+    activeUser[0].userFavoriteCards.filter((item) => item !== 0);
   });
 
-  // Favorite selected card
+  // Favorite selected card => favorite selected card and put it in users class into the favorite array
   favorite.addEventListener("click", function () {
     activeUser[0].userFavoriteCards.push(objPath[num]);
   });
@@ -265,7 +293,8 @@ const createCardFinal = function (objPath, num) {
   container.append(newCard);
 };
 
-// Function for showing all cards avalible
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Function for showing all cards avalible => When clicked user gets all cards from every array element
 
 allCards.addEventListener("click", function () {
   container.innerHTML = "";
@@ -276,36 +305,18 @@ allCards.addEventListener("click", function () {
   );
 });
 
-// Event listener for showing all favorited cards
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event listener for showing all favorited cards => Here I loop trough favorite array and append all cards in array to container element
 show.addEventListener("click", function () {
-  // Make container empty before showing the favorite cards
   container.innerHTML = "";
-
-  // Check if favorite array
   activeUser[0].userFavoriteCards.forEach((x, i) => {
     createCardFinal(activeUser[0].userFavoriteCards, i);
+    favorite.classList.add("hidden");
   });
 });
 
 //////////////////////////////////////////////////////////////////////
-// Here I search card by name, so I putted name in array by unshift method, and then show card on position one from that array
-
-// const namesArr = [];
-
-// const autocomplite = function () {
-//   arr.forEach((y) => y.cards.forEach((x) => namesArr.push(x.name)));
-//   let one = inputName.value[0];
-//   let two = inputName.value[1];
-//   let three = inputName.value[2];
-
-//   namesArr.forEach((x) => {
-//     if (x[0] === one && x[1] === two && x[2] === three) {
-//       inputName.value = x;
-//     }
-//   });
-// };
-
-// autocomplite();
+// Here I search card by name => I putted name in array by unshift method, and then show card on position one from that array
 
 nameBtn.addEventListener("click", function () {
   container.innerHTML = "";
@@ -315,7 +326,7 @@ nameBtn.addEventListener("click", function () {
         nameArr.unshift(x);
         inputName.value = "";
         if (nameArr.length > 40) {
-          nameArr.splice(1, nameArr.length);
+          nameArr.splice(1, nameArr.length - 1);
         }
       }
     })
@@ -323,8 +334,8 @@ nameBtn.addEventListener("click", function () {
   createCardFinal(nameArr, 0);
 });
 
-//////////////////////////////////////////////////////////////////////
-// Show all cards by rarity. So here I putted all cards thet I look for in new array then I simply loop over that array and show cards
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Show all cards by rarity => Here I putted all cards that I look for in new array then I simply loop over that array and show cards
 
 typeBtn.addEventListener("click", function () {
   rareCards = [];
@@ -340,9 +351,8 @@ typeBtn.addEventListener("click", function () {
   inputType.value = "";
 });
 
-////////////////////////////////////////////////////////////////////////
-
-// Class for every new created users
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Class prototype for every new created user
 
 class UsersCl {
   constructor(username, password) {
@@ -359,7 +369,8 @@ let userOne = new UsersCl("bartul_9", "jasamkralj222");
 let userTwo = new UsersCl("mike", "1234");
 users.push(userOne, userTwo);
 
-// When user clicks Create I create object with his name in it and password and push it to ussers array
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Cretae acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
 createBtn.addEventListener("click", function () {
   container.innerHTML = "";
@@ -372,7 +383,7 @@ createBtn.addEventListener("click", function () {
   createBtn.textContent = "Create Acc";
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
-  modalCreate.style.display = "none";
+  mymodalCreate.style.display = "none";
   btnModalCreate.style.left = "-100%";
   btnModalLogin.style.left = "-100%";
   welcomeMsg.style.right = "0";
@@ -386,7 +397,8 @@ createBtn.addEventListener("click", function () {
   console.log(users);
 });
 
-// When user logs in change active users to user that logged in, and show his favorite cards, also close model window on log in and change all the other stuff that needs to be changed
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// User logs in => When user logs in, I change active users to user that logged in, and show his favorite cards, also close modal window on log in and change all the other stuff that needs to be changed, also I check if input is valid, if not i display nice message in button
 
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
@@ -395,7 +407,7 @@ loginBtn.addEventListener("click", function () {
     if (user.username === username.value && user.password === password.value) {
       console.log(user);
       username.value = password.value = "";
-      modalLogin.style.display = "none";
+      mymodalLogin.style.display = "none";
       btnModalCreate.style.opacity = 0;
       btnModalLogin.style.opacity = 0;
       welcomeMsg.style.right = "0";
@@ -420,38 +432,25 @@ loginBtn.addEventListener("click", function () {
   }, 1500);
 });
 
-////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 // User logs out, reset active user, put all things as they were before user logged in
 
 logoutBtn.addEventListener("click", function () {
-  container.innerHTML = "";
   activeUser = [];
   logoutBtn.classList.add("hidden");
-  sectionSearch.style.opacity = 0;
   welcomeMsg.style.opacity = 0;
   welcomeMsg.style.right = "100%";
-  setTimeout(() => {
-    sectionSearch.style.left = "-100%";
-  }, 500);
   btnModalCreate.style.left = 0;
   btnModalLogin.style.left = 0;
-  container.style.transition = "500ms";
-  container.style.opacity = 0;
-  container.style.height = 0;
-  footer.style.top = "-245px";
-  section4.style.top = "0";
-  searchOptionsBtn.classList.remove("hidden");
-
+  closeSearchLogout();
   setTimeout(() => {
     btnModalCreate.style.opacity = 1;
     btnModalLogin.style.opacity = 1;
   }, 200);
 });
 
-////////////////////////////////////////////////////////////////////////////////
-// Btn for opening search options
-
-const topPage = document.querySelector("#topPageImg");
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
 
 searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
@@ -461,17 +460,16 @@ searchOptionsBtn.addEventListener("click", function () {
   container.style.height = "100vh";
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
-  topPage.style.bottom = "-190px";
+  topPage.style.bottom = "-210px";
   footer.style.top = 0;
   section4.style.top = "155px";
   if (!arr[0]) {
-    console.log("hello");
     let spinner = document.createElement("div");
     spinner.classList.add("loader");
     container.append(spinner);
     setTimeout(() => {
       container.innerHTML = "";
-      arr.cards.forEach((x, i) => createCardFinal(arr.cards, i));
+      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
     }, 6000);
   }
 
@@ -482,104 +480,60 @@ searchOptionsBtn.addEventListener("click", function () {
 // Btn  for closing search options
 
 closeSearchBtn.addEventListener("click", function () {
-  container.innerHTML = "";
-  sectionSearch.style.opacity = 0;
-  setTimeout(() => {
-    sectionSearch.style.left = "-100%";
-  }, 500);
-  container.style.transition = "500ms";
-  section4.style.top = "0";
-  previousBtn.style.left = "-100%";
-  nextBtn.style.left = "100%";
-  footer.style.top = "-245px";
-  container.style.opacity = 0;
-  container.style.height = 0;
-  searchOptionsBtn.classList.remove("hidden");
+  closeSearchLogout();
 });
 
-///////////////////////////////////////////////
-
-// Modal for cards image
-
-window.onclick = function (event) {
-  if (event.target == cardsModal) {
-    imageModal.style.display = "none";
-    imageModal.style.opacity = 0;
-  }
-};
-
-// Cards modal window
-
-const cardsModal = document.querySelector("#cardsModal");
-const closeCardsModal = document.querySelector(".closeCardsModal");
-
-// Modal cards
-
-// When the user clicks on <span> (x), close the modal
-closeCardsModal.onclick = function () {
-  cardsModal.style.display = "none";
-  cardsModal.style.opacity = 0;
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (e) {
-  if (e.target == cardsModal) {
-    cardsModal.style.display = "none";
-    cardsModal.style.opacity = 0;
-  }
-};
-
 ///////////////////////////////////////////////////////////////////////////////////////
-// Modal window when creatin acc !!!!!!!!!!!!
+// Modal window when creatin acc
 
 // When the user clicks the button, open the modal
 btnModalCreate.onclick = function () {
-  modalCreate.style.display = "block";
+  mymodalCreate.style.display = "block";
   setTimeout(() => {
-    modalCreate.style.opacity = 1;
+    mymodalCreate.style.opacity = 1;
   }, 50);
 };
 
 // When the user clicks on <span> (x), close the modal
 spanModal.onclick = function () {
-  modalCreate.style.display = "none";
-  modalCreate.style.opacity = 0;
+  mymodalCreate.style.display = "none";
+  mymodalCreate.style.opacity = 0;
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (e) {
-  if (e.target == modalCreate) {
-    modalCreate.style.display = "none";
-    modalCreate.style.opacity = 0;
+  if (e.target == mymodalCreate) {
+    mymodalCreate.style.display = "none";
+    mymodalCreate.style.opacity = 0;
   }
 };
 
 //////////////////////////////////////////////////////////////////////////////
-//// Modal for logging  in !!!!!!!!!!
+//// Modal for logging  in
 
 // When the user clicks the button, open the modal
 btnModalLogin.onclick = function () {
-  modalLogin.style.display = "block";
+  mymodalLogin.style.display = "block";
   setTimeout(() => {
-    modalLogin.style.opacity = 1;
+    mymodalLogin.style.opacity = 1;
   }, 50);
 };
 
 // When the user clicks on <span> (x), close the modal
 spanModalLogin.onclick = function () {
-  modalLogin.style.display = "none";
-  modalLogin.style.opacity = 0;
+  mymodalLogin.style.display = "none";
+  mymodalLogin.style.opacity = 0;
 };
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-  if (event.target == modalLogin) {
-    modalLogin.style.display = "none";
-    modalLogin.style.opacity = 0;
+  if (event.target == mymodalLogin) {
+    mymodalLogin.classList.add("hidden");
   }
 };
 
-// Modal for about
+//////////////////////////////////////////////////////////////
+// Modal for about on the main page
 
 cardBackAbout.onclick = function () {
   aboutModal.style.display = "block";
@@ -602,8 +556,10 @@ window.onclick = function (event) {
   }
 };
 
-// Testimonials change
+//////////////////////////////////////////////////////////////
+// Testimonials change => now they are just images, ill see if ill add testimonials animation
 
+// Array for images that I change on click and event listener
 const testimonialsImageArray = [
   "https://crystal-cdn3.crystalcommerce.com/photos/6344442/large/en_oYewlmYojE.png",
   "https://media.wizards.com/legacy/magic/images/mtgcom/fcpics/latest/dl16_large.jpg",
@@ -620,5 +576,3 @@ testimonials.addEventListener("click", function () {
   clickCount++;
   testimonials.style.backgroundImage = `url(${testimonialsImageArray[clickCount]})`;
 });
-
-// Auto complite function
