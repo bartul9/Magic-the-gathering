@@ -88,8 +88,6 @@ window.addEventListener("scroll", function () {
 // Array for keeping the fetched card information on Array position 1
 const arr = [];
 
-const arrFinal = arr[0];
-
 // Filtered array for rarity cards
 let rareCards = [];
 
@@ -103,7 +101,7 @@ const users = [];
 // Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
 fetch("https://api.magicthegathering.io/v1/cards")
   .then((res) => res.json())
-  .then((x) => arr.push(...x))
+  .then((x) => arr.push(x))
   .catch((err) => console.log(err));
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
@@ -133,86 +131,6 @@ const cardModalText = function (path, i) {};
 
 // ////////////////////////////////////////////////////
 
-const createFavorite = function (i) {
-  //Creating elements
-  const newCardFav = document.createElement("div");
-  newCardFav.classList.add("card");
-
-  const imageFavDiv = document.createElement("div");
-  imageFavDiv.classList.add("image");
-
-  const imageFav = document.createElement("img");
-  imageFav.id = "card--image";
-
-  // Delete button
-  const delBtn = document.createElement("button");
-  delBtn.classList = "del";
-  delBtn.innerText = "X";
-
-  imageFav.src = `${activeUser[0].userFavoriteCards[i].imageUrl}`;
-
-  // Checking if image exists, if not then I put another image !!! also need to make function for this !!!
-  if (!activeUser[0].userFavoriteCards[i].imageUrl) {
-    newCardFav.classList.add("hidden");
-    // const noneCardText = document.createElement("h2");
-    // noneCardText.classList.add("card--noImageText");
-    // noneCardText.textContent = activeUser[0].userFavoriteCards[i].name;
-    // newCardFav.append(noneCardText);
-    // delBtn.classList.remove("del");
-    // delBtn.classList.add("no--image--del");
-  }
-
-  newCardFav.addEventListener("click", function () {
-    console.log("click");
-    cardsModal.style.display = "block";
-    setTimeout(() => {
-      cardsModal.style.opacity = 1;
-    }, 50);
-  });
-
-  imageFav.addEventListener("click", function () {
-    console.log("click");
-    cardsModal.style.display = "block";
-    cardName.textContent = activeUser[0].userFavoriteCards[i].name;
-    cardRarity.textContent = activeUser[0].userFavoriteCards[i].rarity;
-    cardType.textContent = activeUser[0].userFavoriteCards[i].type;
-    cardSet.textContent = activeUser[0].userFavoriteCards[i].set;
-    cardOriginalText.textContent =
-      activeUser[0].userFavoriteCards[i].originalText;
-    setTimeout(() => {
-      cardsModal.style.opacity = 1;
-    }, 50);
-  });
-
-  cardModalText(activeUser[0], i);
-
-  newCardFav.append(imageFavDiv);
-  newCardFav.append(delBtn);
-  imageFavDiv.append(imageFav);
-
-  // Delete selected card from favorites
-  delBtn.addEventListener("click", function () {
-    // So here I added class of hidden to deleted card, and also I delete selected card from array, and if array.length is equal to 0 then i make sure that the last item is deleted and I make arr = empty array
-    newCardFav.classList.add("hidden");
-    activeUser[0].userFavoriteCards.splice(i, 1);
-    if (activeUser[0].userFavoriteCards.length === 0) {
-      activeUser[0].userFavoriteCards = [];
-    }
-  });
-
-  container.append(newCardFav);
-};
-
-// Event listener for showing all favorited cards
-show.addEventListener("click", function () {
-  // Make container empty before showing the favorite cards
-  container.innerHTML = "";
-  // Check if favorite array
-  activeUser[0].userFavoriteCards.forEach((x, i) => {
-    createFavorite(i);
-  });
-});
-
 ///////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -239,14 +157,6 @@ const createCardFinal = function (objPath, num) {
   // Here I check if image exists, if not I put everything in new elements, and classes.. A lot of code, that also exists in other function, but it is what it is. It works, even thought it looks ugly
   if (!objPath[num].imageUrl) {
     newCard.classList.add("hidden");
-    // noneCardText = document.createElement("h2");
-    // noneCardText.classList.add("card--noImageText");
-    // noneCardText.textContent = objPath[num].name;
-    // newCard.append(noneCardText);
-    // newBtn.classList.remove("del");
-    // newBtn.classList.add("no--image--delOne");
-    // favorite.classList.remove("favorite");
-    // favorite.classList.add("no--image--favOne");
   }
 
   // If there is active user create all images with buttons for favorite cards and for deleting card, else just create cards without buttons
@@ -259,6 +169,10 @@ const createCardFinal = function (objPath, num) {
     newCard.append(imageDiv);
     imageDiv.append(image);
   }
+
+  activeUser[0].userFavoriteCards.forEach((x) =>
+    favorite.classList.add("hidden")
+  );
 
   image.addEventListener("click", function () {
     console.log("click");
@@ -292,6 +206,17 @@ allCards.addEventListener("click", function () {
   container.innerHTML = "";
   arr[0].cards.forEach((x, i) => {
     createCardFinal(arr[0].cards, i);
+  });
+});
+
+// Event listener for showing all favorited cards
+show.addEventListener("click", function () {
+  // Make container empty before showing the favorite cards
+  container.innerHTML = "";
+
+  // Check if favorite array
+  activeUser[0].userFavoriteCards.forEach((x, i) => {
+    createCardFinal(activeUser[0].userFavoriteCards, i);
   });
 });
 
