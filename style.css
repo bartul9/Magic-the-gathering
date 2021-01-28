@@ -23,7 +23,6 @@ header {
   padding: 40px, 100px;
   z-index: 100000;
   opacity: 0;
-  border-bottom: 1px solid rgb(0, 0, 0);
 }
 
 header.sticky {
@@ -101,6 +100,7 @@ header .logo {
   background-image: url(https://dw9to29mmj727.cloudfront.net/promo/2016/5336-SeriesHeaders_Tier01_Magic_2000x800.jpg);
   width: 100%;
   text-align: center;
+
   height: 100vh;
   display: flex;
   align-items: center;
@@ -470,7 +470,7 @@ header .logo {
 .pageButtons {
   position: relative;
   top: -130px;
-
+  left: -100%;
   width: 150px;
   height: 25px;
   border-radius: 10px;
@@ -486,12 +486,12 @@ header .logo {
   cursor: pointer;
 }
 
-.next {
+/* .next {
   left: 100%;
 }
 .previous {
   left: -100%;
-}
+} */
 /* ----------------------------- */
 
 #cardsModal {
@@ -876,15 +876,11 @@ header .logo {
 
 #topPageImg {
   color: white;
-  width: 60px;
-  height: 50px;
+  width: 40px;
+  height: 30px;
   position: relative;
   bottom: -50px;
   transition: 250ms;
-}
-
-#topPageImg:hover {
-  bottom: -45px;
 }
 
 .testimonials:hover {
@@ -1066,7 +1062,7 @@ header .logo {
     top: -25px;
   }
   .searchOptionBtn {
-    top: 10px;
+    top: 20px;
   }
   .modalBtnLogin {
     top: -100px;
@@ -1118,6 +1114,9 @@ header .logo {
 }
 
 @media (max-width: 430px) {
+  .heading--section {
+    background-size: cover;
+  }
   .welcomeMsg {
     font-size: 28px;
   }
