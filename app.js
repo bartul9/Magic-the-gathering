@@ -145,13 +145,17 @@ fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=3")
 
 // Page slider
 
-let pageCount = 0;
+let pageCount = 1;
 
 nextBtn.addEventListener("click", function () {
   if (pageCount === arr.length - 1) {
-    pageCount = -1;
+    pageCount = 0;
   }
   pageCount++;
+  nextBtn.textContent = pageCount;
+  setTimeout(() => {
+    nextBtn.textContent = "Next Page";
+  }, 700);
   container.innerHTML = "";
   arr[pageCount].cards.forEach((x, i) => {
     createCardFinal(arr[pageCount].cards, i);
@@ -159,10 +163,14 @@ nextBtn.addEventListener("click", function () {
 });
 
 previousBtn.addEventListener("click", function () {
-  if (pageCount === 0) {
+  if (pageCount === 1) {
     pageCount = arr.length;
   }
   pageCount--;
+  previousBtn.textContent = pageCount;
+  setTimeout(() => {
+    previousBtn.textContent = "Next Page";
+  }, 700);
   container.innerHTML = "";
   arr[pageCount].cards.forEach((x, i) => {
     createCardFinal(arr[pageCount].cards, i);
@@ -261,9 +269,11 @@ const createCardFinal = function (objPath, num) {
 
 allCards.addEventListener("click", function () {
   container.innerHTML = "";
-  arr[0].cards.forEach((x, i) => {
-    createCardFinal(arr[0].cards, i);
-  });
+  arr.forEach((y) =>
+    y.cards.forEach((x, i) => {
+      createCardFinal(y.cards, i);
+    })
+  );
 });
 
 // Event listener for showing all favorited cards
@@ -279,18 +289,37 @@ show.addEventListener("click", function () {
 
 //////////////////////////////////////////////////////////////////////
 // Here I search card by name, so I putted name in array by unshift method, and then show card on position one from that array
+
+// const namesArr = [];
+
+// const autocomplite = function () {
+//   arr.forEach((y) => y.cards.forEach((x) => namesArr.push(x.name)));
+//   let one = inputName.value[0];
+//   let two = inputName.value[1];
+//   let three = inputName.value[2];
+
+//   namesArr.forEach((x) => {
+//     if (x[0] === one && x[1] === two && x[2] === three) {
+//       inputName.value = x;
+//     }
+//   });
+// };
+
+// autocomplite();
+
 nameBtn.addEventListener("click", function () {
   container.innerHTML = "";
-  let input = convertString(inputName.value);
-  inputName.value = "";
-  arr[0].cards.forEach((x) => {
-    if (x.name === input) {
-      nameArr.unshift(x);
-      if (nameArr.length > 40) {
-        nameArr.splice(1, nameArr.length);
+  arr.forEach((y) =>
+    y.cards.forEach((x) => {
+      if (x.name.toLowerCase() === inputName.value.toLowerCase()) {
+        nameArr.unshift(x);
+        inputName.value = "";
+        if (nameArr.length > 40) {
+          nameArr.splice(1, nameArr.length);
+        }
       }
-    }
-  });
+    })
+  );
   createCardFinal(nameArr, 0);
 });
 
@@ -302,7 +331,7 @@ typeBtn.addEventListener("click", function () {
   container.innerHTML = "";
   arr.forEach((y) =>
     y.cards.forEach((x) => {
-      if (x.rarity === convertString(inputType.value)) {
+      if (x.rarity === inputType.value) {
         rareCards.push(x);
       }
     })
@@ -422,6 +451,8 @@ logoutBtn.addEventListener("click", function () {
 ////////////////////////////////////////////////////////////////////////////////
 // Btn for opening search options
 
+const topPage = document.querySelector("#topPageImg");
+
 searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
@@ -430,6 +461,7 @@ searchOptionsBtn.addEventListener("click", function () {
   container.style.height = "100vh";
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
+  topPage.style.bottom = "-190px";
   footer.style.top = 0;
   section4.style.top = "155px";
   if (!arr[0]) {
@@ -574,12 +606,9 @@ window.onclick = function (event) {
 
 const testimonialsImageArray = [
   "https://crystal-cdn3.crystalcommerce.com/photos/6344442/large/en_oYewlmYojE.png",
-  "https://i.pinimg.com/474x/d3/1f/b0/d31fb0b245a7fb1e3b3cc0e1e642d47f.jpg",
   "https://media.wizards.com/legacy/magic/images/mtgcom/fcpics/latest/dl16_large.jpg",
   "https://media.magic.wizards.com/image_legacy_migration/magic/images/mtgcom/fcpics/play/zm28_vvocl8l9i5fmibb3.jpg",
   "https://crystal-cdn3.crystalcommerce.com/photos/4203323/large/undergrowthchampion.jpg",
-  "https://cdn1.mtggoldfish.com/images/gf/Corpsejack%2BMenace%2B%255BRTR%255D.jpg",
-  "https://www.sadrobot.co.za/wp-content/uploads/2013/06/MM0471.jpeg",
 ];
 
 let clickCount = 0;
@@ -591,3 +620,5 @@ testimonials.addEventListener("click", function () {
   clickCount++;
   testimonials.style.backgroundImage = `url(${testimonialsImageArray[clickCount]})`;
 });
+
+// Auto complite function
