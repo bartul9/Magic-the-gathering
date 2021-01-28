@@ -9,6 +9,16 @@ body {
   background-color: black;
   color: white;
   overflow-x: hidden;
+
+  background-image: url(https://cdn.hipwallpaper.com/i/1/29/BHXVTP.jpg);
+  /* background-image: url(https://cdn.hipwallpaper.com/i/35/82/G8sxbp.png); */
+  /* background-image: url(https://c.wallhere.com/photos/4a/78/Magic_The_Gathering_Trading_Card_Games-12217.jpg!d); */
+  /* background-image: url(https://c.wallhere.com/photos/f2/52/Magic_The_Gathering_Trading_Card_Games_elements_lava_smoke_cherry_blossom-1394895.jpg!d); */
+  /* background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/23/458367-Magic_The_Gathering-Trading_Card_Games-simple-minimalism-black_background-skull.jpg;"); */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 510vh;
 }
 
 /* Navbar and its properities */
@@ -418,6 +428,24 @@ header .logo {
   transition: 500ms;
 }
 
+.thankYouMessage {
+  position: relative;
+  bottom: -360px;
+  text-align: center;
+  width: 40%;
+  font-weight: 400;
+  font-size: 24px;
+  transition: 500ms;
+  font-style: italic;
+  color: #ffffff;
+}
+
+#mySing {
+  font-size: 26px;
+  font-weight: 500;
+  color: #000000;
+  font-style: italic;
+}
 /* ----------------  */
 
 /* Cards modal */
