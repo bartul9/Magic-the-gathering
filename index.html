@@ -13,7 +13,7 @@
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <!-- My styles -->
@@ -96,6 +96,14 @@
         >
           Search
         </button>
+        <!-- --------------------------- -->
+
+        <label for="search--set">Search by Set </label>
+        <input type="text" id="search--set" name="search--set" /><button
+          class="set--btn btnSearch"
+        >
+          Search
+        </button>
       </div>
       <div class="search--div searchBtnsAll">
         <button class="show showBtns">Show Favorites</button>
@@ -108,6 +116,18 @@
         <!-- <input type="text" id="search--type" name="search--type" /> -->
         <select id="search--type" name="rCommon">
           <option value="Common">Common</option>
+          <option value="Uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="Mythic">Mythic</option>
+        </select>
+        <button class="type--btn btnSearch">Search</button>
+
+        <!-- ------------------------------------------------------------------------- -->
+        <!-- Second part, filter by -->
+        <label for="search--type">Filter by </label>
+        <!-- <input type="text" id="search--type" name="search--type" /> -->
+        <select id="search--type" name="rCommon">
+          <option value="ManaCost">Mana Cost</option>
           <option value="Uncommon">Uncommon</option>
           <option value="rare">Rare</option>
           <option value="Mythic">Mythic</option>
@@ -171,13 +191,16 @@
         <p class="paragrafCards cardSet"></p>
 
         <p class="paragrafCards cardOriginalText"></p>
+
+        <p class="paragrafCards cardArtist"></p>
       </div>
     </div>
     <p class="thankYouMessage">
       Thank you for visiting my site that I built with pure love and joy, and
       honestly I think it looks beautiful. Huge thank's to Magic the Gathering
       loving people for letting me use they API. This site was completly made in
-      HTML, CSS and JavaScript, and it's not for comercial use. <br />
+      Html, Css and JavaScript, and it's not for comercial use. For best
+      experiance use in desktop mode. <br />
       <span id="mySing">Luka Bartulović</span>
     </p>
 
