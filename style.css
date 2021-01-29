@@ -93,9 +93,31 @@ header .logo {
   color: rgb(135, 0, 168);
 }
 
+.createAcc--div {
+  position: relative;
+  top: -150px;
+  display: flex;
+  flex-direction: column;
+  left: -100%;
+  opacity: 0;
+  transition: 200ms;
+}
+
+.login--div {
+  transition: 200ms;
+  position: relative;
+  left: -100%;
+  top: -250px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+}
+
 /* Heading and its animation */
 
 .headingOne {
+  position: relative;
+  top: 80px;
   opacity: 1;
   font-size: 150px;
   letter-spacing: 5px;
@@ -138,7 +160,7 @@ header .logo {
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  background-color: rgb(3, 3, 3);
+  background-color: rgb(141, 141, 141);
   transition: 1s;
 }
 
@@ -598,7 +620,7 @@ header .logo {
   color: rgb(255, 255, 255);
 }
 .cardOriginalText {
-  color: rgb(255, 145, 0);
+  color: rgb(212, 212, 212);
   padding: 15px;
   font-size: 19px;
 }
@@ -614,56 +636,6 @@ header .logo {
 }
 
 /* --------------------------------------------------------------------- */
-/* Modal for create new account */
-
-#myModalCreate {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  transition: 500ms;
-  opacity: 0;
-}
-
-/* Modal Content */
-.modal-content {
-  font-size: 20px;
-  position: relative;
-  top: 100px;
-  background-color: #000000;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 300px;
-  height: 240px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
-    0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
-  background-position: center;
-  background-size: cover;
-}
-
-/* Create acc div in modal */
-.createAcc--div {
-  position: relative;
-  top: 0px;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  color: rgb(53, 158, 255);
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  letter-spacing: 2px;
-}
 
 .create--btn {
   width: 200px;
@@ -687,72 +659,7 @@ header .logo {
   cursor: pointer;
 }
 
-/* The Close Button for create acc modal */
-.close {
-  color: rgb(255, 255, 255);
-  position: relative;
-  left: 130px;
-  top: -10px;
-  font-size: 40px;
-  font-weight: 700;
-}
-
-.close:hover,
-.close:focus {
-  color: rgb(156, 156, 156);
-  text-decoration: none;
-  cursor: pointer;
-}
-
 /* Modal for login */
-
-#myModalLogin {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  opacity: 0;
-  transition: 500ms;
-}
-
-/* Modal Content */
-.modal-login {
-  font-size: 20px;
-  position: relative;
-  top: 100px;
-  background-color: #000000;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 300px;
-  height: 240px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
-    0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
-  background-position: bottom;
-  background-size: cover;
-}
-
-.login--div {
-  position: relative;
-  top: 0px;
-  font-weight: 600;
-  display: flex;
-  flex-direction: column;
-  color: rgb(53, 158, 255);
-  justify-content: center;
-  align-items: center;
-  font-size: 25px;
-  letter-spacing: 1px;
-}
 
 .login--btn {
   width: 200px;
@@ -773,23 +680,6 @@ header .logo {
 .login--btn:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-  cursor: pointer;
-}
-
-/* The Close Button for login modal */
-.closeLogin {
-  color: rgb(255, 255, 255);
-  position: relative;
-  left: 130px;
-  top: -10px;
-  font-size: 40px;
-  font-weight: 700;
-}
-
-.closeLogin:hover,
-.closeLogin:focus {
-  color: rgb(129, 129, 129);
-  text-decoration: none;
   cursor: pointer;
 }
 
@@ -824,7 +714,7 @@ header .logo {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   position: relative;
-  top: -120px;
+  top: -30px;
   left: 0;
 }
 .btnModal2 {
@@ -854,24 +744,6 @@ header .logo {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
   cursor: pointer;
-}
-
-/* Modal about */
-
-#myModalAbout {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: -20px;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  opacity: 0;
-  transition: 500ms;
 }
 
 .section--4 {
@@ -930,58 +802,6 @@ header .logo {
   transform: rotateX(20deg);
   transform: rotateY(10deg);
   opacity: 0.5;
-}
-
-/* Modal Content */
-.modal-about {
-  display: flex;
-  justify-content: center;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  font-size: 20px;
-  position: relative;
-  top: 100px;
-  background-color: #000000;
-  margin: auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 70%;
-  height: 300px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(165, 165, 165, 0.2),
-    0 6px 20px 0 rgba(155, 155, 155, 0.19);
-  /* background-image: url(https://ae01.alicdn.com/kf/HTB14PrpoCtYBeNjSspaq6yOOFXat/Five-Manas-Symbols-Magic-Play-mat-Board-cards-Games-big-mousepad-Table-Pad-Custom-ccg-ygo.jpg);
-  background-position: center;
-  background-size: cover; */
-}
-#h3About {
-  color: rgb(9, 179, 74);
-  text-shadow: 2px 2px 2px rgb(0, 0, 0);
-  font-size: 35px;
-}
-
-.closeAbout {
-  color: rgb(255, 255, 255);
-  font-size: 40px;
-  font-weight: 700;
-  position: relative;
-  top: 35px;
-}
-
-.closeAbout:hover,
-.closeAbout:focus {
-  color: rgb(129, 129, 129);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.about--text {
-  font-size: 19px;
-  padding: 25px;
-  text-align: center;
-  position: relative;
-  top: -20px;
 }
 
 /* Spinner wheel */
