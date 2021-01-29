@@ -1,5 +1,12 @@
 "use strict";
 
+window.onload = function () {
+  if (!window.location.hash) {
+    window.location = window.location + "#loaded";
+    window.location.reload();
+  }
+};
+
 // Selectors
 const container = document.querySelector(".container");
 const nameBtn = document.querySelector(".name--btn");
@@ -33,6 +40,10 @@ const createDiv = document.querySelector(".createAcc--div");
 const loginDiv = document.querySelector(".login--div");
 const loginBringBtn = document.querySelector(".loginBringInputs");
 const thankYouMsg = document.querySelector(".thankYouMessage");
+const cardTextAbout = document.querySelector(".cardTextAbout");
+const cardBackImg = document.querySelector(".cardBackImg");
+const closeCreateLoginBtn = document.querySelectorAll(".close");
+const body = document.querySelector("body");
 
 // Selectors for card modal
 
@@ -59,10 +70,6 @@ const loginBtn = document.querySelector(".login--btn");
 const cardsModal = document.querySelector("#cardsModal");
 const closeCardsModal = document.querySelector(".closeCardsModal");
 
-///////////////////////////////////////////////////////////////////////////////
-
-//////////////////
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Functions for login, create, logout buttons and div animations
 
@@ -79,6 +86,28 @@ const removeAccDivs = function (val1, left, opacity) {
   val1.style.left = left;
   val1.style.opacity = opacity;
 };
+
+///////////////////////////////////////////////////////////////////////////////
+// Listeners for about section, when you hover over text, card dessapear and text comes in nice animation
+
+cardTextAbout.addEventListener("mouseover", function () {
+  cardBackImg.style.opacity = 0;
+  cardTextAbout.style.backgroundColor = "rgba(255, 50, 255, 0.2)";
+});
+
+cardTextAbout.addEventListener("mouseout", function () {
+  cardBackImg.style.opacity = 1;
+});
+
+// Functions for closing create login if you change you mind
+
+closeCreateLoginBtn.forEach((x) =>
+  x.addEventListener("click", function () {
+    removeAccDivs(createDiv, "-100%", 0);
+    removeAccDivs(loginDiv, "-100%", 0);
+    loginRemove(1, 0);
+  })
+);
 
 /////////////////////////////////////////////////////////////////////////////
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
@@ -104,17 +133,6 @@ const closeSearchLogout = function () {
   }, 500);
 };
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Function for turning first letter to uppercase and rest to lowercase => I dont need this for now, probably gonna delite it !!!!!!!!!!!!!
-
-const convertString = function (str) {
-  let arrStr = str.split("");
-  let arrStr2 = arrStr[0].toUpperCase();
-  let arrStr3 =
-    arrStr2 + arrStr.splice(1, arrStr.length).join("").toLowerCase();
-  return arrStr3;
-};
-
 //////////////////////////////////////////////////////////////////////////////
 // Navabr scroll function => navbar animation
 
@@ -137,15 +155,13 @@ let rareCards = [];
 let nameArr = [];
 
 // Users array
-
 const users = [];
 
 // Arr for active users
-
 let activeUser = [];
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// Fetch methods for api=> I need to reorganize this, and alow user to search cards from API by sets, or names !!
+// Fetch methods for api=> These are the first card fetched so user can have something to see when he opens container
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
   .then((res) => res.json())
@@ -330,19 +346,8 @@ show.addEventListener("click", function () {
   });
 });
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Set Btn !!!! still in progres
-// const allSets = [];
-
-// const callSet = function () {
-//   fetch("https://api.magicthegathering.io/v1/sets")
-//     .then((res) => res.json())
-//     .then((x) => (allSets[0] = x));
-// };
-
-// document.getElementById("myDiv").innerHTML = resolvedData;
-
-// callSet();
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Function for fetchin the sets from server, I decidec to do it like this. Card sets have max to four pages so I putted everything like this, it could be cleaner, but I think it works good for what I tryed to do
 
 const setArr = [];
 
@@ -419,6 +424,8 @@ setBtn.addEventListener("click", function () {
 //////////////////////////////////////////////////////////////////////
 // Here I search card by name => I putted name in array by unshift method, and then show card on position one from that array
 
+/// !!!!!!!!!!!!!!!!!!!!!!! Not shure if ill add this option, it would be to cloutered
+
 // nameBtn.addEventListener("click", function () {
 //   container.innerHTML = "";
 //   arr.forEach((y) =>
@@ -483,7 +490,7 @@ loginBringBtn.addEventListener("click", function () {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Cretae acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
+// Create acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
 createBtn.addEventListener("click", function () {
   closeSearchLogout();
@@ -561,7 +568,7 @@ logoutBtn.addEventListener("click", function () {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
-const body = document.querySelector("body");
+
 searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
@@ -592,14 +599,14 @@ searchOptionsBtn.addEventListener("click", function () {
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
-//////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 // Btn  for closing search options
 
 closeSearchBtn.addEventListener("click", function () {
   closeSearchLogout();
 });
 
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////
 // Testimonials change => now they are just images, ill see if ill add testimonials animation
 
 // Array for images that I change on click and event listener
