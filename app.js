@@ -32,6 +32,7 @@ const createBringBtn = document.querySelector(".createBringInputs");
 const createDiv = document.querySelector(".createAcc--div");
 const loginDiv = document.querySelector(".login--div");
 const loginBringBtn = document.querySelector(".loginBringInputs");
+const thankYouMsg = document.querySelector(".thankYouMessage");
 
 // Selectors for card modal
 
@@ -87,9 +88,13 @@ const closeSearchLogout = function () {
   nextBtn.style.left = "-100%";
   topPage.style.bottom = "-100px";
   previousBtn.style.left = "-100%";
+  thankYouMsg.style.top = "360px";
   section4.style.top = "0";
   container.style.transition = "500ms";
   container.innerHTML = "";
+  show.style.opacity = 0;
+  show.style.left = "-200%";
+  body.style.height = "510vh";
   sectionSearch.style.opacity = 0;
   container.style.opacity = 0;
   container.style.height = 0;
@@ -142,29 +147,29 @@ let activeUser = [];
 /////////////////////////////////////////////////////////////////////////////////////////
 // Fetch methods for api=> I need to reorganize this, and alow user to search cards from API by sets, or names !!
 
-// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
-//   .then((res) => res.json())
-//   .then((x) => arr.push(x))
-//   .catch((err) => console.log(err));
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
 
-// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
-//   .then((res) => res.json())
-//   .then((x) => arr.push(x))
-//   .catch((err) => console.log(err));
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
 
-// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
-//   .then((res) => res.json())
-//   .then((x) => arr.push(x))
-//   .catch((err) => console.log(err));
+fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
+  .then((res) => res.json())
+  .then((x) => arr.push(x))
+  .catch((err) => console.log(err));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
 
-let pageCount = 1;
+let pageCount = 0;
 
 nextBtn.addEventListener("click", function () {
   if (pageCount === arr.length - 1) {
-    pageCount = 0;
+    pageCount = -1;
   }
   pageCount++;
   nextBtn.textContent = pageCount;
@@ -178,13 +183,13 @@ nextBtn.addEventListener("click", function () {
 });
 
 previousBtn.addEventListener("click", function () {
-  if (pageCount === 1) {
+  if (pageCount === 0) {
     pageCount = arr.length;
   }
   pageCount--;
   previousBtn.textContent = pageCount;
   setTimeout(() => {
-    previousBtn.textContent = "Next Page";
+    previousBtn.textContent = "Previous Page";
   }, 700);
   container.innerHTML = "";
   arr[pageCount].cards.forEach((x, i) => {
@@ -372,6 +377,13 @@ setBtn.addEventListener("click", function () {
     .then((x) => (arr[2] = x))
     .catch((err) => console.log(err));
 
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=4`
+  )
+    .then((res) => res.json())
+    .then((x) => (arr[2] = x))
+    .catch((err) => console.log(err));
+
   if (!setArr.length < 2) {
     let spinner = document.createElement("div");
     spinner.classList.add("loader");
@@ -407,21 +419,21 @@ setBtn.addEventListener("click", function () {
 //////////////////////////////////////////////////////////////////////
 // Here I search card by name => I putted name in array by unshift method, and then show card on position one from that array
 
-nameBtn.addEventListener("click", function () {
-  container.innerHTML = "";
-  arr.forEach((y) =>
-    y.cards.forEach((x) => {
-      if (x.name.toLowerCase() === inputName.value.toLowerCase()) {
-        nameArr.unshift(x);
-        inputName.value = "";
-        if (nameArr.length > 40) {
-          nameArr.splice(1, nameArr.length - 1);
-        }
-      }
-    })
-  );
-  createCardFinal(nameArr, 0);
-});
+// nameBtn.addEventListener("click", function () {
+//   container.innerHTML = "";
+//   arr.forEach((y) =>
+//     y.cards.forEach((x) => {
+//       if (x.name.toLowerCase() === inputName.value.toLowerCase()) {
+//         nameArr.unshift(x);
+//         inputName.value = "";
+//         if (nameArr.length > 40) {
+//           nameArr.splice(1, nameArr.length - 1);
+//         }
+//       }
+//     })
+//   );
+//   createCardFinal(nameArr, 0);
+// });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Show all cards by rarity => Here I putted all cards that I look for in new array then I simply loop over that array and show cards
@@ -448,7 +460,6 @@ class UsersCl {
     this.username = username;
     this.password = password;
     this.userFavoriteCards = [];
-    this.cardSet = [];
   }
 }
 
@@ -486,6 +497,7 @@ createBtn.addEventListener("click", function () {
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
   loginRemove(0, "-100%");
+  show.style.left = 0;
   removeAccDivs(createDiv, "-100%", 0);
   welcomeMsg.style.right = "0";
   welcomeMsg.style.opacity = 1;
@@ -502,12 +514,15 @@ createBtn.addEventListener("click", function () {
 // User logs in => When user logs in, I change active users to user that logged in, and show his favorite cards, also close modal window on log in and change all the other stuff that needs to be changed, also I check if input is valid, if not i display nice message in button
 
 loginBtn.addEventListener("click", function () {
+  container.innerHTML = "";
   closeSearchLogout();
   loginRemove();
   users.forEach((user) => {
     console.log(user);
     if (user.username === username.value && user.password === password.value) {
       console.log(user);
+      show.style.left = 0;
+      show.style.opacity = 1;
       username.value = password.value = "";
       welcomeMsg.style.right = "0";
       welcomeMsg.style.opacity = 1;
@@ -517,6 +532,7 @@ loginBtn.addEventListener("click", function () {
       logoutBtn.classList.remove("hidden");
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createCardFinal(activeUser[0].userFavoriteCards, i);
+        favorite.classList.add("hidden");
       });
 
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
@@ -536,14 +552,16 @@ logoutBtn.addEventListener("click", function () {
   activeUser = [];
   logoutBtn.classList.add("hidden");
   welcomeMsg.style.opacity = 0;
+
   welcomeMsg.style.right = "100%";
   closeSearchLogout();
   loginRemove(1, 0);
+  container.innerHTML = "";
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
-
+const body = document.querySelector("body");
 searchOptionsBtn.addEventListener("click", function () {
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
@@ -551,19 +569,25 @@ searchOptionsBtn.addEventListener("click", function () {
   container.style.opacity = 1;
   container.style.height = "100vh";
   previousBtn.style.left = 0;
+  if (activeUser[0]) {
+    show.style.opacity = 1;
+    show.style.left = 0;
+  }
   nextBtn.style.left = 0;
-  topPage.style.bottom = "-210px";
+  topPage.style.bottom = "-140px";
+  thankYouMsg.style.bottom = "-450px";
+  body.style.height = "625vh";
   footer.style.top = 0;
   section4.style.top = "155px";
-  // if (!arr[0]) {
-  //   let spinner = document.createElement("div");
-  //   spinner.classList.add("loader");
-  //   container.append(spinner);
-  //   setTimeout(() => {
-  //     container.innerHTML = "";
-  //     arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
-  //   }, 10000);
-  // }
+  if (!arr[0]) {
+    let spinner = document.createElement("div");
+    spinner.classList.add("loader");
+    container.append(spinner);
+    setTimeout(() => {
+      container.innerHTML = "";
+      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+    }, 10000);
+  }
 
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
