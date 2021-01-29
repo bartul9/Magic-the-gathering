@@ -40,51 +40,26 @@
         Magic the <br />
         gathering
       </h1>
-      <!-- <img
-        id="mobileImg"
-        src="https://dw9to29mmj727.cloudfront.net/promo/2016/5336-SeriesHeaders_Tier01_Magic_2000x800.jpg"
-        alt=""
-      /> --><button class="modalBtnCreate btnModal">Create Account</button>
-      <!-- Trigger/Open The Modal -->
-      <button id="searchBtn" class="modalBtnLogin btnModal">Login</button>
+      <button class="btnModal createBringInputs">Create Acc</button
+      ><button class="btnModal loginBringInputs">Login</button>
+      <div class="createAcc--div">
+        <label for="createUsername">Username: </label>
+        <input type="text" id="createUsername" name="createUsername" />
+        <label for="createPassword">Password: </label>
+        <input type="password" id="createPassword" name="createPassword" />
+        <button class="create--btn">Create Account</button>
+      </div>
+
+      <div class="login--div">
+        <label for="username">Username: </label>
+        <input type="text" id="username" name="username" />
+        <label for="password">Password: </label>
+        <input type="password" id="password" name="password" />
+        <button class="login--btn">Login</button>
+      </div>
     </section>
-    <div class="sticky--div"></div>
-    <!-- Trigger/Open The Modal -->
 
     <p class="welcomeMsg">Welcome back</p>
-
-    <!-- The modal for creating new Account -->
-    <div id="myModalCreate">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="createAcc--div">
-          <span class="close">&times;</span>
-          <label for="createUsername">Username: </label>
-          <input type="text" id="createUsername" name="createUsername" />
-          <label for="createPassword">Password: </label>
-          <input type="password" id="createPassword" name="createPassword" />
-          <button class="create--btn">Create Account</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- The modal for login -->
-    <div id="myModalLogin">
-      <!-- Modal content -->
-      <div class="modal-login">
-        <div class="login--div">
-          <span class="closeLogin">&times;</span>
-          <label for="username">Username: </label>
-          <input type="text" id="username" name="username" />
-          <label for="password">Password: </label>
-          <input type="password" id="password" name="password" /><button
-            class="login--btn"
-          >
-            Login
-          </button>
-        </div>
-      </div>
-    </div>
 
     <button class="btnModal2 searchOptionBtn">Search</button>
     <!-- Section with search divs  -->
@@ -99,11 +74,21 @@
         <!-- --------------------------- -->
 
         <label for="search--set">Search by Set </label>
-        <input type="text" id="search--set" name="search--set" /><button
-          class="set--btn btnSearch"
-        >
-          Search
-        </button>
+        <select id="search--set" name="rCommon">
+          <option value="ktk">Khans of Tarkir</option>
+          <option value="aer">Aether Revolt</option>
+          <option value="uma">Ultimate Masters</option>
+          <option value="arb">Alara Reborn</option>
+          <option value="jou">Journey into Nyx</option>
+          <option value="rix">Rivals of Ixalan</option>
+          <option value="jud">Judgment</option>
+          <option value="wwk">Worldwake</option>
+          <option value="shm">Shadowmoor</option>
+          <option value="pls">Planeshift</option>
+          <option value="tor">Torment</option>
+        </select>
+
+        <button class="set--btn btnSearch">Search</button>
       </div>
       <div class="search--div searchBtnsAll">
         <button class="show showBtns">Show Favorites</button>
@@ -124,15 +109,15 @@
 
         <!-- ------------------------------------------------------------------------- -->
         <!-- Second part, filter by -->
-        <label for="search--type">Filter by </label>
+        <!-- <label for="search--type">Filter by </label>
         <!-- <input type="text" id="search--type" name="search--type" /> -->
-        <select id="search--type" name="rCommon">
+        <!-- <select id="search--type" name="rCommon">
           <option value="ManaCost">Mana Cost</option>
           <option value="Uncommon">Uncommon</option>
           <option value="rare">Rare</option>
           <option value="Mythic">Mythic</option>
         </select>
-        <button class="type--btn btnSearch">Search</button>
+        <button class="type--btn btnSearch">Search</button>  -->
       </div>
     </section>
 
@@ -161,22 +146,6 @@
     </section>
 
     <!-- The modal for About section -->
-    <div id="myModalAbout">
-      <!-- Modal content -->
-      <div class="modal-about">
-        <span class="closeAbout">&times;</span>
-        <h3 id="h3About">Welcome to the world of magic</h3>
-        <p class="about--text">
-          Magic: The Gathering (colloquially known as Magic or just MTG) is a
-          collectible and digital collectible card game created by Richard
-          Garfield. Released in 1993 by Wizards of the Coast (now a subsidiary
-          of Hasbro), Magic was the first trading card game and has
-          approximately thirty-five million players as of December 2018, and
-          over twenty billion Magic cards produced in the period from 2008 to
-          2016, during which time it grew in popularity.
-        </p>
-      </div>
-    </div>
 
     <!-- The modal for cards -->
     <div id="cardsModal">
