@@ -28,7 +28,7 @@
     <header class="navbar">
       <a href="#" class="logo">MAGIC</a>
       <ul class="nav--ul">
-        <li class="nav--li"><a href="#searchBtn">Search</a></li>
+        <li class="nav--li"><a href="#search">Search</a></li>
         <li class="nav--li"><a href="#about">About</a></li>
         <li class="hidden" id="logout">Logout</li>
       </ul>
@@ -45,6 +45,7 @@
         <label for="createPassword">Password: </label>
         <input type="password" id="createPassword" name="createPassword" />
         <button class="create--btn">Create Account</button>
+        <span class="close">X</span>
       </div>
 
       <div class="login--div">
@@ -52,7 +53,7 @@
         <input type="text" id="username" name="username" />
         <label for="password">Password: </label>
         <input type="password" id="password" name="password" />
-        <button class="login--btn">Login</button>
+        <button class="login--btn">Login</button> <span class="close close2">X</span>
       </div>
     </section>
 
@@ -60,7 +61,7 @@
 
     <button class="btnModal2 searchOptionBtn">Search</button>
     <!-- Section with search divs  -->
-    <section class="section section--2">
+    <section id="search" class="section section--2">
       <div class="search--div searchByName">
         <!-- <label for="search--name">Search by Name </label>
         <input type="text" id="search--name" name="search--name" /><button
@@ -137,6 +138,14 @@
     <!-- Footer with contact and credentials -->
     <section id="about" class="section footer--one">
       <div class="cardBackImg"></div>
+      <p class="cardTextAbout">
+        Magic: The Gathering (colloquially known as Magic or just MTG) is a
+        collectible and digital collectible card game created by Richard
+        Garfield. Released in 1993 by Wizards of the Coast, Magic was the first
+        trading card game and has approximately thirty-five million players as
+        of December 2018, and over twenty billion Magic cards produced in the
+        period from 2008 to 2016, during which time it grew in popularity.
+      </p>
     </section>
 
     <section class="section section--4">
