@@ -28,6 +28,10 @@ const topPage = document.querySelector("#topPageImg");
 const cardArtist = document.querySelector(".cardArtist");
 const searchSet = document.querySelector("#search--set");
 const setBtn = document.querySelector(".set--btn");
+const createBringBtn = document.querySelector(".createBringInputs");
+const createDiv = document.querySelector(".createAcc--div");
+const loginDiv = document.querySelector(".login--div");
+const loginBringBtn = document.querySelector(".loginBringInputs");
 
 // Selectors for card modal
 
@@ -49,24 +53,6 @@ const username = document.querySelector("#username");
 const password = document.querySelector("#password");
 const loginBtn = document.querySelector(".login--btn");
 
-//  Create account modal inputs
-
-const mymodalCreate = document.querySelector("#myModalCreate");
-const btnModalCreate = document.querySelector(".modalBtnCreate");
-const spanModal = document.getElementsByClassName("close")[0];
-
-// Login modal inputs
-
-const btnModalLogin = document.querySelector(".modalBtnLogin");
-const mymodalLogin = document.querySelector("#myModalLogin");
-const spanModalLogin = document.getElementsByClassName("closeLogin")[0];
-
-//  Card back about modal
-
-const cardBackAbout = document.querySelector(".cardBackImg");
-const aboutModal = document.querySelector("#myModalAbout");
-const closeAbout = document.querySelector(".closeAbout");
-
 // Modal for more info about cards
 
 const cardsModal = document.querySelector("#cardsModal");
@@ -75,6 +61,23 @@ const closeCardsModal = document.querySelector(".closeCardsModal");
 ///////////////////////////////////////////////////////////////////////////////
 
 //////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Functions for login, create, logout buttons and div animations
+
+const loginRemove = function (opacity, left) {
+  loginBringBtn.style.opacity = opacity;
+  createBringBtn.style.opacity = opacity;
+  setTimeout(() => {
+    createBringBtn.style.left = left;
+    loginBringBtn.style.left = left;
+  }, 450);
+};
+
+const removeAccDivs = function (val1, left, opacity) {
+  val1.style.left = left;
+  val1.style.opacity = opacity;
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
@@ -120,7 +123,7 @@ window.addEventListener("scroll", function () {
 });
 
 // Array for keeping the fetched card information in array, so I can work with them
-const arr = [];
+let arr = [];
 
 // Filtered array for rarity cards
 let rareCards = [];
@@ -137,43 +140,22 @@ const users = [];
 let activeUser = [];
 
 /////////////////////////////////////////////////////////////////////////////////////////
-// Fetch methods for api=> I need to reorganize this, and alow user to search cards from API by sets, or names
+// Fetch methods for api=> I need to reorganize this, and alow user to search cards from API by sets, or names !!
 
-// Fetch from magic the gathering api// only up to 100 cards, I am not sure how to get others, will check for that later !!!
-// fetch("https://api.magicthegathering.io/v1/cards")
+// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
 //   .then((res) => res.json())
 //   .then((x) => arr.push(x))
 //   .catch((err) => console.log(err));
 
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
+//   .then((res) => res.json())
+//   .then((x) => arr.push(x))
+//   .catch((err) => console.log(err));
 
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
-
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
-
-fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=1")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
-
-fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=2")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
-
-fetch("https://api.magicthegathering.io/v1/cards?set=ktk&page=3")
-  .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+// fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
+//   .then((res) => res.json())
+//   .then((x) => arr.push(x))
+//   .catch((err) => console.log(err));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
@@ -312,6 +294,19 @@ const createCardFinal = function (objPath, num) {
 
 allCards.addEventListener("click", function () {
   container.innerHTML = "";
+  if (!arr[0]) {
+    let spinner = document.createElement("div");
+    spinner.classList.add("loader");
+    container.append(spinner);
+    setTimeout(() => {
+      container.innerHTML = "";
+      arr.forEach((y) =>
+        y.cards.forEach((x, i) => {
+          createCardFinal(y.cards, i);
+        })
+      );
+    }, 2500);
+  }
   arr.forEach((y) =>
     y.cards.forEach((x, i) => {
       createCardFinal(y.cards, i);
@@ -321,6 +316,7 @@ allCards.addEventListener("click", function () {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Event listener for showing all favorited cards => Here I loop trough favorite array and append all cards in array to container element
+
 show.addEventListener("click", function () {
   container.innerHTML = "";
   activeUser[0].userFavoriteCards.forEach((x, i) => {
@@ -330,21 +326,82 @@ show.addEventListener("click", function () {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Set Btn
+// Set Btn !!!! still in progres
+// const allSets = [];
+
+// const callSet = function () {
+//   fetch("https://api.magicthegathering.io/v1/sets")
+//     .then((res) => res.json())
+//     .then((x) => (allSets[0] = x));
+// };
+
+// document.getElementById("myDiv").innerHTML = resolvedData;
+
+// callSet();
 
 const setArr = [];
-let setPage = -1;
 
 setBtn.addEventListener("click", function () {
-  setPage++;
-  let setInput = searchSet.value.slice(0, 2).toLowerCase();
+  container.innerHTML = "";
+
   fetch(
-    `https://api.magicthegathering.io/v1/cards?set=${setInput}&page=${setPage}`
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => setArr.push(x))
+    .then((x) => (setArr[0] = x))
     .catch((err) => console.log(err));
-  console.log(setArr);
+
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
+  )
+    .then((res) => res.json())
+    .then((x) => (arr[0] = x))
+    .catch((err) => console.log(err));
+
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=2`
+  )
+    .then((res) => res.json())
+    .then((x) => (arr[1] = x))
+    .catch((err) => console.log(err));
+
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=3`
+  )
+    .then((res) => res.json())
+    .then((x) => (arr[2] = x))
+    .catch((err) => console.log(err));
+
+  if (!setArr.length < 2) {
+    let spinner = document.createElement("div");
+    spinner.classList.add("loader");
+    container.append(spinner);
+    setTimeout(() => {
+      container.innerHTML = "";
+      setArr[0].cards.forEach((x, i) => {
+        createCardFinal(setArr[0].cards, i);
+      });
+    }, 10000);
+  }
+
+  if (
+    !setArr[setArr.length - 1].cards.set ===
+    setArr[setArr.length - 1].cards.searchSet.value
+  ) {
+    let spinner = document.createElement("div");
+    spinner.classList.add("loader");
+    container.append(spinner);
+    setTimeout(() => {
+      container.innerHTML = "";
+      setArr[0].cards.forEach((x, i) => {
+        createCardFinal(setArr[0].cards, i);
+      });
+    }, 10000);
+  }
+
+  setArr[0].cards.forEach((x, i) => {
+    createCardFinal(setArr[0].cards, i);
+  });
 });
 
 //////////////////////////////////////////////////////////////////////
@@ -374,7 +431,7 @@ typeBtn.addEventListener("click", function () {
   container.innerHTML = "";
   arr.forEach((y) =>
     y.cards.forEach((x) => {
-      if (x.rarity === inputType.value) {
+      if (x.rarity.toUpperCase() === inputType.value.toUpperCase()) {
         rareCards.push(x);
       }
     })
@@ -402,6 +459,19 @@ let userTwo = new UsersCl("mike", "1234");
 users.push(userOne, userTwo);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Event listeners for login, logout buttons
+
+createBringBtn.addEventListener("click", function () {
+  loginRemove(0, "-100%");
+  removeAccDivs(createDiv, 0, 1);
+});
+
+loginBringBtn.addEventListener("click", function () {
+  loginRemove(0, "-100%");
+  removeAccDivs(loginDiv, 0, 1);
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Cretae acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
 createBtn.addEventListener("click", function () {
@@ -415,9 +485,8 @@ createBtn.addEventListener("click", function () {
   createBtn.textContent = "Create Acc";
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
-  mymodalCreate.style.display = "none";
-  btnModalCreate.style.left = "-100%";
-  btnModalLogin.style.left = "-100%";
+  loginRemove(0, "-100%");
+  removeAccDivs(createDiv, "-100%", 0);
   welcomeMsg.style.right = "0";
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
@@ -434,25 +503,21 @@ createBtn.addEventListener("click", function () {
 
 loginBtn.addEventListener("click", function () {
   closeSearchLogout();
+  loginRemove();
   users.forEach((user) => {
     console.log(user);
     if (user.username === username.value && user.password === password.value) {
       console.log(user);
       username.value = password.value = "";
-      mymodalLogin.style.display = "none";
-      btnModalCreate.style.opacity = 0;
-      btnModalLogin.style.opacity = 0;
       welcomeMsg.style.right = "0";
       welcomeMsg.style.opacity = 1;
       activeUser[0] = user;
+      loginRemove(0, "-100%");
+      removeAccDivs(loginDiv, "-100%", 0);
       logoutBtn.classList.remove("hidden");
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createCardFinal(activeUser[0].userFavoriteCards, i);
       });
-      setTimeout(() => {
-        btnModalCreate.style.left = "100%";
-        btnModalLogin.style.left = "100%";
-      }, 400);
 
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
     }
@@ -472,13 +537,8 @@ logoutBtn.addEventListener("click", function () {
   logoutBtn.classList.add("hidden");
   welcomeMsg.style.opacity = 0;
   welcomeMsg.style.right = "100%";
-  btnModalCreate.style.left = 0;
-  btnModalLogin.style.left = 0;
   closeSearchLogout();
-  setTimeout(() => {
-    btnModalCreate.style.opacity = 1;
-    btnModalLogin.style.opacity = 1;
-  }, 200);
+  loginRemove(1, 0);
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -495,15 +555,15 @@ searchOptionsBtn.addEventListener("click", function () {
   topPage.style.bottom = "-210px";
   footer.style.top = 0;
   section4.style.top = "155px";
-  if (!arr[0]) {
-    let spinner = document.createElement("div");
-    spinner.classList.add("loader");
-    container.append(spinner);
-    setTimeout(() => {
-      container.innerHTML = "";
-      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
-    }, 6000);
-  }
+  // if (!arr[0]) {
+  //   let spinner = document.createElement("div");
+  //   spinner.classList.add("loader");
+  //   container.append(spinner);
+  //   setTimeout(() => {
+  //     container.innerHTML = "";
+  //     arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+  //   }, 10000);
+  // }
 
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
@@ -514,79 +574,6 @@ searchOptionsBtn.addEventListener("click", function () {
 closeSearchBtn.addEventListener("click", function () {
   closeSearchLogout();
 });
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Modal window when creatin acc
-
-// When the user clicks the button, open the modal
-btnModalCreate.onclick = function () {
-  mymodalCreate.style.display = "block";
-  setTimeout(() => {
-    mymodalCreate.style.opacity = 1;
-  }, 50);
-};
-
-// When the user clicks on <span> (x), close the modal
-spanModal.onclick = function () {
-  mymodalCreate.style.display = "none";
-  mymodalCreate.style.opacity = 0;
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (e) {
-  if (e.target == mymodalCreate) {
-    mymodalCreate.style.display = "none";
-    mymodalCreate.style.opacity = 0;
-  }
-};
-
-//////////////////////////////////////////////////////////////////////////////
-//// Modal for logging  in
-
-// When the user clicks the button, open the modal
-btnModalLogin.onclick = function () {
-  mymodalLogin.style.display = "block";
-  setTimeout(() => {
-    mymodalLogin.style.opacity = 1;
-  }, 50);
-};
-
-// When the user clicks on <span> (x), close the modal
-spanModalLogin.onclick = function () {
-  mymodalLogin.style.display = "none";
-  mymodalLogin.style.opacity = 0;
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == mymodalLogin) {
-    mymodalLogin.classList.add("hidden");
-  }
-};
-
-//////////////////////////////////////////////////////////////
-// Modal for about on the main page
-
-cardBackAbout.onclick = function () {
-  aboutModal.style.display = "block";
-  setTimeout(() => {
-    aboutModal.style.opacity = 1;
-  }, 50);
-};
-
-// When the user clicks on <span> (x), close the modal
-closeAbout.onclick = function () {
-  aboutModal.style.display = "none";
-  aboutModal.style.opacity = 0;
-};
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == aboutModal) {
-    aboutModal.style.display = "none";
-    aboutModal.style.opacity = 0;
-  }
-};
 
 //////////////////////////////////////////////////////////////
 // Testimonials change => now they are just images, ill see if ill add testimonials animation
