@@ -11,10 +11,6 @@ body {
   overflow-x: hidden;
   background-position: center;
   background-image: url(https://cdn.hipwallpaper.com/i/1/29/BHXVTP.jpg);
-  /* background-image: url(https://cdn.hipwallpaper.com/i/35/82/G8sxbp.png); */
-  /* background-image: url(https://c.wallhere.com/photos/4a/78/Magic_The_Gathering_Trading_Card_Games-12217.jpg!d); */
-  /* background-image: url(https://c.wallhere.com/photos/f2/52/Magic_The_Gathering_Trading_Card_Games_elements_lava_smoke_cherry_blossom-1394895.jpg!d); */
-  /* background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/23/458367-Magic_The_Gathering-Trading_Card_Games-simple-minimalism-black_background-skull.jpg;"); */
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -93,6 +89,8 @@ header .logo {
   color: rgb(135, 0, 168);
 }
 
+/* Divs with login, create inputs */
+
 .createAcc--div {
   position: relative;
   top: -130px;
@@ -118,7 +116,14 @@ header .logo {
   border-radius: 10px;
   outline: none;
 }
-
+#search--set {
+  width: 180px;
+  height: 20px;
+}
+#search--type {
+  width: 180px;
+  height: 21px;
+}
 #username {
   border-radius: 10px;
   outline: none;
@@ -139,7 +144,7 @@ header .logo {
   font-size: 23px;
 }
 
-/* Heading and its animation */
+/* Heading  */
 
 .headingOne {
   position: relative;
@@ -208,12 +213,6 @@ header .logo {
   top: 0;
 }
 
-.addClass {
-  background-color: rgba(255, 255, 255, 0.25);
-  border-top: 5px solid rgba(255, 255, 255, 0.25);
-  border-bottom: 5px solid rgba(255, 255, 255, 0.25);
-}
-
 .btnSearch {
   width: 150px;
   height: 25px;
@@ -236,17 +235,7 @@ header .logo {
   color: black;
 }
 
-/* About heading */
-
-/* #aboutHeading {
-  font-size: 55px;
-  letter-spacing: 2px;
-  color: rgb(255, 255, 255);
-  text-shadow: 2px 2px 2px rgb(0, 0, 0);
-  transform: skewY(6.5deg);
-} */
-
-/* Sections in order */
+/* Sections */
 
 .section--2 {
   width: 100%;
@@ -277,6 +266,7 @@ header .logo {
   height: 100vh;
 }
 
+/* Section 3 */
 .footer--one {
   display: flex;
   justify-content: space-between;
@@ -314,9 +304,6 @@ header .logo {
   cursor: pointer;
 }
 
-/* --------------- */
-/* Return to top icon */
-
 /* Show buttons, show all and show favorite cards */
 
 .showBtns {
@@ -344,11 +331,6 @@ header .logo {
   width: 230px;
   height: 300px;
   transition: 500ms;
-}
-
-#search--set {
-  width: 180px;
-  height: 20px;
 }
 
 .card {
@@ -404,26 +386,9 @@ header .logo {
   opacity: 0;
 }
 
-.seeMore {
-  position: relative;
-  left: -52px;
-  top: -321px;
-}
-
-/* card clikc */
-
-.cardClick {
-  display: inline;
-  left: 0;
-  position: relative;
-  border: 1px solid red;
-  height: 450px;
-  width: 150px;
-}
-
 /* ************ */
 
-/* Testimonials */
+/* First image and card in it */
 .cardBackImg {
   border-radius: 5px;
   display: flex;
@@ -474,6 +439,7 @@ header .logo {
   opacity: 0.8;
 }
 
+/* To top page link */
 #topPage {
   position: relative;
   bottom: -200px;
@@ -490,7 +456,7 @@ header .logo {
 
 /* --------------------------------------------------- */
 
-/* Scrollbar */
+/* Scrollbars */
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -506,10 +472,12 @@ header .logo {
   -webkit-box-shadow: inset 0 0 6px rgb(87, 87, 87);
 }
 
+/* Class hidden for hiding objects */
 .hidden {
   display: none;
-  transition: 500ms;
 }
+
+/* Thank you message on the end and my name */
 
 .thankYouMessage {
   position: relative;
@@ -533,8 +501,6 @@ header .logo {
 }
 /* ----------------  */
 
-/* Cards modal */
-
 .cardImageBig {
   position: relative;
   left: 122px;
@@ -556,23 +522,8 @@ header .logo {
   cursor: pointer;
 }
 
-#imageModal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(155, 155, 155); /* Fallback color */
-  background-color: rgba(165, 165, 165, 0.4); /* Black w/ opacity */
-  transition: 500ms;
-  opacity: 0;
-}
-
 /* ----------- */
+/* Smooth scroll on page */
 
 @media screen and (prefers-reduced-motion: no-preference) {
   html {
@@ -580,6 +531,7 @@ header .logo {
   }
 }
 
+/* Slider buttons */
 .pageButtons {
   position: relative;
   top: -130px;
@@ -599,12 +551,6 @@ header .logo {
   cursor: pointer;
 }
 
-/* .next {
-  left: 100%;
-}
-.previous {
-  left: -100%;
-} */
 /* ----------------------------- */
 
 #cardsModal {
@@ -623,10 +569,6 @@ header .logo {
   opacity: 0;
 }
 
-#search--type {
-  width: 180px;
-  height: 21px;
-}
 /* Modal Content */
 .modal--cards {
   overflow: auto;
@@ -741,13 +683,7 @@ header .logo {
   cursor: pointer;
 }
 
-/* Modal open buttons */
-
-/* .modalBtnCreate .modalBtnLogin {
-  position: relative;
-  left: 0%;
-} */
-
+/* Welcome msg that slides in */
 .welcomeMsg {
   font-size: 50px;
   font-weight: 700;
@@ -759,6 +695,7 @@ header .logo {
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
 
+/* !!!!!!!!! this I have to change !!!!!!!!!!!!!!!!! */
 .btnModal {
   width: 200px;
   height: 30px;
@@ -804,6 +741,7 @@ header .logo {
   cursor: pointer;
 }
 
+/* Last big image section */
 .section--4 {
   margin-top: 65px;
   display: flex;
@@ -845,6 +783,15 @@ header .logo {
   position: relative;
 }
 
+.testimonials:hover {
+  cursor: pointer;
+  position: relative;
+  transform: rotateX(20deg);
+  transform: rotateY(10deg);
+  opacity: 0.5;
+}
+
+/* To page icon */
 #topPageImg {
   color: white;
   width: 40px;
@@ -853,6 +800,8 @@ header .logo {
   bottom: -50px;
   transition: 250ms;
 }
+
+/* Close inputs for login and create */
 .close {
   position: relative;
   top: 20px;
@@ -862,14 +811,6 @@ header .logo {
 .close:hover {
   color: silver;
   cursor: pointer;
-}
-
-.testimonials:hover {
-  cursor: pointer;
-  position: relative;
-  transform: rotateX(20deg);
-  transform: rotateY(10deg);
-  opacity: 0.5;
 }
 
 /* Spinner wheel */
@@ -924,21 +865,7 @@ header .logo {
   .searchOptionBtn {
     top: -20px;
   }
-  #h3About {
-    display: none;
-  }
-  .closeAbout {
-    display: none;
-  }
 
-  .about--text {
-    color: rgb(9, 179, 74);
-    text-shadow: 2px 2px 2px rgb(0, 0, 0);
-    top: 0;
-  }
-  .navbar {
-    flex-direction: column;
-  }
   header .logo {
     margin: 0;
     display: none;
@@ -989,9 +916,7 @@ header .logo {
   .pageButtons {
     top: -20px;
   }
-  .about--text {
-    font-size: 17px;
-  }
+
   .container {
     top: 0px;
   }
@@ -1063,28 +988,9 @@ header .logo {
   .close {
     left: 110px;
   }
-  .section--1 {
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
 
   .btnModal {
     top: 150px;
-  }
-  .text {
-    width: 100%;
-  }
-  .about {
-    width: 100%;
-    font-size: 18px;
-    padding: 5px;
-  }
-  .aboutImages {
-    width: 100%;
-  }
-  #aboutHeading {
-    font-size: 30px;
   }
 }
 
@@ -1111,9 +1017,6 @@ header .logo {
   }
   .headingOne {
     font-size: 130px;
-  }
-  .about--text {
-    font-size: 14px;
   }
 }
 
