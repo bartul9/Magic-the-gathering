@@ -44,6 +44,7 @@ const cardTextAbout = document.querySelector(".cardTextAbout");
 const cardBackImg = document.querySelector(".cardBackImg");
 const closeCreateLoginBtn = document.querySelectorAll(".close");
 const body = document.querySelector("body");
+const navbar = document.querySelector(".navbar");
 
 // Selectors for card modal
 
@@ -119,7 +120,7 @@ closeCreateLoginBtn.forEach((x) =>
 // Function for page slider
 
 const sliderBtnTxt = function (slide) {
-  `${slide}Btn.textContent = pageCount`;
+  `${slide}Btn.textContent = ${pageCount}`;
   setTimeout(() => {
     `${slide}Btn.textContent = ${slide} Page`;
   }, 700);
@@ -143,7 +144,7 @@ const closeSearchLogout = function () {
   container.innerHTML = "";
   show.style.opacity = 0;
   show.style.left = "-200%";
-  body.style.height = "510vh";
+  body.style.height = "485vh";
   sectionSearch.style.opacity = 0;
   container.style.opacity = 0;
   container.style.height = 0;
@@ -156,14 +157,31 @@ const closeSearchLogout = function () {
 //////////////////////////////////////////////////////////////////////////////
 // Navabr scroll function => navbar animation
 
-window.addEventListener("scroll", function () {
-  header.classList.toggle("sticky", window.scrollY > 0);
-  if (window.scrollY > 0) {
-    header.style.opacity = 1;
-  } else {
-    header.style.opacity = 0;
-  }
-});
+function navSlide() {
+  const burger = document.querySelector(".burger");
+  const nav = document.querySelector(".nav-links");
+  const navLinks = document.querySelectorAll(".nav-links li");
+
+  burger.addEventListener("click", () => {
+    //Toggle Nav
+    nav.classList.toggle("nav-active");
+
+    //Animate Links
+    navLinks.forEach((link, index) => {
+      if (link.style.animation) {
+        link.style.animation = "";
+      } else {
+        link.style.animation = `navLinkFade 0.5s ease forwards ${
+          index / 7 + 0.5
+        }s`;
+      }
+    });
+    //Burger Animation
+    burger.classList.toggle("toggle");
+  });
+}
+
+navSlide();
 
 // Array for keeping the fetched card information in array, so I can work with them
 let arr = [];
@@ -242,7 +260,7 @@ const createCardFinal = function (objPath, num) {
   favorite = document.createElement("button");
   favorite.classList.add("favorite");
   favorite.classList.add("cardBtn");
-  favorite.innerText = "Favorite";
+  favorite.innerText = "Favourite";
 
   // Delete button
   const newBtn = document.createElement("button");
@@ -586,7 +604,7 @@ searchOptionsBtn.addEventListener("click", function () {
   nextBtn.style.left = 0;
   topPage.style.bottom = "-140px";
   thankYouMsg.style.bottom = "-450px";
-  body.style.height = "625vh";
+  body.style.height = "600vh";
   footer.style.top = 0;
   section4.style.top = "155px";
 
