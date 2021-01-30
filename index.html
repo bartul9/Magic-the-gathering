@@ -4,12 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Scroll up icon -->
-    <link
-      href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
-      rel="stylesheet"
-    />
-
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -24,7 +18,6 @@
   </head>
   <body>
     <!-- Nice navbar -->
-
     <header class="navbar">
       <a href="#" class="logo">MAGIC</a>
       <ul class="nav--ul">
@@ -47,30 +40,26 @@
         <button class="create--btn">Create Account</button>
         <span class="close">X</span>
       </div>
-
       <div class="login--div">
         <label for="username">Username: </label>
         <input type="text" id="username" name="username" />
         <label for="password">Password: </label>
         <input type="password" id="password" name="password" />
-        <button class="login--btn">Login</button> <span class="close close2">X</span>
+        <button class="login--btn">Login</button>
+        <span class="close close2">X</span>
       </div>
     </section>
 
+    <!-- Welcome message that slides in -->
     <p class="welcomeMsg">Welcome back</p>
 
+    <!-- Button that opens search options -->
     <button class="btnModal2 searchOptionBtn">Search</button>
+
     <!-- Section with search divs  -->
     <section id="search" class="section section--2">
+      <!-- Search by set div -->
       <div class="search--div searchByName">
-        <!-- <label for="search--name">Search by Name </label>
-        <input type="text" id="search--name" name="search--name" /><button
-          class="name--btn btnSearch"
-        >
-          Search
-        </button> -->
-        <!-- --------------------------- -->
-
         <label for="search--set">Search by Set </label>
         <select id="search--set" name="rCommon">
           <option value="dom">Dominaria</option>
@@ -86,15 +75,15 @@
           <option value="pls">Planeshift</option>
           <option value="tor">Torment</option>
         </select>
-
         <button class="set--btn btnSearch">Search</button>
       </div>
+      <!-- Middle buttons -->
       <div class="search--div searchBtnsAll">
         <button class="show showBtns">Show Favorites</button>
         <button class="showAll showBtns">All Set Cards</button>
         <button class="closeSearchBtn showBtns">Close Search</button>
       </div>
-
+      <!-- Search by rarity options -->
       <div class="search--div searchByRarity">
         <label for="search--type">Filter by rarity </label>
         <!-- <input type="text" id="search--type" name="search--type" /> -->
@@ -105,24 +94,13 @@
           <option value="Mythic">Mythic</option>
         </select>
         <button class="type--btn btnSearch">Search</button>
-
-        <!-- ------------------------------------------------------------------------- -->
-        <!-- Second part, filter by -->
-        <!-- <label for="search--type">Filter by </label>
-        <!-- <input type="text" id="search--type" name="search--type" /> -->
-        <!-- <select id="search--type" name="rCommon">
-          <option value="ManaCost">Mana Cost</option>
-          <option value="Uncommon">Uncommon</option>
-          <option value="rare">Rare</option>
-          <option value="Mythic">Mythic</option>
-        </select>
-        <button class="type--btn btnSearch">Search</button>  -->
       </div>
     </section>
 
-    <!-- Main container with cards --><button class="pageButtons previous">
-      Previous page</button
+    <!-- Page sliders  -->
+    <button class="pageButtons previous">Previous page</button
     ><button class="pageButtons next">Next page</button>
+    <!-- Main container with cards -->
     <main class="container section">
       <!-- Cards propotype -->
       <div class="card hidden">
@@ -135,7 +113,7 @@
       </div>
     </main>
 
-    <!-- Footer with contact and credentials -->
+    <!-- About section with card in the middle -->
     <section id="about" class="section footer--one">
       <div class="cardBackImg"></div>
       <p class="cardTextAbout">
@@ -148,11 +126,20 @@
       </p>
     </section>
 
+    <!-- Section with card that is like slider -->
     <section class="section section--4">
       <div class="testimonials"></div>
     </section>
 
-    <!-- The modal for About section -->
+    <!-- Thank you message on the end of body -->
+    <p class="thankYouMessage">
+      Thank you for visiting my site that I built with pure love and joy, and
+      honestly I think it looks beautiful. Huge thanks to Magic the Gathering
+      loving people for letting me use the API. This site was completely made in
+      HTML, CSS and JavaScript, and it's not for commercial use. For best
+      experience use in desktop mode. <br />
+      <span id="mySing">Luka Bartulović</span>
+    </p>
 
     <!-- The modal for cards -->
     <div id="cardsModal">
@@ -171,14 +158,6 @@
         <p class="paragrafCards cardArtist"></p>
       </div>
     </div>
-    <p class="thankYouMessage">
-      Thank you for visiting my site that I built with pure love and joy, and
-      honestly I think it looks beautiful. Huge thanks to Magic the Gathering
-      loving people for letting me use the API. This site was completely made in
-      HTML, CSS and JavaScript, and it's not for commercial use. For best
-      experience use in desktop mode. <br />
-      <span id="mySing">Luka Bartulović</span>
-    </p>
 
     <a href="#top"
       ><img id="topPageImg" src="/imgs/arrow_up back to top.png" alt=""
