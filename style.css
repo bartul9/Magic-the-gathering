@@ -162,14 +162,14 @@ nav {
 }
 
 #search--set {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   border-radius: 10px;
-  background: rgb(0, 0, 0);
+  background: rgb(255, 255, 255);
 }
 
 #search--type {
-  background: rgb(0, 0, 0);
-  color: white;
+  background: rgb(255, 255, 255);
+  color: black;
   border-radius: 10px;
 }
 #createUsername {
@@ -243,14 +243,14 @@ nav {
 .container {
   position: relative;
   top: -110px;
-  border-radius: 10px;
   padding-top: 25px;
   height: 0vh;
+  border-radius: 10px;
   opacity: 0;
   /* overflow: auto; */
   overflow-y: visible;
   overflow-x: hidden;
-  width: 98%;
+  width: 100%;
   border: 3px solid rgb(0, 0, 0);
   display: flex;
   flex-direction: row;
@@ -262,18 +262,18 @@ nav {
   transition: 1s;
 }
 #common {
-  color: rgb(88, 88, 88);
+  color: rgb(0, 0, 0);
 }
 #uncommon {
-  color: rgb(117, 243, 85);
+  color: rgb(150, 150, 150);
 }
 
 #rare {
-  color: rgb(255, 153, 0);
+  color: rgb(241, 168, 57);
 }
 
 #mythic {
-  color: rgb(206, 0, 206);
+  color: rgb(255, 60, 0);
 }
 
 /* Search divs and buttons inside them */
@@ -371,16 +371,6 @@ nav {
 }
 
 /* Cards */
-.card {
-  border-radius: 5px;
-  width: 230px;
-  height: 310px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: 500ms;
-  margin-bottom: 20px;
-}
 
 .card:hover {
   cursor: pointer;
@@ -416,10 +406,13 @@ nav {
 }
 
 .card {
+  position: relative;
+  left: -5px;
   width: 230px;
   transition: 500ms;
   height: 300px;
-  margin-bottom: 50px;
+  margin-right: 25px;
+  margin-bottom: 75px;
 }
 
 .card:hover {
@@ -867,7 +860,7 @@ nav {
   height: 40px;
   position: relative;
   bottom: -50px;
-  transition: 1s;
+  transition: 300ms;
 }
 
 #topPageImg:hover {
