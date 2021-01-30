@@ -18,18 +18,30 @@
   </head>
   <body>
     <!-- Nice navbar -->
-    <header class="navbar">
-      <a href="#" class="logo">MAGIC</a>
-      <ul class="nav--ul">
-        <li class="nav--li"><a href="#search">Search</a></li>
-        <li class="nav--li"><a href="#about">About</a></li>
-        <li class="hidden" id="logout">Logout</li>
+    <nav>
+      <div class="logo">
+        <img
+          id="logoImg"
+          src="https://i.dlpng.com/static/png/5522406-download-magic-the-gathering-logo-guilds-of-ravnica-logo-full-magic-the-gathering-logo-transparent-601_183_preview.png"
+          alt=""
+        />
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Cards</a></li>
+        <li><a id="aboutLink" href="#">About</a></li>
+        <!-- <li><a href="#">Project</a></li> -->
+        <li id="logout" class="hidden">Logout</li>
       </ul>
-    </header>
+      <div class="burger">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
 
     <!-- H1 with nice animation and slideing divs -->
     <section class="heading--section">
-      <h1 class="headingOne">Magic <br /></h1>
+      <h1 class="headingOne">Magic<br /></h1>
       <button class="btnModal createBringInputs">Create Acc</button
       ><button class="btnModal loginBringInputs">Login</button>
       <div class="createAcc--div">
@@ -54,7 +66,7 @@
     <p class="welcomeMsg">Welcome back</p>
 
     <!-- Button that opens search options -->
-    <button class="btnModal2 searchOptionBtn">Search</button>
+    <button class="btnModal2 searchOptionBtn">Cards</button>
 
     <!-- Section with search divs  -->
     <section id="search" class="section section--2">
@@ -79,7 +91,7 @@
       </div>
       <!-- Middle buttons -->
       <div class="search--div searchBtnsAll">
-        <button class="show showBtns">Show Favorites</button>
+        <button class="show showBtns">Show Favourites</button>
         <button class="showAll showBtns">All Set Cards</button>
         <button class="closeSearchBtn showBtns">Close Search</button>
       </div>
@@ -88,10 +100,10 @@
         <label for="search--type">Filter by rarity </label>
         <!-- <input type="text" id="search--type" name="search--type" /> -->
         <select id="search--type" name="rCommon">
-          <option value="Common">Common</option>
-          <option value="Uncommon">Uncommon</option>
-          <option value="rare">Rare</option>
-          <option value="Mythic">Mythic</option>
+          <option id="common" value="Common">Common</option>
+          <option id="uncommon" value="Uncommon">Uncommon</option>
+          <option id="rare" value="rare">Rare</option>
+          <option id="mythic" value="Mythic">Mythic</option>
         </select>
         <button class="type--btn btnSearch">Search</button>
       </div>
