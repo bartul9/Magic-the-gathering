@@ -14,86 +14,145 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  min-height: 510vh;
+  min-height: 485vh;
+}
+/* Navbar and its properities */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Navbar and its properities */
-header {
+nav {
   position: fixed;
-  left: 0;
+  top: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  transition: 0.6s;
-  padding: 40px, 100px;
+  min-height: 60px;
+  background-color: #ffffff;
   z-index: 100000;
+  color: #000000;
+}
+
+.logo {
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 32px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-evenly;
+  width: 30%;
+}
+
+.nav-links li {
+  font-weight: 500;
+  list-style: none;
+  font-size: 27px;
+  color: rgb(97, 0, 136);
+}
+#aboutLink {
+  color: rgba(255, 30, 0, 0.815);
+}
+.redCl {
+  color: rgb(0, 132, 255);
+}
+.nav-links a {
+  color: rgb(0, 132, 255);
+  text-decoration: none;
+  letter-spacing: 0px;
+  font-size: 27px;
+}
+#logout {
+  font-weight: bold;
+}
+#logout:hover {
+  cursor: pointer;
+  color: #5d4954;
+}
+.burger {
+  display: none;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: rgb(0, 0, 0);
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
+  .nav-links {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .nav-links {
+    position: fixed;
+    right: 0px;
+    height: 92vh;
+    top: 60px;
+    background-color: #ffffffb9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+  }
+
+  .nav-links li {
+    opacity: 0;
+  }
+
+  .burger {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.nav-active {
+  transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.toggle .line2 {
   opacity: 0;
 }
 
-header.sticky {
-  padding: 5px, 100px;
-  background-color: white;
-}
-
-header.sticky ul li a {
-  color: black;
-  font-weight: 500;
-}
-
-header .logo {
-  position: relative;
-  color: rgb(0, 0, 0);
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 2em;
-  letter-spacing: 2px;
-  transition: 0.6s;
-  margin-left: 50px;
-}
-
-.nav--ul {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 50px;
-}
-
-.nav--li {
-  position: relative;
-  list-style: none;
-}
-
-.nav--li a {
-  font-size: 22px;
-  position: relative;
-  margin: 15px;
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-  letter-spacing: 2px;
-  font-weight: 500;
-  transition: 0.6;
-}
-
-#logout {
-  font-size: 28px;
-  font-weight: 600;
-  color: rgb(211, 40, 245);
-  list-style: none;
-  transition: 500ms;
-}
-
-#logout:hover {
-  cursor: pointer;
-  color: rgb(135, 0, 168);
+.toggle .line3 {
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* Divs with login, create inputs */
 
 .createAcc--div {
   position: relative;
-  top: -130px;
+  top: 90px;
   display: flex;
   flex-direction: column;
   left: -100%;
@@ -103,9 +162,14 @@ header .logo {
 }
 
 #search--set {
+  color: rgb(255, 255, 255);
   border-radius: 10px;
+  background: rgb(0, 0, 0);
 }
+
 #search--type {
+  background: rgb(0, 0, 0);
+  color: white;
   border-radius: 10px;
 }
 #createUsername {
@@ -137,24 +201,28 @@ header .logo {
   transition: 200ms;
   position: relative;
   left: -100%;
-  top: -280px;
+  top: -60px;
   display: flex;
   flex-direction: column;
   opacity: 0;
   font-size: 23px;
 }
-
+#logoImg {
+  width: 30%;
+  position: relative;
+  top: 10px;
+}
 /* Heading  */
 
 .headingOne {
   position: relative;
-  top: 140px;
+  top: 190px;
   opacity: 1;
   font-size: 220px;
   letter-spacing: 5px;
   text-align: center;
-  color: rgb(0, 0, 0);
-  text-shadow: 3px 3px 3px rgb(0, 197, 247);
+  color: rgba(255, 255, 255, 0.829);
+  text-shadow: 3px 3px 3px rgb(0, 132, 255);
 }
 
 .heading--section {
@@ -193,6 +261,20 @@ header .logo {
   background: linear-gradient(121deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 100%);
   transition: 1s;
 }
+#common {
+  color: rgb(88, 88, 88);
+}
+#uncommon {
+  color: rgb(117, 243, 85);
+}
+
+#rare {
+  color: rgb(255, 153, 0);
+}
+
+#mythic {
+  color: rgb(206, 0, 206);
+}
 
 /* Search divs and buttons inside them */
 .search--div {
@@ -203,14 +285,14 @@ header .logo {
   align-items: center;
   flex-direction: column;
   position: relative;
-  top: 30px;
+  top: 80px;
   color: rgb(0, 0, 0);
-  font-size: 23px;
+  font-size: 27px;
   font-weight: 400;
 }
 
 .searchBtnsAll {
-  top: 0;
+  top: 50px;
 }
 
 .btnSearch {
@@ -350,6 +432,7 @@ header .logo {
 }
 
 .del {
+  width: 25px;
   position: relative;
   left: 96px;
   top: -303px;
@@ -373,8 +456,8 @@ header .logo {
 
 .favorite {
   position: relative;
-  left: 56px;
-  top: -324px;
+  left: 59px;
+  top: -322px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -439,21 +522,6 @@ header .logo {
   opacity: 0.8;
 }
 
-/* To top page link */
-#topPage {
-  position: relative;
-  bottom: -200px;
-  text-decoration: none;
-  font-size: 22px;
-  color: white;
-  transition: 1s;
-}
-
-#topPage:hover {
-  letter-spacing: 1px;
-  border-bottom: 1px solid blue;
-}
-
 /* --------------------------------------------------- */
 
 /* Scrollbars */
@@ -488,15 +556,14 @@ header .logo {
   font-size: 21px;
   transition: 500ms;
   font-style: italic;
-  color: #ffffff;
+  color: rgb(255, 255, 255);
 }
 
 #mySing {
   position: relative;
   top: 10px;
   font-size: 26px;
-  font-weight: 500;
-  color: #000000;
+  color: rgba(255, 30, 0, 0.815);
   font-style: italic;
 }
 /* ----------------  */
@@ -605,6 +672,7 @@ header .logo {
 
 .paragrafCards {
   top: -50px;
+  margin-top: 20px;
   position: relative;
   text-align: center;
 }
@@ -648,14 +716,14 @@ header .logo {
   font-size: 17px;
   font-weight: 600;
   transition: 500ms;
-  background-color: black;
+  background-color: rgba(0, 132, 255, 0.747);
   color: white;
   opacity: 1;
 }
 
 .create--btn:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: rgba(0, 132, 255, 0.747);
+  border: 1px solid white;
   cursor: pointer;
 }
 
@@ -672,14 +740,14 @@ header .logo {
   font-size: 17px;
   font-weight: 600;
   transition: 500ms;
-  background-color: black;
+  background-color: rgba(0, 132, 255, 0.747);
   color: white;
   opacity: 1;
 }
 
 .login--btn:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: rgb(0, 132, 255);
+  border: 1px solid white;
   cursor: pointer;
 }
 
@@ -706,15 +774,15 @@ header .logo {
   font-weight: 600;
   transition: 500ms;
   margin-top: 25px;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: rgba(0, 132, 255, 0.747);
+  color: rgb(255, 255, 255);
   position: relative;
-  top: 0px;
+  top: 250px;
   left: 0;
 }
 .btnModal2 {
   width: 200px;
-  height: 25px;
+  height: 23px;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
@@ -722,23 +790,25 @@ header .logo {
   font-weight: 600;
   transition: 500ms;
   margin-top: 25px;
-  background-color: black;
+  background-color: rgba(255, 30, 0, 0.747);
   color: white;
   position: relative;
-  top: -50px;
+  top: 0px;
   left: 0;
 }
 
 .btnModal:hover {
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(0, 132, 255);
   color: rgb(255, 255, 255);
   cursor: pointer;
+  border: 1px solid white;
 }
 
 .btnModal2:hover {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: rgb(255, 30, 0, 1);
+  color: rgb(255, 255, 255);
   cursor: pointer;
+  border: 1px solid rgb(255, 255, 255);
 }
 
 /* Last big image section */
@@ -793,12 +863,15 @@ header .logo {
 
 /* To page icon */
 #topPageImg {
-  color: white;
-  width: 40px;
-  height: 30px;
+  width: 50px;
+  height: 40px;
   position: relative;
   bottom: -50px;
-  transition: 250ms;
+  transition: 1s;
+}
+
+#topPageImg:hover {
+  transform: scaleY(1.2);
 }
 
 /* Close inputs for login and create */
@@ -866,10 +939,6 @@ header .logo {
     top: -20px;
   }
 
-  header .logo {
-    margin: 0;
-    display: none;
-  }
   .createAcc--div {
     top: -50px;
     width: 200px;
@@ -894,19 +963,29 @@ header .logo {
 }
 
 @media (max-width: 570px) {
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+    margin: 0 0 4px;
+    width: 25px;
+    height: 5px;
+  }
+
   .close {
     top: -50px;
   }
   body {
     background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/23/458367-Magic_The_Gathering-Trading_Card_Games-simple-minimalism-black_background-skull.jpg;");
   }
-  #mySing {
-    color: rgb(83, 83, 241);
-    font-weight: 400;
-  }
+
   .cardTextAbout {
     width: 100%;
     font-size: 19px;
+  }
+  .createAcc--div {
+    top: 80px;
+  }
+  .login--div {
+    top: -80px;
   }
 
   .thankYouMessage {
@@ -924,7 +1003,7 @@ header .logo {
     font-size: 150px;
     letter-spacing: 0;
     position: relative;
-    top: 100px;
+    top: 140px;
   }
 
   .section--2 {
@@ -942,7 +1021,7 @@ header .logo {
 
   .searchByName {
     position: relative;
-    top: -55px;
+    top: -40px;
   }
 
   .showBtns {
@@ -950,7 +1029,7 @@ header .logo {
   }
   .searchBtnsAll {
     position: relative;
-    top: -50px;
+    top: -40px;
   }
 
   .searchByRarity {
@@ -958,13 +1037,7 @@ header .logo {
     top: -25px;
   }
   .searchOptionBtn {
-    top: 20px;
-  }
-  .modalBtnLogin {
-    top: -100px;
-  }
-  .modalBtnCreate {
-    top: 25px;
+    top: 60px;
   }
 
   .btnSearch {
@@ -990,7 +1063,8 @@ header .logo {
   }
 
   .btnModal {
-    top: 150px;
+    top: 250px;
+    height: 23px;
   }
 }
 
