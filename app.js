@@ -1,12 +1,5 @@
 "use strict";
 
-window.onload = function () {
-  if (!window.location.hash) {
-    window.location = window.location + "#loaded";
-    window.location.reload();
-  }
-};
-
 // Selectors
 const container = document.querySelector(".container");
 const nameBtn = document.querySelector(".name--btn");
