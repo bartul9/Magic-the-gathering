@@ -87,6 +87,13 @@ const removeAccDivs = function (val1, left, opacity) {
   val1.style.opacity = opacity;
 };
 
+// Spinner function
+const spinner = function () {
+  let spinner = document.createElement("div");
+  spinner.classList.add("loader");
+  container.append(spinner);
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 // Listeners for about section, when you hover over text, card dessapear and text comes in nice animation
 
@@ -108,6 +115,19 @@ closeCreateLoginBtn.forEach((x) =>
     loginRemove(1, 0);
   })
 );
+
+// Function for page slider
+
+const sliderBtnTxt = function (slide) {
+  `${slide}Btn.textContent = pageCount`;
+  setTimeout(() => {
+    `${slide}Btn.textContent = ${slide} Page`;
+  }, 700);
+  container.innerHTML = "";
+  arr[pageCount].cards.forEach((x, i) => {
+    createCardFinal(arr[pageCount].cards, i);
+  });
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
@@ -188,11 +208,7 @@ nextBtn.addEventListener("click", function () {
     pageCount = -1;
   }
   pageCount++;
-  nextBtn.textContent = pageCount;
-  setTimeout(() => {
-    nextBtn.textContent = "Next Page";
-  }, 700);
-  container.innerHTML = "";
+  sliderBtnTxt("next");
   arr[pageCount].cards.forEach((x, i) => {
     createCardFinal(arr[pageCount].cards, i);
   });
@@ -203,14 +219,7 @@ previousBtn.addEventListener("click", function () {
     pageCount = arr.length;
   }
   pageCount--;
-  previousBtn.textContent = pageCount;
-  setTimeout(() => {
-    previousBtn.textContent = "Previous Page";
-  }, 700);
-  container.innerHTML = "";
-  arr[pageCount].cards.forEach((x, i) => {
-    createCardFinal(arr[pageCount].cards, i);
-  });
+  sliderBtnTxt("previous");
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -228,11 +237,13 @@ const createCardFinal = function (objPath, num) {
   imageDiv.classList.add("image");
   const image = document.createElement("img");
   image.id = "card--image";
+
   //Favorite button
   favorite = document.createElement("button");
   favorite.classList.add("favorite");
   favorite.classList.add("cardBtn");
   favorite.innerText = "Favorite";
+
   // Delete button
   const newBtn = document.createElement("button");
   newBtn.classList = "del";
@@ -259,6 +270,7 @@ const createCardFinal = function (objPath, num) {
 
   // Click on image and open modal with informations about clicked card
   image.addEventListener("click", function () {
+    // Put colors on rarity
     if (objPath[num].rarity === "Rare") {
       cardRarity.style.color = "gold";
     } else if (objPath[num].rarity === "Common") {
@@ -269,7 +281,7 @@ const createCardFinal = function (objPath, num) {
       cardRarity.style.color = "purple";
     }
 
-    console.log("click");
+    // Put all text on modal from api
     cardsModal.style.display = "block";
     cardName.textContent = objPath[num].name;
     cardRarity.textContent = objPath[num].rarity;
@@ -277,6 +289,7 @@ const createCardFinal = function (objPath, num) {
     cardSet.textContent = objPath[num].setName;
     cardOriginalText.textContent = objPath[num].originalText;
     cardArtist.textContent = objPath[num].artist;
+
     setTimeout(() => {
       cardsModal.style.opacity = 1;
     }, 50);
@@ -355,6 +368,7 @@ const setArr = [];
 setBtn.addEventListener("click", function () {
   container.innerHTML = "";
 
+  // Fetch all card pages and push them into array
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
@@ -390,10 +404,9 @@ setBtn.addEventListener("click", function () {
     .then((x) => (arr[2] = x))
     .catch((err) => console.log(err));
 
+  // Check if setArr is empty or not, if yes add spinner and put 10sec timeout
   if (!setArr.length < 2) {
-    let spinner = document.createElement("div");
-    spinner.classList.add("loader");
-    container.append(spinner);
+    spinner();
     setTimeout(() => {
       container.innerHTML = "";
       setArr[0].cards.forEach((x, i) => {
@@ -406,9 +419,8 @@ setBtn.addEventListener("click", function () {
     !setArr[setArr.length - 1].cards.set ===
     setArr[setArr.length - 1].cards.searchSet.value
   ) {
-    let spinner = document.createElement("div");
-    spinner.classList.add("loader");
-    container.append(spinner);
+    spinner();
+
     setTimeout(() => {
       container.innerHTML = "";
       setArr[0].cards.forEach((x, i) => {
@@ -422,33 +434,13 @@ setBtn.addEventListener("click", function () {
   });
 });
 
-//////////////////////////////////////////////////////////////////////
-// Here I search card by name => I putted name in array by unshift method, and then show card on position one from that array
-
-/// !!!!!!!!!!!!!!!!!!!!!!! Not shure if ill add this option, it would be to cloutered
-
-// nameBtn.addEventListener("click", function () {
-//   container.innerHTML = "";
-//   arr.forEach((y) =>
-//     y.cards.forEach((x) => {
-//       if (x.name.toLowerCase() === inputName.value.toLowerCase()) {
-//         nameArr.unshift(x);
-//         inputName.value = "";
-//         if (nameArr.length > 40) {
-//           nameArr.splice(1, nameArr.length - 1);
-//         }
-//       }
-//     })
-//   );
-//   createCardFinal(nameArr, 0);
-// });
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Show all cards by rarity => Here I putted all cards that I look for in new array then I simply loop over that array and show cards
 
 typeBtn.addEventListener("click", function () {
   rareCards = [];
   container.innerHTML = "";
+
   arr.forEach((y) =>
     y.cards.forEach((x) => {
       if (x.rarity.toUpperCase() === inputType.value.toUpperCase()) {
@@ -472,7 +464,7 @@ class UsersCl {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Event listeners for login, logout buttons
+// Event listeners for login, logout buttons that bring inputs
 
 createBringBtn.addEventListener("click", function () {
   loginRemove(0, "-100%");
@@ -489,6 +481,8 @@ loginBringBtn.addEventListener("click", function () {
 
 createBtn.addEventListener("click", function () {
   closeSearchLogout();
+
+  // If inputs are empty put message on button and reset inputs
   if (createUsername.value === "" || createPassword.value === "") {
     createUsername.value = createPassword.value = "";
     createBtn.textContent = "Wrong input";
@@ -496,20 +490,23 @@ createBtn.addEventListener("click", function () {
     return;
   }
   createBtn.textContent = "Create Acc";
+
+  // Create new user object and push it to users array
   let newUser = new UsersCl(createUsername.value, createPassword.value);
   users.push(newUser);
-  loginRemove(0, "-100%");
-  show.style.left = 0;
-  removeAccDivs(createDiv, "-100%", 0);
-  welcomeMsg.style.right = "0";
+
   setStorage();
+  loginRemove(0, "-100%");
+  removeAccDivs(createDiv, "-100%", 0);
+
+  welcomeMsg.style.right = "0";
+  show.style.left = 0;
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
   activeUser[0] = newUser;
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
-  console.log(users);
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -520,20 +517,20 @@ loginBtn.addEventListener("click", function () {
   closeSearchLogout();
   loginRemove();
 
+  // Check if users username and password matches and create user interface
   users.forEach((user) => {
-    console.log(user);
     if (user.username === username.value && user.password === password.value) {
-      console.log(user);
       show.style.left = 0;
       show.style.opacity = 1;
       username.value = password.value = "";
       welcomeMsg.style.right = "0";
       welcomeMsg.style.opacity = 1;
       activeUser[0] = user;
-      console.log(activeUser);
+      logoutBtn.classList.remove("hidden");
+
       loginRemove(0, "-100%");
       removeAccDivs(loginDiv, "-100%", 0);
-      logoutBtn.classList.remove("hidden");
+
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createCardFinal(activeUser[0].userFavoriteCards, i);
         favorite.classList.add("hidden");
@@ -542,6 +539,8 @@ loginBtn.addEventListener("click", function () {
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
     }
   });
+
+  // If input is wrong put message on button
   username.value = password.value = "";
   loginBtn.textContent = "Wrong Input";
   setTimeout(() => {
@@ -549,7 +548,7 @@ loginBtn.addEventListener("click", function () {
   }, 1500);
 });
 
-// Set local storage
+// Set local storage and get local storage functions
 
 const setStorage = function () {
   localStorage.setItem("account", JSON.stringify(users));
@@ -564,12 +563,12 @@ const getStorage = function () {
 // User logs out, reset active user, put all things as they were before user logged in
 
 logoutBtn.addEventListener("click", function () {
+  closeSearchLogout();
+  loginRemove(1, 0);
   activeUser = [];
   logoutBtn.classList.add("hidden");
   welcomeMsg.style.opacity = 0;
   welcomeMsg.style.right = "100%";
-  closeSearchLogout();
-  loginRemove(1, 0);
   container.innerHTML = "";
 });
 
@@ -577,32 +576,34 @@ logoutBtn.addEventListener("click", function () {
 // Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
 
 searchOptionsBtn.addEventListener("click", function () {
+  // Set all elements where they need to be
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
   container.style.opacity = 1;
   container.style.height = "100vh";
   previousBtn.style.left = 0;
-  if (activeUser[0]) {
-    show.style.opacity = 1;
-    show.style.left = 0;
-  }
   nextBtn.style.left = 0;
   topPage.style.bottom = "-140px";
   thankYouMsg.style.bottom = "-450px";
   body.style.height = "625vh";
   footer.style.top = 0;
   section4.style.top = "155px";
+
+  // If there is active user, bring all favorites button
+  if (activeUser[0]) {
+    show.style.opacity = 1;
+    show.style.left = 0;
+  }
+
+  // Check if array with api is loaded if not put spinner in the middle and wait 10 seconds. There are better ways to do it, but this time I did it like this
   if (!arr[0]) {
-    let spinner = document.createElement("div");
-    spinner.classList.add("loader");
-    container.append(spinner);
+    spinner();
     setTimeout(() => {
       container.innerHTML = "";
       arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
     }, 10000);
   }
-
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
@@ -613,8 +614,8 @@ closeSearchBtn.addEventListener("click", function () {
   closeSearchLogout();
 });
 
-////////////////////////////////////////////////////////////////////////////
-// Testimonials change => now they are just images, ill see if ill add testimonials animation
+///////////////////////////////////////////////////////////////////////////////////////////////
+// Testimonials change => I planned to make testimonials here, but it would not look good so I putted only pictures to change
 
 // Array for images that I change on click and event listener
 const testimonialsImageArray = [
