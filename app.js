@@ -305,6 +305,7 @@ const createCardFinal = function (objPath, num) {
   // Favorite selected card => favorite selected card and put it in users class into the favorite array
   favorite.addEventListener("click", function () {
     activeUser[0].userFavoriteCards.push(objPath[num]);
+    setStorage();
   });
 
   container.append(newCard);
@@ -470,12 +471,6 @@ class UsersCl {
   }
 }
 
-// Users created by me for app building use
-
-let userOne = new UsersCl("bartul_9", "jasamkralj222");
-let userTwo = new UsersCl("mike", "1234");
-users.push(userOne, userTwo);
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Event listeners for login, logout buttons
 
@@ -507,10 +502,10 @@ createBtn.addEventListener("click", function () {
   show.style.left = 0;
   removeAccDivs(createDiv, "-100%", 0);
   welcomeMsg.style.right = "0";
+  setStorage();
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
   activeUser[0] = newUser;
-
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
@@ -524,6 +519,7 @@ loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   closeSearchLogout();
   loginRemove();
+
   users.forEach((user) => {
     console.log(user);
     if (user.username === username.value && user.password === password.value) {
@@ -534,6 +530,7 @@ loginBtn.addEventListener("click", function () {
       welcomeMsg.style.right = "0";
       welcomeMsg.style.opacity = 1;
       activeUser[0] = user;
+      console.log(activeUser);
       loginRemove(0, "-100%");
       removeAccDivs(loginDiv, "-100%", 0);
       logoutBtn.classList.remove("hidden");
@@ -552,6 +549,17 @@ loginBtn.addEventListener("click", function () {
   }, 1500);
 });
 
+// Set local storage
+
+const setStorage = function () {
+  localStorage.setItem("account", JSON.stringify(users));
+};
+
+const getStorage = function () {
+  const local = JSON.parse(localStorage.getItem("account"));
+  users = local;
+};
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // User logs out, reset active user, put all things as they were before user logged in
 
@@ -559,7 +567,6 @@ logoutBtn.addEventListener("click", function () {
   activeUser = [];
   logoutBtn.classList.add("hidden");
   welcomeMsg.style.opacity = 0;
-
   welcomeMsg.style.right = "100%";
   closeSearchLogout();
   loginRemove(1, 0);
