@@ -294,9 +294,9 @@ const createCardFinal = function (objPath, num) {
     } else if (objPath[num].rarity === "Common") {
       cardRarity.style.color = "white";
     } else if (objPath[num].rarity === "Uncommon") {
-      cardRarity.style.color = "lightgreen";
+      cardRarity.style.color = "silver";
     } else if (objPath[num].rarity === "Mythic") {
-      cardRarity.style.color = "purple";
+      cardRarity.style.color = "orangered";
     }
 
     // Put all text on modal from api
@@ -522,6 +522,7 @@ createBtn.addEventListener("click", function () {
   welcomeMsg.style.opacity = 1;
   logoutBtn.classList.remove("hidden");
   activeUser[0] = newUser;
+
   welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
   createUsername.value = createPassword.value = "";
   welcomeMsg.style.top = "-170px";
