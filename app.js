@@ -65,7 +65,7 @@ const cardsModal = document.querySelector("#cardsModal");
 const closeCardsModal = document.querySelector(".closeCardsModal");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Functions for login, create, logout buttons and div animations
+// Functions for login, create, logout buttons and div animations, and also spinner
 
 const loginRemove = function (opacity, left) {
   loginBringBtn.style.opacity = opacity;
@@ -112,11 +112,7 @@ closeCreateLoginBtn.forEach((x) =>
 
 // Function for page slider
 
-const sliderBtnTxt = function (slide) {
-  `${slide}Btn.textContent = ${pageCount}`;
-  setTimeout(() => {
-    `${slide}Btn.textContent = ${slide} Page`;
-  }, 700);
+const sliderBtnTxt = function () {
   container.innerHTML = "";
   arr[pageCount].cards.forEach((x, i) => {
     createCardFinal(arr[pageCount].cards, i);
@@ -186,7 +182,7 @@ let rareCards = [];
 let nameArr = [];
 
 // Users array
-const users = [];
+let users = [];
 
 // Arr for active users
 let activeUser = [];
@@ -218,11 +214,14 @@ nextBtn.addEventListener("click", function () {
   if (pageCount === arr.length - 1) {
     pageCount = -1;
   }
+
   pageCount++;
-  sliderBtnTxt("next");
-  arr[pageCount].cards.forEach((x, i) => {
-    createCardFinal(arr[pageCount].cards, i);
-  });
+  nextBtn.textContent = pageCount;
+  setTimeout(() => {
+    nextBtn.textContent = "Next Page";
+  }, 700);
+
+  sliderBtnTxt();
 });
 
 previousBtn.addEventListener("click", function () {
@@ -230,7 +229,12 @@ previousBtn.addEventListener("click", function () {
     pageCount = arr.length;
   }
   pageCount--;
-  sliderBtnTxt("previous");
+  previousBtn.textContent = pageCount;
+  setTimeout(() => {
+    previousBtn.textContent = "Previous Page";
+  }, 700);
+
+  sliderBtnTxt();
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -528,7 +532,7 @@ loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   closeSearchLogout();
   loginRemove();
-
+  getStorage();
   // Check if users username and password matches and create user interface
   users.forEach((user) => {
     if (user.username === username.value && user.password === password.value) {
@@ -567,7 +571,7 @@ const setStorage = function () {
 };
 
 const getStorage = function () {
-  const local = JSON.parse(localStorage.getItem("account"));
+  let local = JSON.parse(localStorage.getItem("account"));
   users = local;
 };
 
