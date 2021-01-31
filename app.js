@@ -192,18 +192,15 @@ let activeUser = [];
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
   .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+  .then((x) => arr.push(x));
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
   .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+  .then((x) => arr.push(x));
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
   .then((res) => res.json())
-  .then((x) => arr.push(x))
-  .catch((err) => console.log(err));
+  .then((x) => arr.push(x));
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
@@ -257,7 +254,7 @@ const createCardFinal = function (objPath, num) {
   favorite = document.createElement("button");
   favorite.classList.add("favorite");
   favorite.classList.add("cardBtn");
-  favorite.innerText = "Favourite";
+  favorite.innerText = "Favorite";
 
   // Delete button
   const newBtn = document.createElement("button");
@@ -384,40 +381,30 @@ setBtn.addEventListener("click", function () {
   container.innerHTML = "";
 
   // Fetch all card pages and push them into array
+  // Here I fetch first page and render cards in container, and other pages I push to arr, then later if you want to see all set card I pull them from arr, or if you want next page I pull the set from arr so you dont have to wait it to fetch.
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => (setArr[0] = x))
-    .catch((err) => console.log(err));
+    .then((x) => (setArr[0] = x));
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => (arr[0] = x))
-    .catch((err) => console.log(err));
+    .then((x) => (arr[0] = x));
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=2`
   )
     .then((res) => res.json())
-    .then((x) => (arr[1] = x))
-    .catch((err) => console.log(err));
+    .then((x) => (arr[1] = x));
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=3`
   )
     .then((res) => res.json())
-    .then((x) => (arr[2] = x))
-    .catch((err) => console.log(err));
-
-  fetch(
-    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=4`
-  )
-    .then((res) => res.json())
-    .then((x) => (arr[2] = x))
-    .catch((err) => console.log(err));
+    .then((x) => (arr[2] = x));
 
   // Check if setArr is empty or not, if yes add spinner and put 10sec timeout
   if (!setArr.length < 2) {
@@ -429,7 +416,7 @@ setBtn.addEventListener("click", function () {
       });
     }, 10000);
   }
-
+  // Chech if there is allready set loaded that we are looking for, if not add spinner and search for new one
   if (
     !setArr[setArr.length - 1].cards.set ===
     setArr[setArr.length - 1].cards.searchSet.value
