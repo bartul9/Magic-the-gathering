@@ -449,7 +449,7 @@ nav {
 
 .favorite {
   position: relative;
-  left: 120px;
+  left: 125px;
   top: -310px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -863,8 +863,12 @@ nav {
   transition: 300ms;
 }
 
+.gitHub {
+  background-color: black;
+}
+
 #topPageImg:hover {
-  transform: scaleY(1.2);
+  transform: scaleY(1.1);
 }
 
 /* Close inputs for login and create */
