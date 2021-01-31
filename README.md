@@ -7,7 +7,7 @@ set and filter cards by rarity. App looks amazing, and it has everything that yo
 more information about it, I also can remove cards from favorites if I want to.
 
 I made an app in HTML, CSS and JavaScript two and a half months after I started to learn programming. I still want to start to learn backend, so more users can use it to look up the cards
-and use favorite cards. I also plan to add options, so the user can create card sets, and to search card by name, witch I didn't do now, because UI would too cluttered. I manage those things 
+and use favorite cards. I also plan to add options, so the user can create card sets, and to search card by name, witch I didn't do now, because UI would be too cluttered. I manage those things 
 later, when I learn enough backend, so I can make it fully working for other people, so they can make ACC and then do all things with cards that they want to do.
 
 Building this app was a great experience. For the first time I saw how much you can do with JavaScript and I really loved it.
