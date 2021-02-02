@@ -52,7 +52,7 @@ nav {
 .nav-links li {
   font-weight: 500;
   list-style: none;
-  font-size: 27px;
+  font-size: 25px;
   color: rgb(97, 0, 136);
 }
 #aboutLink {
@@ -65,8 +65,10 @@ nav {
   color: rgb(0, 132, 255);
   text-decoration: none;
   letter-spacing: 0px;
-  font-size: 27px;
+  font-size: 25px;
+  transition: 500ms;
 }
+
 #logout {
   font-weight: bold;
 }
@@ -159,6 +161,8 @@ nav {
   opacity: 0;
   transition: 200ms;
   font-size: 23px;
+  color: rgb(255, 255, 255);
+  letter-spacing: 1px;
 }
 
 #search--set {
@@ -201,7 +205,7 @@ nav {
   transition: 200ms;
   position: relative;
   left: -100%;
-  top: -60px;
+  top: -55px;
   display: flex;
   flex-direction: column;
   opacity: 0;
@@ -228,6 +232,8 @@ nav {
 .heading--section {
   background-color: white;
   background-image: url(https://dw9to29mmj727.cloudfront.net/promo/2016/5336-SeriesHeaders_Tier01_Magic_2000x800.jpg);
+  background-size: cover;
+  background-position: center;
   width: 100%;
   text-align: center;
   height: 100vh;
@@ -297,7 +303,7 @@ nav {
 
 .btnSearch {
   width: 150px;
-  height: 25px;
+  height: 22px;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
@@ -307,14 +313,13 @@ nav {
   margin: 20px;
   position: relative;
   top: 15px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.719);
   color: white;
 }
 
 .btnSearch:hover {
-  background-color: white;
   cursor: pointer;
-  color: black;
+  color: rgb(255, 0, 0);
 }
 
 /* Sections */
@@ -359,10 +364,9 @@ nav {
   justify-content: center;
   align-items: center;
   position: relative;
-  top: -245px;
+  top: -220px;
   transition: 1s;
   opacity: 1;
-  transform: skewY(-7deg);
   background-color: rgb(255, 255, 255);
   background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
   background-size: cover;
@@ -388,12 +392,12 @@ nav {
   font-weight: 600;
   transition: 500ms;
   margin: 20px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.664);
   color: white;
 }
 
 .showBtns:hover {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.747);
   cursor: pointer;
   color: black;
 }
@@ -454,13 +458,6 @@ nav {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
-.show {
-  margin-top: 25px;
-  position: relative;
-  left: -200%;
-  transition: 500ms;
-  opacity: 0;
-}
 
 /* ************ */
 
@@ -492,7 +489,7 @@ nav {
   text-align: center;
   width: 50%;
   font-size: 22px;
-  transform: skewY(0deg);
+  transform: skewY(7deg);
   opacity: 0;
   transition: 1s;
   color: #ffffff;
@@ -504,7 +501,7 @@ nav {
 .cardTextAbout:hover {
   cursor: pointer;
   opacity: 1;
-  transform: skewY(7deg);
+  transform: skewY(0deg);
 }
 
 .cardBackImg:hover {
@@ -596,21 +593,45 @@ nav {
   position: relative;
   top: -130px;
   left: -100%;
-  width: 150px;
-  height: 25px;
+  width: 80px;
+  height: 20px;
   border-radius: 15px;
-  background-color: #000000;
-  color: white;
   transition: 500ms;
   outline: none;
+  border: 1px solid rgb(136, 136, 136);
+  margin-bottom: 5px;
+  color: white;
 }
 
 .pageButtons:hover {
-  background-color: white;
-  color: black;
   cursor: pointer;
 }
+.next {
+  background-color: rgba(0, 132, 255, 0.747);
+}
+.previous {
+  background-color: rgba(255, 30, 0, 0.815);
+}
+.next:hover {
+  background-color: rgba(0, 132, 255, 1);
+}
+.previous:hover {
+  background-color: rgba(255, 30, 0);
+}
 
+.show {
+  margin-top: 25px;
+  position: relative;
+  left: -200%;
+  transition: 500ms;
+  opacity: 0;
+  background-color: rgba(255, 255, 255, 0.76);
+  color: black;
+}
+
+.show:hover {
+  color: rgb(4, 0, 255);
+}
 /* ----------------------------- */
 
 #cardsModal {
@@ -702,7 +723,7 @@ nav {
   width: 200px;
   position: relative;
   top: 20px;
-  height: 25px;
+  height: 21px;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
@@ -726,7 +747,7 @@ nav {
   width: 200px;
   position: relative;
   top: 20px;
-  height: 25px;
+  height: 21px;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
@@ -758,12 +779,15 @@ nav {
 
 /* !!!!!!!!! this I have to change !!!!!!!!!!!!!!!!! */
 .btnModal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 200px;
   height: 30px;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   transition: 500ms;
   margin-top: 25px;
@@ -772,6 +796,7 @@ nav {
   position: relative;
   top: 250px;
   left: 0;
+  letter-spacing: 1px;
 }
 .btnModal2 {
   width: 200px;
@@ -779,7 +804,7 @@ nav {
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   border-radius: 15px;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   transition: 500ms;
   margin-top: 25px;
@@ -788,6 +813,7 @@ nav {
   position: relative;
   top: 0px;
   left: 0;
+  letter-spacing: 1px;
 }
 
 .btnModal:hover {
@@ -806,7 +832,7 @@ nav {
 
 /* Last big image section */
 .section--4 {
-  margin-top: 65px;
+  margin-top: 0px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -819,11 +845,22 @@ nav {
   top: 0px;
   transition: 1s;
   opacity: 1;
-  transform: skewY(7deg);
   background-color: rgb(255, 255, 255);
   background-image: url(https://images.wallpapersden.com/image/download/aurelia-magic-the-gathering_bGVqbWeUmZqaraWkpJRmbmdlrWZnZWU.jpg);
   background-size: cover;
   background-position: center;
+}
+.textBetweenImgs {
+  text-align: center;
+  position: relative;
+  top: -120px;
+  display: inline;
+  font-size: 80px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-style: italic;
+  color: #ffffff;
+  text-shadow: 2px 2px 2px#0066ff;
 }
 
 .testimonials {
@@ -863,6 +900,11 @@ nav {
   transition: 300ms;
 }
 
+.container-p {
+  font-size: 35px;
+  color: #000000;
+  text-align: center;
+}
 .gitHub {
   background-color: black;
 }
@@ -913,13 +955,24 @@ nav {
     transform: rotate(360deg);
   }
 }
+#closeSearch {
+  background-color: rgba(136, 136, 136, 0.76);
+  color: rgb(255, 255, 255);
+}
+#closeSearch:hover {
+  background-color: rgba(255, 255, 255, 0.685);
+  color: rgb(0, 0, 0);
+}
 
+/* ----------------------------------------------- */
 @media (max-width: 900px) {
   .cardTextAbout {
     width: 80%;
     font-size: 21px;
   }
-
+  .textBetweenImgs {
+    font-size: 60px;
+  }
   .thankYouMessage {
     width: 90%;
     font-size: 20px;
@@ -962,6 +1015,14 @@ nav {
 }
 
 @media (max-width: 570px) {
+  .textBetweenImgs {
+    font-size: 40px;
+  }
+  .heading--section {
+    background-position: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
   .logo {
     margin-left: 15px;
   }
@@ -984,7 +1045,9 @@ nav {
     top: -50px;
   }
   body {
-    background-image: url("https://hdwallpaperim.com/wp-content/uploads/2017/08/23/458367-Magic_The_Gathering-Trading_Card_Games-simple-minimalism-black_background-skull.jpg;");
+    background-image: url("https://cdn.hipwallpaper.com/i/39/27/j1iF29.jpg");
+    background-size: cover;
+    min-height: 520vh;
   }
 
   .cardTextAbout {
@@ -1002,7 +1065,7 @@ nav {
   }
   .pageButtons {
     top: -20px;
-    color: rgb(0, 132, 255);
+    color: white;
   }
 
   .container {
@@ -1035,7 +1098,12 @@ nav {
 
   .showBtns {
     margin: 5px;
-    color: rgb(0, 132, 255);
+    background-color: rgba(0, 0, 0, 0.671);
+    color: rgb(0, 57, 243);
+  }
+  .showBtns:hover {
+    background-color: rgba(0, 0, 0, 0.671);
+    color: rgb(255, 255, 255);
   }
   .searchBtnsAll {
     position: relative;
