@@ -88,6 +88,20 @@ const spinner = function () {
   container.append(spinner);
 };
 
+// Text inside of container if cards could not be loaded after 10 sec
+
+const containerTextTimer = function (path) {
+  setTimeout(() => {
+    if (!path) {
+      console.log("not loaded");
+      let p = document.createElement("p");
+      p.classList.add("container-p");
+      p.textContent = "Could not load, please try again";
+      container.append(p);
+    }
+  }, 10010);
+};
+
 ///////////////////////////////////////////////////////////////////////////////
 // Listeners for about section, when you hover over text, card dessapear and text comes in nice animation
 
@@ -123,6 +137,8 @@ const sliderBtnTxt = function () {
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
 
 const closeSearchLogout = function () {
+  textBtwImg.style.top = "-120px";
+  textBtwImg.style.marginBottom = "0";
   footer.style.top = "-245px";
   nextBtn.style.left = "-100%";
   topPage.style.bottom = "-100px";
@@ -240,6 +256,7 @@ previousBtn.addEventListener("click", function () {
 
 // I had to pull this variable out so when I show favorite cards I can add class hidden to favorite button
 let favorite;
+let newBtn;
 
 const createCardFinal = function (objPath, num) {
   // Creating card element by element, adding classes to them, and appending them to each other
@@ -257,7 +274,7 @@ const createCardFinal = function (objPath, num) {
   favorite.innerText = "Favorite";
 
   // Delete button
-  const newBtn = document.createElement("button");
+  newBtn = document.createElement("button");
   newBtn.classList = "del";
   newBtn.classList.add("cardBtn");
   newBtn.innerText = "X";
@@ -416,6 +433,8 @@ setBtn.addEventListener("click", function () {
       });
     }, 10000);
   }
+
+  containerTextTimer(setArr[0]);
   // Chech if there is allready set loaded that we are looking for, if not add spinner and search for new one
   if (
     !setArr[setArr.length - 1].cards.set ===
@@ -481,35 +500,101 @@ loginBringBtn.addEventListener("click", function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Create acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
+// Function for checking if inputs contain enough characters and if lenght is minimun 4 long
+
+const buttonDisplayMsg = function (value) {
+  createPassword.value = createUsername.value = "";
+  createBtn.style.fontSize = "15px";
+  createBtn.style.height = "70px";
+  createBtn.style.marginBottom = "30px";
+  createBtn.textContent = value;
+  createBtn.style.fontWeight = 400;
+  setTimeout(() => {
+    createBtn.style.fontWeight = 600;
+    createBtn.style.marginBottom = 0;
+    createBtn.style.height = "21px";
+    createBtn.style.fontSize = "16px";
+    createBtn.textContent = "Create Account";
+  }, 4000);
+};
+
+/////////////////////////////////////////////
+
 createBtn.addEventListener("click", function () {
   closeSearchLogout();
 
-  // If inputs are empty put message on button and reset inputs
-  if (createUsername.value === "" || createPassword.value === "") {
-    createUsername.value = createPassword.value = "";
-    createBtn.textContent = "Wrong input";
-    setTimeout(() => (createBtn.textContent = "Create Account"), 1500);
+  // Check for valid inputs
+
+  if (createPassword.value.length < 4 && createUsername.value.length < 4) {
+    buttonDisplayMsg(
+      "Both password and username must be at least 4 charaters long and contain 1 digit and 1 letter"
+    );
     return;
   }
-  createBtn.textContent = "Create Acc";
+
+  ////// !!!!!!!!!!!!!!!!!!!! have to reafactor this !
+  const checkUsername = function (username) {
+    if (firstCheck === true && username.length >= 4) {
+      let usernamenumbers = [];
+      let usernameletters = [];
+      createUsername.value.split("").forEach((x) => {
+        if (isNaN(x)) {
+          usernameletters.push(x);
+        }
+        if (!isNaN(x)) {
+          usernamenumbers.push(x);
+        }
+      });
+      if (usernameletters.length < 1 || usernamenumbers.length < 1) {
+        buttonDisplayMsg("Username must contain letters and numbers");
+        return false;
+      }
+
+      return true;
+    }
+  };
+
+  const checkPassword = function (password) {
+    if (password.length >= 4 && createUsername.value.length >= 4) {
+      let passwordnumbers = [];
+      let passwordletters = [];
+      password.split("").forEach((x) => {
+        if (isNaN(x)) {
+          passwordletters.push(x);
+        }
+        if (!isNaN(x)) {
+          passwordnumbers.push(x);
+        }
+      });
+      if (passwordletters.length < 1 || passwordnumbers.length < 1) {
+        buttonDisplayMsg("Password must contain letters and numbers");
+        return false;
+      }
+      return true;
+    }
+  };
+  let firstCheck = checkPassword(createPassword.value);
+  let secondCheck = checkUsername(createUsername.value);
 
   // Create new user object and push it to users array
-  let newUser = new UsersCl(createUsername.value, createPassword.value);
-  users.push(newUser);
+  if (firstCheck === true && secondCheck === true) {
+    let newUser = new UsersCl(createUsername.value, createPassword.value);
+    users.push(newUser);
 
-  setStorage();
-  loginRemove(0, "-100%");
-  removeAccDivs(createDiv, "-100%", 0);
+    setStorage();
+    loginRemove(0, "-100%");
+    removeAccDivs(createDiv, "-100%", 0);
 
-  welcomeMsg.style.right = "0";
-  show.style.left = 0;
-  welcomeMsg.style.opacity = 1;
-  logoutBtn.classList.remove("hidden");
-  activeUser[0] = newUser;
+    welcomeMsg.style.right = "0";
+    show.style.left = 0;
+    welcomeMsg.style.opacity = 1;
+    logoutBtn.classList.remove("hidden");
+    activeUser[0] = newUser;
 
-  welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
-  createUsername.value = createPassword.value = "";
-  welcomeMsg.style.top = "-170px";
+    welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
+    createUsername.value = createPassword.value = "";
+    welcomeMsg.style.top = "-170px";
+  }
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -534,9 +619,11 @@ loginBtn.addEventListener("click", function () {
       loginRemove(0, "-100%");
       removeAccDivs(loginDiv, "-100%", 0);
 
+      // Remove favorite button from allready favorited cards
       activeUser[0].userFavoriteCards.forEach((x, i) => {
         createCardFinal(activeUser[0].userFavoriteCards, i);
         favorite.classList.add("hidden");
+        newBtn.classList.add("hidden");
       });
 
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
@@ -578,12 +665,16 @@ logoutBtn.addEventListener("click", function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
 
+const textBtwImg = document.querySelector(".textBetweenImgs");
+
 searchOptionsBtn.addEventListener("click", function () {
   // Set all elements where they need to be
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
   container.style.opacity = 1;
+  textBtwImg.style.top = "90px";
+  textBtwImg.style.marginBottom = "20px";
   container.style.height = "100vh";
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
@@ -592,8 +683,10 @@ searchOptionsBtn.addEventListener("click", function () {
   body.style.height = "600vh";
   footer.style.top = 0;
   section4.style.top = "155px";
+  createBringBtn.style.left = "-100%";
+  loginBringBtn.style.left = "-100%";
 
-  // If there is active user, bring all favorites button
+  // If there is active user, bring favorites button
   if (activeUser[0]) {
     show.style.opacity = 1;
     show.style.left = 0;
@@ -607,6 +700,7 @@ searchOptionsBtn.addEventListener("click", function () {
       arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
     }, 10000);
   }
+  containerTextTimer(arr[0]);
   arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
 });
 
@@ -615,6 +709,8 @@ searchOptionsBtn.addEventListener("click", function () {
 
 closeSearchBtn.addEventListener("click", function () {
   closeSearchLogout();
+  createBringBtn.style.left = "0";
+  loginBringBtn.style.left = "0";
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
