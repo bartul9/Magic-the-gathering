@@ -45,17 +45,27 @@
       <button class="btnModal createBringInputs">Create Acc</button
       ><button class="btnModal loginBringInputs">Login</button>
       <div class="createAcc--div">
-        <label for="createUsername">Username: </label>
-        <input type="text" id="createUsername" name="createUsername" />
-        <label for="createPassword">Password: </label>
-        <input type="password" id="createPassword" name="createPassword" />
+        <label for="createUsername">Username </label>
+        <input
+          type="text"
+          id="createUsername"
+          name="createUsername"
+          placeholder="Min 4 characters"
+        />
+        <label for="createPassword">Password</label>
+        <input
+          type="password"
+          id="createPassword"
+          name="createPassword"
+          placeholder="Must contain letter and number"
+        />
         <button class="create--btn">Create Account</button>
         <span class="close">X</span>
       </div>
       <div class="login--div">
-        <label for="username">Username: </label>
+        <label for="username">Username </label>
         <input type="text" id="username" name="username" />
-        <label for="password">Password: </label>
+        <label for="password">Password </label>
         <input type="password" id="password" name="password" />
         <button class="login--btn">Login</button>
         <span class="close close2">X</span>
@@ -160,7 +170,9 @@
       <div class="search--div searchBtnsAll">
         <button class="show showBtns">Show Favorites</button>
         <button class="showAll showBtns">All Set Cards</button>
-        <button class="closeSearchBtn showBtns">Close Search</button>
+        <button id="closeSearch" class="closeSearchBtn showBtns">
+          Close Search
+        </button>
       </div>
       <!-- Search by rarity options -->
       <div class="search--div searchByRarity">
@@ -177,8 +189,8 @@
     </section>
 
     <!-- Page sliders  -->
-    <button class="pageButtons previous">Previous page</button
-    ><button class="pageButtons next">Next page</button>
+    <button class="pageButtons previous">Previous</button
+    ><button class="pageButtons next">Next</button>
     <!-- Main container with cards -->
     <main class="container section">
       <!-- Cards propotype -->
@@ -204,7 +216,7 @@
         period from 2008 to 2016, during which time it grew in popularity.
       </p>
     </section>
-
+    <h2 class="textBetweenImgs"><q>The greatest card game ever made</q></h2>
     <!-- Section with card that is like slider -->
     <section class="section section--4">
       <div class="testimonials"></div>
