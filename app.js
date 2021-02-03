@@ -142,9 +142,9 @@ const closeSearchLogout = function () {
   pageBtnDiv.style.left = "-100%";
   footer.style.top = "-245px";
   nextBtn.style.left = "-100%";
-  topPage.style.bottom = "-100px";
+  topPage.style.bottom = "-140px";
   previousBtn.style.left = "-100%";
-  thankYouMsg.style.top = "360px";
+  thankYouMsg.style.top = "400px";
   section4.style.top = "0";
   container.style.transition = "500ms";
   container.innerHTML = "";
@@ -505,7 +505,7 @@ loginBringBtn.addEventListener("click", function () {
 const buttonDisplayMsg = function (value) {
   createPassword.value = createUsername.value = "";
   createBtn.style.fontSize = "15px";
-  createBtn.style.height = "70px";
+  createBtn.style.height = "75px";
   createBtn.style.marginBottom = "30px";
   createBtn.textContent = value;
   createBtn.style.fontWeight = 400;
@@ -667,8 +667,8 @@ searchOptionsBtn.addEventListener("click", function () {
   container.style.height = "100vh";
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
-  topPage.style.bottom = "-140px";
-  thankYouMsg.style.bottom = "-450px";
+  topPage.style.bottom = "-180px";
+  thankYouMsg.style.bottom = "-400px";
   body.style.height = "595vh";
   pageBtnDiv.style.opacity = 1;
   pageBtnDiv.style.left = 0;
