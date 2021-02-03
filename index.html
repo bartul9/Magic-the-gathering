@@ -30,7 +30,9 @@
         <li><a href="#search">Cards</a></li>
         <li><a id="aboutLink" href="#about">About</a></li>
         <!-- <li><a href="#">Project</a></li> -->
-        <li id="logout" class="hidden">Logout</li>
+        <li id="logout" class="hidden">
+          <img id="logoutImg" src="/imgs/logout_90894.png" alt="" />
+        </li>
       </ul>
       <div class="burger">
         <div class="line1"></div>
@@ -46,19 +48,9 @@
       ><button class="btnModal loginBringInputs">Login</button>
       <div class="createAcc--div">
         <label for="createUsername">Username </label>
-        <input
-          type="text"
-          id="createUsername"
-          name="createUsername"
-          placeholder="Min 4 characters"
-        />
+        <input type="text" id="createUsername" name="createUsername" />
         <label for="createPassword">Password</label>
-        <input
-          type="password"
-          id="createPassword"
-          name="createPassword"
-          placeholder="Must contain letter and number"
-        />
+        <input type="password" id="createPassword" name="createPassword" />
         <button class="create--btn">Create Account</button>
         <span class="close">X</span>
       </div>
@@ -189,8 +181,10 @@
     </section>
 
     <!-- Page sliders  -->
-    <button class="pageButtons previous">Previous</button
-    ><button class="pageButtons next">Next</button>
+    <div class="pageBtnDiv">
+      <button class="pageButtons previous">&#10094;</button
+      ><button class="pageButtons next">&#10095;</button>
+    </div>
     <!-- Main container with cards -->
     <main class="container section">
       <!-- Cards propotype -->
@@ -216,7 +210,7 @@
         period from 2008 to 2016, during which time it grew in popularity.
       </p>
     </section>
-    <h2 class="textBetweenImgs"><q>The greatest card game ever made</q></h2>
+
     <!-- Section with card that is like slider -->
     <section class="section section--4">
       <div class="testimonials"></div>
