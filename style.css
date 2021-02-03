@@ -68,9 +68,20 @@ nav {
   font-size: 25px;
   transition: 500ms;
 }
+#logoutImg {
+  position: relative;
+  top: 5px;
+  width: 60%;
+  transition: 500ms;
+}
+
+#logoutImg:hover {
+  transform: rotateY(35deg);
+}
 
 #logout {
   font-weight: bold;
+  width: 10%;
 }
 #logout:hover {
   cursor: pointer;
@@ -489,7 +500,7 @@ nav {
   text-align: center;
   width: 50%;
   font-size: 22px;
-  transform: skewY(7deg);
+  transform: skewY(8deg);
   opacity: 0;
   transition: 1s;
   color: #ffffff;
@@ -593,23 +604,32 @@ nav {
   position: relative;
   top: -130px;
   left: -100%;
-  width: 80px;
-  height: 20px;
-  border-radius: 15px;
+  width: 40px;
+  height: 40px;
   transition: 500ms;
   outline: none;
   border: 1px solid rgb(136, 136, 136);
   margin-bottom: 5px;
   color: white;
+  font-size: 22px;
+}
+.pageBtnDiv {
+  position: relative;
+  left: 0;
+  opacity: 1;
 }
 
 .pageButtons:hover {
   cursor: pointer;
 }
 .next {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   background-color: rgba(0, 132, 255, 0.747);
 }
 .previous {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   background-color: rgba(255, 30, 0, 0.815);
 }
 .next:hover {
@@ -845,6 +865,7 @@ nav {
   top: 0px;
   transition: 1s;
   opacity: 1;
+  transform: skewY(-7deg);
   background-color: rgb(255, 255, 255);
   background-image: url(https://images.wallpapersden.com/image/download/aurelia-magic-the-gathering_bGVqbWeUmZqaraWkpJRmbmdlrWZnZWU.jpg);
   background-size: cover;
@@ -874,7 +895,7 @@ nav {
   background-size: contain;
   background-repeat: no-repeat;
   width: 229px;
-  transform: skewY(-7deg);
+  transform: skewY(-2deg);
   transition: 1s;
   -webkit-box-shadow: 0px 0px 10px 6px #ffffff;
   box-shadow: 0px 0px 10px 6px #ffffff;
@@ -886,9 +907,8 @@ nav {
 .testimonials:hover {
   cursor: pointer;
   position: relative;
-  transform: rotateX(20deg);
-  transform: rotateY(10deg);
-  opacity: 0.5;
+  transform: skewY(7deg);
+  opacity: 0.9;
 }
 
 /* To page icon */
@@ -1014,6 +1034,13 @@ nav {
   }
 }
 
+@media (max-width: 770px) {
+  #logoutImg {
+    width: 105%;
+    left: 5px;
+  }
+}
+
 @media (max-width: 570px) {
   .textBetweenImgs {
     font-size: 40px;
@@ -1115,7 +1142,7 @@ nav {
     top: -25px;
   }
   .searchOptionBtn {
-    top: 60px;
+    top: 40px;
   }
 
   .btnSearch {
@@ -1148,6 +1175,9 @@ nav {
 }
 
 @media (max-width: 430px) {
+  #logoutImg {
+    width: 150%;
+  }
   #topPageImg {
     top: 100px;
   }
