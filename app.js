@@ -38,6 +38,7 @@ const cardBackImg = document.querySelector(".cardBackImg");
 const closeCreateLoginBtn = document.querySelectorAll(".close");
 const body = document.querySelector("body");
 const navbar = document.querySelector(".navbar");
+const pageBtnDiv = document.querySelector(".pageBtnDiv");
 
 // Selectors for card modal
 
@@ -137,8 +138,8 @@ const sliderBtnTxt = function () {
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
 
 const closeSearchLogout = function () {
-  textBtwImg.style.top = "-120px";
-  textBtwImg.style.marginBottom = "0";
+  pageBtnDiv.style.opacity = 0;
+  pageBtnDiv.style.left = "-100%";
   footer.style.top = "-245px";
   nextBtn.style.left = "-100%";
   topPage.style.bottom = "-100px";
@@ -231,7 +232,7 @@ nextBtn.addEventListener("click", function () {
   pageCount++;
   nextBtn.textContent = pageCount;
   setTimeout(() => {
-    nextBtn.textContent = "Next Page";
+    nextBtn.innerHTML = "&#10095;";
   }, 700);
 
   sliderBtnTxt();
@@ -244,7 +245,7 @@ previousBtn.addEventListener("click", function () {
   pageCount--;
   previousBtn.textContent = pageCount;
   setTimeout(() => {
-    previousBtn.textContent = "Previous Page";
+    previousBtn.innerHTML = "&#10094;";
   }, 700);
 
   sliderBtnTxt();
@@ -500,8 +501,7 @@ loginBringBtn.addEventListener("click", function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Create acc =>  When user clicks Create I create object with his name in it and password and push it to ussers array, also I display welcome message, and remove all elements that need to be removed in nice animation
 
-// Function for checking if inputs contain enough characters and if lenght is minimun 4 long
-
+// This is function for displaying message in button, I think it looks alright, but maybe I find another solution eventually
 const buttonDisplayMsg = function (value) {
   createPassword.value = createUsername.value = "";
   createBtn.style.fontSize = "15px";
@@ -518,6 +518,31 @@ const buttonDisplayMsg = function (value) {
   }, 4000);
 };
 
+///////////////////////////////////////////////////////////////////////////
+// Function for checking inputs
+
+// Here I created function that accepts three values. First value is username or password, second value is username or password for comparing, and thirs value is text that I display on button. If we are checking password text is password, and for username it's username.
+// So if the values are above 3 I split value into array, and put all numbers in numbers array and letters in letters array, and if the lenght of both arrays is above 0 I know value contains letter and a number
+const checkRightInputs = function (value1, value2, value3) {
+  if (value1.length >= 4 && value2.length >= 4) {
+    let numbers = [];
+    let letters = [];
+    value1.split("").forEach((x) => {
+      if (isNaN(x)) {
+        letters.push(x);
+      }
+      if (!isNaN(x)) {
+        numbers.push(x);
+      }
+    });
+    if (letters.length < 1 || numbers.length < 1) {
+      buttonDisplayMsg(`${value3} must contain letters and numbers`);
+      return false;
+    }
+    return true;
+  }
+};
+
 /////////////////////////////////////////////
 
 createBtn.addEventListener("click", function () {
@@ -532,49 +557,17 @@ createBtn.addEventListener("click", function () {
     return;
   }
 
-  ////// !!!!!!!!!!!!!!!!!!!! have to reafactor this !
-  const checkUsername = function (username) {
-    if (firstCheck === true && username.length >= 4) {
-      let usernamenumbers = [];
-      let usernameletters = [];
-      createUsername.value.split("").forEach((x) => {
-        if (isNaN(x)) {
-          usernameletters.push(x);
-        }
-        if (!isNaN(x)) {
-          usernamenumbers.push(x);
-        }
-      });
-      if (usernameletters.length < 1 || usernamenumbers.length < 1) {
-        buttonDisplayMsg("Username must contain letters and numbers");
-        return false;
-      }
-
-      return true;
-    }
-  };
-
-  const checkPassword = function (password) {
-    if (password.length >= 4 && createUsername.value.length >= 4) {
-      let passwordnumbers = [];
-      let passwordletters = [];
-      password.split("").forEach((x) => {
-        if (isNaN(x)) {
-          passwordletters.push(x);
-        }
-        if (!isNaN(x)) {
-          passwordnumbers.push(x);
-        }
-      });
-      if (passwordletters.length < 1 || passwordnumbers.length < 1) {
-        buttonDisplayMsg("Password must contain letters and numbers");
-        return false;
-      }
-      return true;
-    }
-  };
-  let firstCheck = checkPassword(createPassword.value);
-  let secondCheck = checkUsername(createUsername.value);
+  // Here I put results of input into variables so I can use them to check if result of function was true, if it was for both username and password I create new ACC
+  let firstCheck = checkRightInputs(
+    createPassword.value,
+    createUsername.value,
+    "Password"
+  );
+  let secondCheck = checkRightInputs(
+    createUsername.value,
+    createPassword.value,
+    "Username"
+  );
 
   // Create new user object and push it to users array
   if (firstCheck === true && secondCheck === true) {
@@ -665,22 +658,20 @@ logoutBtn.addEventListener("click", function () {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Btn for opening search options => Make nice animation for everything, display 100 cards, if they are not yet fetched wait for 6 seconds and add spinner
 
-const textBtwImg = document.querySelector(".textBetweenImgs");
-
 searchOptionsBtn.addEventListener("click", function () {
   // Set all elements where they need to be
   sectionSearch.style.opacity = 1;
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
   container.style.opacity = 1;
-  textBtwImg.style.top = "90px";
-  textBtwImg.style.marginBottom = "20px";
   container.style.height = "100vh";
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
   topPage.style.bottom = "-140px";
   thankYouMsg.style.bottom = "-450px";
-  body.style.height = "600vh";
+  body.style.height = "595vh";
+  pageBtnDiv.style.opacity = 1;
+  pageBtnDiv.style.left = 0;
   footer.style.top = 0;
   section4.style.top = "155px";
   createBringBtn.style.left = "-100%";
