@@ -39,6 +39,8 @@ const closeCreateLoginBtn = document.querySelectorAll(".close");
 const body = document.querySelector("body");
 const navbar = document.querySelector(".navbar");
 const pageBtnDiv = document.querySelector(".pageBtnDiv");
+const searchColors = document.querySelector("#search--colors");
+const colorsBtn = document.querySelector(".colors--btn");
 
 // Selectors for card modal
 
@@ -138,6 +140,8 @@ const sliderBtnTxt = function () {
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
 
 const closeSearchLogout = function () {
+  createDiv.style.left = 0;
+  loginDiv.style.left = 0;
   pageBtnDiv.style.opacity = 0;
   pageBtnDiv.style.left = "-100%";
   footer.style.top = "-245px";
@@ -204,20 +208,36 @@ let users = [];
 // Arr for active users
 let activeUser = [];
 
+// Arr for types, ladn, enchantment, etc..
+let typeArr = [];
+
+// Push cards that we are looking at right now to active cards arr so I can filter those cards
+let activeCardsArr = [];
+/////////////////////////////////////////////////////////////
+
 /////////////////////////////////////////////////////////////////////////////////////////
 // Fetch methods for api=> These are the first card fetched so user can have something to see when he opens container
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
   .then((res) => res.json())
-  .then((x) => arr.push(x));
+  .then((x) => {
+    arr.push(x);
+    activeCardsArr.push(x);
+  });
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
   .then((res) => res.json())
-  .then((x) => arr.push(x));
+  .then((x) => {
+    arr.push(x);
+    activeCardsArr.push(x);
+  });
 
 fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
   .then((res) => res.json())
-  .then((x) => arr.push(x));
+  .then((x) => {
+    arr.push(x);
+    activeCardsArr.push(x);
+  });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
@@ -230,7 +250,7 @@ nextBtn.addEventListener("click", function () {
   }
 
   pageCount++;
-  nextBtn.textContent = pageCount;
+  nextBtn.textContent = pageCount + 1;
   setTimeout(() => {
     nextBtn.innerHTML = "&#10095;";
   }, 700);
@@ -243,7 +263,7 @@ previousBtn.addEventListener("click", function () {
     pageCount = arr.length;
   }
   pageCount--;
-  previousBtn.textContent = pageCount;
+  previousBtn.textContent = pageCount + 1;
   setTimeout(() => {
     previousBtn.innerHTML = "&#10094;";
   }, 700);
@@ -404,13 +424,19 @@ setBtn.addEventListener("click", function () {
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => (setArr[0] = x));
+    .then((x) => {
+      setArr[0] = x;
+      activeCardsArr[0] = x;
+    });
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => (arr[0] = x));
+    .then((x) => {
+      arr[0] = x;
+      activeCardsArr.push(x);
+    });
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=2`
@@ -433,6 +459,7 @@ setBtn.addEventListener("click", function () {
         createCardFinal(setArr[0].cards, i);
       });
     }, 10000);
+    searchSet.value = "";
   }
 
   containerTextTimer(setArr[0]);
@@ -462,7 +489,6 @@ setBtn.addEventListener("click", function () {
 typeBtn.addEventListener("click", function () {
   rareCards = [];
   container.innerHTML = "";
-
   arr.forEach((y) =>
     y.cards.forEach((x) => {
       if (x.rarity.toUpperCase() === inputType.value.toUpperCase()) {
@@ -470,10 +496,53 @@ typeBtn.addEventListener("click", function () {
       }
     })
   );
+
   rareCards.forEach((x, i) => createCardFinal(rareCards, i));
   inputType.value = "";
 });
 
+///////////////////////////////////////////////////////////////////////////////////////
+/// Search by types => createure, enchantments, etc
+
+colorsBtn.addEventListener("click", function () {
+  activeCardsArr = [];
+  typeArr = [];
+  container.innerHTML = "";
+  arr.forEach((y) =>
+    y.cards.forEach((x) => {
+      if (x.types[0].toUpperCase() === searchColors.value.toUpperCase()) {
+        typeArr.push(x);
+        activeCardsArr.push(x);
+      }
+    })
+  );
+  typeArr.forEach((x, i) => createCardFinal(typeArr, i));
+  searchColors.value = "";
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////
+// Search by name
+
+const inputNameSearch = function () {
+  nameArr = [];
+  container.innerHTML = "";
+  fetch(`https://api.magicthegathering.io/v1/cards?name=${inputName.value}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      nameArr[0] = data;
+    });
+  setTimeout(() => {
+    nameArr[0].cards.forEach((x, i) => {
+      createCardFinal(nameArr[0].cards, i);
+    });
+  }, 1500);
+  inputName.value = "";
+};
+
+nameBtn.addEventListener("click", inputNameSearch);
+
+// inputName.addEventListener("input", inputNameSearch);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Class prototype for every new created user
 
@@ -661,6 +730,8 @@ logoutBtn.addEventListener("click", function () {
 searchOptionsBtn.addEventListener("click", function () {
   // Set all elements where they need to be
   sectionSearch.style.opacity = 1;
+  createDiv.style.left = "-100%";
+  loginDiv.style.left = "-100%";
   sectionSearch.style.left = "0";
   searchOptionsBtn.classList.add("hidden");
   container.style.opacity = 1;
