@@ -170,10 +170,40 @@ nav {
   flex-direction: column;
   left: -100%;
   opacity: 0;
-  transition: 200ms;
+  transition: 400ms;
   font-size: 23px;
   color: rgb(255, 255, 255);
   letter-spacing: 1px;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: -30px;
+}
+.right-side {
+  position: relative;
+  right: -30px;
+}
+.searchByName {
+  top: 0;
+}
+.searchBySet {
+  top: 0;
+}
+.searchByRarity {
+  top: 0;
+}
+
+#search--name {
+  border-radius: 10px;
+}
+#search--colors {
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  background: rgb(255, 255, 255);
+  width: 180px;
 }
 
 #search--set {
@@ -213,7 +243,7 @@ nav {
 }
 
 .login--div {
-  transition: 200ms;
+  transition: 400ms;
   position: relative;
   left: -100%;
   top: -55px;
@@ -295,7 +325,7 @@ nav {
 
 /* Search divs and buttons inside them */
 .search--div {
-  width: 100%;
+  width: 250px;
   height: 20vh;
   display: flex;
   justify-content: center;
@@ -310,6 +340,7 @@ nav {
 
 .searchBtnsAll {
   top: 50px;
+  width: 50;
 }
 
 .btnSearch {
@@ -986,6 +1017,12 @@ nav {
 
 /* ----------------------------------------------- */
 @media (max-width: 900px) {
+  .left-side {
+    top: 12px;
+  }
+  .right-side {
+    top: 15px;
+  }
   .cardTextAbout {
     width: 80%;
     font-size: 21px;
@@ -1041,6 +1078,58 @@ nav {
   }
 }
 
+@media (max-width: 690px) {
+  .section--2 {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .btnSearch {
+    top: -10px;
+  }
+  .left-side {
+    display: flex;
+    flex-direction: row;
+    left: 0px;
+    top: 110px;
+    height: 75%;
+  }
+  .searchByName {
+    top: 0;
+    height: 75%;
+  }
+  .searchBySet {
+    top: 0;
+    height: 75%;
+  }
+  .searchByRarity {
+    top: 0;
+    height: 75%;
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: row;
+    right: 0px;
+    top: -40px;
+    height: 150px;
+  }
+  .pageBtnDiv {
+    position: relative;
+    top: 20px;
+  }
+
+  .closeSearchBtn {
+    position: relative;
+    top: 29px;
+    left: 120px;
+  }
+  .showAll {
+    position: relative;
+    top: 92px;
+    left: -120px;
+  }
+}
+
 @media (max-width: 570px) {
   .textBetweenImgs {
     font-size: 40px;
@@ -1090,41 +1179,18 @@ nav {
     width: 100%;
     font-size: 19px;
   }
-  .pageButtons {
-    top: -20px;
-    color: white;
-  }
 
-  .container {
-    top: 0px;
-  }
   .headingOne {
     font-size: 150px;
     letter-spacing: 0;
     position: relative;
     top: 140px;
   }
-
-  .section--2 {
-    flex-direction: column;
-    margin-bottom: 50px;
-    top: 25px;
-  }
   .search--div {
-    color: rgb(0, 132, 255);
-    height: 100px;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    color: white;
+    font-size: 20px;
   }
-
-  .searchByName {
-    position: relative;
-    top: -32px;
-  }
-
   .showBtns {
-    margin: 5px;
     background-color: rgba(0, 0, 0, 0.671);
     color: rgb(0, 57, 243);
   }
@@ -1132,22 +1198,13 @@ nav {
     background-color: rgba(0, 0, 0, 0.671);
     color: rgb(255, 255, 255);
   }
-  .searchBtnsAll {
-    position: relative;
-    top: -40px;
-  }
 
-  .searchByRarity {
-    position: relative;
-    top: -25px;
-  }
   .searchOptionBtn {
     top: 65px;
   }
 
   .btnSearch {
     position: relative;
-    top: -10px;
     color: rgb(0, 132, 255);
   }
   .modal-content {
@@ -1173,8 +1230,77 @@ nav {
     height: 23px;
   }
 }
-
+@media (max-width: 490px) {
+  .searchByRarity {
+    top: 0px;
+  }
+  .searchBtnsAll {
+    width: 10px;
+  }
+  .left-side {
+    height: 75px;
+    top: 140px;
+  }
+  .searchByName {
+    width: 70%;
+  }
+  .searchBySet {
+    width: 70%;
+  }
+  .searchByRarity {
+    width: 70%;
+  }
+  .right-side {
+    height: 100px;
+    top: 40px;
+  }
+  .btnSearch {
+    width: 140px;
+  }
+  .previous {
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+  }
+  .next {
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+  }
+  #search--colors {
+    width: 140px;
+  }
+  #search--type {
+    width: 140px;
+  }
+  #search--name {
+    width: 140px;
+  }
+  #search--set {
+    width: 140px;
+  }
+  .closeSearchBtn {
+    position: relative;
+    top: 72px;
+    left: 100px;
+    width: 120px;
+    font-size: 16px;
+  }
+  .showAll {
+    position: relative;
+    top: 132px;
+    left: -100px;
+    width: 120px;
+    font-size: 16px;
+  }
+}
 @media (max-width: 430px) {
+  .left-side {
+    top: 100px;
+  }
+  .right-side {
+    top: -60px;
+  }
   #logoutImg {
     width: 150%;
   }
@@ -1219,5 +1345,47 @@ nav {
   }
   #logoImg {
     width: 50%;
+  }
+  .btnSearch {
+    width: 100px;
+  }
+  .colors--btn {
+    width: 100px;
+  }
+  .previous {
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+  }
+  .next {
+    font-size: 16px;
+    height: 30px;
+    width: 30px;
+  }
+  #search--colors {
+    width: 100px;
+  }
+  #search--type {
+    width: 100px;
+  }
+  #search--name {
+    width: 100px;
+  }
+  #search--set {
+    width: 100px;
+  }
+  .closeSearchBtn {
+    position: relative;
+    top: 10px;
+    left: 90px;
+    width: 100px;
+    font-size: 15px;
+  }
+  .showAll {
+    position: relative;
+    top: 70px;
+    left: -90px;
+    width: 100px;
+    font-size: 15px;
   }
 }
