@@ -110,7 +110,7 @@ const containerTextTimer = function (path) {
 
 cardTextAbout.addEventListener("mouseover", function () {
   cardBackImg.style.opacity = 0;
-  cardTextAbout.style.backgroundColor = "rgba(255, 50, 255, 0.2)";
+  cardTextAbout.style.backgroundColor = "rgba(255, 50, 255, 0.5)";
 });
 
 cardTextAbout.addEventListener("mouseout", function () {
@@ -140,8 +140,6 @@ const sliderBtnTxt = function () {
 // Function for closing search and logging out => So, here I putted everything thats duplicate from search and logout functions, and putted it all in one so code looks nicer
 
 const closeSearchLogout = function () {
-  createDiv.style.left = 0;
-  loginDiv.style.left = 0;
   pageBtnDiv.style.opacity = 0;
   pageBtnDiv.style.left = "-100%";
   footer.style.top = "-245px";
@@ -616,13 +614,14 @@ const checkRightInputs = function (value1, value2, value3) {
 
 createBtn.addEventListener("click", function () {
   closeSearchLogout();
-
+  loginRemove(0, "-100%");
   // Check for valid inputs
 
   if (createPassword.value.length < 4 && createUsername.value.length < 4) {
     buttonDisplayMsg(
       "Both password and username must be at least 4 charaters long and contain 1 digit and 1 letter"
     );
+
     return;
   }
 
@@ -644,7 +643,7 @@ createBtn.addEventListener("click", function () {
     users.push(newUser);
 
     setStorage();
-    loginRemove(0, "-100%");
+    // loginRemove(0, "-100%");
     removeAccDivs(createDiv, "-100%", 0);
 
     welcomeMsg.style.right = "0";
@@ -665,7 +664,6 @@ createBtn.addEventListener("click", function () {
 loginBtn.addEventListener("click", function () {
   container.innerHTML = "";
   closeSearchLogout();
-  loginRemove();
   getStorage();
   // Check if users username and password matches and create user interface
   users.forEach((user) => {
@@ -771,8 +769,7 @@ searchOptionsBtn.addEventListener("click", function () {
 
 closeSearchBtn.addEventListener("click", function () {
   closeSearchLogout();
-  createBringBtn.style.left = "0";
-  loginBringBtn.style.left = "0";
+  if (!activeUser[0]) loginRemove(1, 0);
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
