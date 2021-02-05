@@ -653,6 +653,7 @@ createBtn.addEventListener("click", function () {
     activeUser[0] = newUser;
 
     welcomeMsg.textContent = `Welcome ${activeUser[0].username} to the world of magic`;
+    searchOptionsBtn.style.top = "10px";
     createUsername.value = createPassword.value = "";
     welcomeMsg.style.top = "-170px";
   }
@@ -687,6 +688,7 @@ loginBtn.addEventListener("click", function () {
       });
 
       welcomeMsg.textContent = `Welcome back ${activeUser[0].username}`;
+      searchOptionsBtn.style.top = "10px";
     }
   });
 
@@ -718,6 +720,7 @@ logoutBtn.addEventListener("click", function () {
   activeUser = [];
   logoutBtn.classList.add("hidden");
   welcomeMsg.style.opacity = 0;
+  searchOptionsBtn.style.top = "0";
   welcomeMsg.style.right = "100%";
   container.innerHTML = "";
 });
