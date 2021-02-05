@@ -172,8 +172,11 @@ nav {
   left: -100%;
   opacity: 0;
   transition: 400ms;
-  font-size: 23px;
-  color: rgba(0, 0, 0, 0);
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  font-weight: 500;
 }
 .close {
   color: white;
@@ -249,12 +252,15 @@ nav {
   transition: 400ms;
   position: relative;
   left: -100%;
-  top: -55px;
+  top: -70px;
   display: flex;
   flex-direction: column;
   opacity: 0;
-  font-size: 23px;
-  color: #00000000;
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  font-weight: 500;
 }
 #logoImg {
   width: 30%;
