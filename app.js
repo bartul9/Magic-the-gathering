@@ -95,14 +95,14 @@ const spinner = function () {
 
 const containerTextTimer = function (path) {
   setTimeout(() => {
-    if (!path) {
+    if (path.length < 1) {
       console.log("not loaded");
       let p = document.createElement("p");
       p.classList.add("container-p");
       p.textContent = "Could not load, please try again";
       container.append(p);
     }
-  }, 10010);
+  }, 10500);
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -416,6 +416,8 @@ const setArr = [];
 setBtn.addEventListener("click", function () {
   container.innerHTML = "";
 
+  arr = [];
+
   // Fetch all card pages and push them into array
   // Here I fetch first page and render cards in container, and other pages I push to arr, then later if you want to see all set card I pull them from arr, or if you want next page I pull the set from arr so you dont have to wait it to fetch.
   fetch(
@@ -424,30 +426,49 @@ setBtn.addEventListener("click", function () {
     .then((res) => res.json())
     .then((x) => {
       setArr[0] = x;
-      activeCardsArr[0] = x;
     });
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
   )
     .then((res) => res.json())
-    .then((x) => {
-      arr[0] = x;
-      activeCardsArr.push(x);
-    });
+    .then((x) => (arr[0] = x));
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=2`
   )
     .then((res) => res.json())
-    .then((x) => (arr[1] = x));
+    .then((x) => {
+      if (x.cards.length < 2) return;
+      arr[1] = x;
+    });
 
   fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=3`
   )
     .then((res) => res.json())
-    .then((x) => (arr[2] = x));
+    .then((x) => {
+      if (x.cards.length < 2) return;
+      arr[2] = x;
+    });
 
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=4`
+  )
+    .then((res) => res.json())
+    .then((x) => {
+      if (x.cards.length < 2) return;
+      arr[3] = x;
+    });
+
+  fetch(
+    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=5`
+  )
+    .then((res) => res.json())
+    .then((x) => {
+      if (x.cards.length < 2) return;
+      arr[4] = x;
+    });
   // Check if setArr is empty or not, if yes add spinner and put 10sec timeout
   if (!setArr.length < 2) {
     spinner();
@@ -460,7 +481,8 @@ setBtn.addEventListener("click", function () {
     searchSet.value = "";
   }
 
-  containerTextTimer(setArr[0]);
+  containerTextTimer(setArr);
+
   // Chech if there is allready set loaded that we are looking for, if not add spinner and search for new one
   if (
     !setArr[setArr.length - 1].cards.set ===
@@ -480,6 +502,9 @@ setBtn.addEventListener("click", function () {
     createCardFinal(setArr[0].cards, i);
   });
 });
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Function for checking if user favorite cards exist so we dont create buttons when searching
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Show all cards by rarity => Here I putted all cards that I look for in new array then I simply loop over that array and show cards
