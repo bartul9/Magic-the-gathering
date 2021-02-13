@@ -152,7 +152,7 @@ const closeSearchLogout = function () {
   container.innerHTML = "";
   show.style.opacity = 0;
   show.style.left = "-200%";
-  body.style.height = "485vh";
+  body.style.height = "482vh";
   sectionSearch.style.opacity = 0;
   container.style.opacity = 0;
   container.style.height = 0;
@@ -411,12 +411,13 @@ show.addEventListener("click", function () {
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Function for fetchin the sets from server, I decidec to do it like this. Card sets have max to four pages so I putted everything like this, it could be cleaner, but I think it works good for what I tryed to do
 
-const setArr = [];
+let setArr = [];
 
 setBtn.addEventListener("click", function () {
   container.innerHTML = "";
-
+  setArr = [];
   arr = [];
+  pageCount = 0;
 
   // Fetch all card pages and push them into array
   // Here I fetch first page and render cards in container, and other pages I push to arr, then later if you want to see all set card I pull them from arr, or if you want next page I pull the set from arr so you dont have to wait it to fetch.
@@ -765,7 +766,7 @@ searchOptionsBtn.addEventListener("click", function () {
   previousBtn.style.left = 0;
   nextBtn.style.left = 0;
   topPage.style.bottom = "-180px";
-  thankYouMsg.style.bottom = "-400px";
+  thankYouMsg.style.top = "500px";
   body.style.height = "595vh";
   pageBtnDiv.style.opacity = 1;
   pageBtnDiv.style.left = 0;
