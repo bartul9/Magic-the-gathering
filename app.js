@@ -550,6 +550,7 @@ colorsBtn.addEventListener("click", function () {
 const inputNameSearch = function () {
   nameArr = [];
   container.innerHTML = "";
+  spinner();
   fetch(`https://api.magicthegathering.io/v1/cards?name=${inputName.value}`)
     .then((res) => res.json())
     .then((data) => {
@@ -557,10 +558,11 @@ const inputNameSearch = function () {
       nameArr[0] = data;
     });
   setTimeout(() => {
+    container.innerHTML = "";
     nameArr[0].cards.forEach((x, i) => {
       createCardFinal(nameArr[0].cards, i);
     });
-  }, 1500);
+  }, 6000);
   inputName.value = "";
 };
 
