@@ -531,7 +531,6 @@ nav {
   background-size: contain;
   background-repeat: no-repeat;
   width: 229px;
-  transform: skewY(6.7deg);
   transition: 1s;
   -webkit-box-shadow: 0px 0px 10px 6px #ffffff;
   box-shadow: 0px 0px 10px 6px #ffffff;
@@ -557,17 +556,9 @@ nav {
 }
 
 .cardTextAbout:hover {
-  cursor: pointer;
   opacity: 1;
-  transform: skewY(0deg);
-}
-
-.cardBackImg:hover {
+  transform: skewY(0);
   cursor: pointer;
-  position: relative;
-  transform: rotateX(20deg);
-  transform: rotateY(10deg);
-  opacity: 0.8;
 }
 
 /* --------------------------------------------------- */
