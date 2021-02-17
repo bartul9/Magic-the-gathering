@@ -209,6 +209,8 @@ nav {
 
 #search--name {
   border-radius: 10px;
+  height: 20px;
+  width: 180px;
 }
 #search--colors {
   color: rgb(0, 0, 0);
@@ -242,7 +244,7 @@ nav {
 }
 #search--type {
   width: 180px;
-  height: 21px;
+  height: 20px;
 }
 #username {
   border-radius: 10px;
