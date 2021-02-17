@@ -216,26 +216,9 @@ let activeCardsArr = [];
 /////////////////////////////////////////////////////////////////////////////////////////
 // Fetch methods for api=> These are the first card fetched so user can have something to see when he opens container
 
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
-  .then((res) => res.json())
-  .then((x) => {
-    arr.push(x);
-    activeCardsArr.push(x);
-  });
+// const fetchFirstCards = async function () {
 
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
-  .then((res) => res.json())
-  .then((x) => {
-    arr.push(x);
-    activeCardsArr.push(x);
-  });
-
-fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
-  .then((res) => res.json())
-  .then((x) => {
-    arr.push(x);
-    activeCardsArr.push(x);
-  });
+// };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Page slider for cards. Since they only allow up to 100 cards to be fetched at one call I decided to put them in pages
@@ -413,95 +396,87 @@ show.addEventListener("click", function () {
 
 let setArr = [];
 
-setBtn.addEventListener("click", function () {
+setBtn.addEventListener("click", async function () {
   container.innerHTML = "";
   setArr = [];
   arr = [];
   pageCount = 0;
+  spinner();
 
   // Fetch all card pages and push them into array
   // Here I fetch first page and render cards in container, and other pages I push to arr, then later if you want to see all set card I pull them from arr, or if you want next page I pull the set from arr so you dont have to wait it to fetch.
-  fetch(
+  const page1 = await fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
-  )
-    .then((res) => res.json())
-    .then((x) => {
-      setArr[0] = x;
-    });
+  ).then((res) => res.json());
+  setArr[0] = page1;
+  arr[0] = page1;
 
-  fetch(
-    `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=1`
-  )
-    .then((res) => res.json())
-    .then((x) => (arr[0] = x));
-
-  fetch(
+  await fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=2`
   )
     .then((res) => res.json())
     .then((x) => {
-      if (x.cards.length < 2) return;
-      arr[1] = x;
+      if (x.cards.length > 2) {
+        arr[1] = x;
+      }
     });
 
-  fetch(
+  await fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=3`
   )
     .then((res) => res.json())
     .then((x) => {
-      if (x.cards.length < 2) return;
-      arr[2] = x;
+      if (x.cards.length > 2) {
+        arr[2] = x;
+      }
     });
 
-  fetch(
+  await fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=4`
   )
     .then((res) => res.json())
     .then((x) => {
-      if (x.cards.length < 2) return;
-      arr[3] = x;
+      if (x.cards.length > 2) {
+        arr[3] = x;
+      }
     });
 
-  fetch(
+  await fetch(
     `https://api.magicthegathering.io/v1/cards?set=${searchSet.value}&page=5`
   )
     .then((res) => res.json())
     .then((x) => {
-      if (x.cards.length < 2) return;
-      arr[4] = x;
+      if (x.cards.length > 2) {
+        arr[4] = x;
+      }
     });
-  // Check if setArr is empty or not, if yes add spinner and put 10sec timeout
-  if (!setArr.length < 2) {
-    spinner();
-    setTimeout(() => {
-      container.innerHTML = "";
-      setArr[0].cards.forEach((x, i) => {
-        createCardFinal(setArr[0].cards, i);
-      });
-    }, 10000);
-    searchSet.value = "";
-  }
 
-  containerTextTimer(setArr);
+  container.innerHTML = "";
 
-  // Chech if there is allready set loaded that we are looking for, if not add spinner and search for new one
-  if (
-    !setArr[setArr.length - 1].cards.set ===
-    setArr[setArr.length - 1].cards.searchSet.value
-  ) {
-    spinner();
-
-    setTimeout(() => {
-      container.innerHTML = "";
-      setArr[0].cards.forEach((x, i) => {
-        createCardFinal(setArr[0].cards, i);
-      });
-    }, 10000);
-  }
+  searchSet.value = "";
 
   setArr[0].cards.forEach((x, i) => {
     createCardFinal(setArr[0].cards, i);
   });
+
+  // Chech if there is allready set loaded that we are looking for, if not add spinner and search for new one
+  // if (
+  //   !setArr[setArr.length - 1].cards.set ===
+  //   setArr[setArr.length - 1].cards.searchSet.value
+  // ) {
+  //   spinner();
+
+  //   setTimeout(() => {
+  //     container.innerHTML = "";
+  //     setArr[0].cards.forEach((x, i) => {
+  //       createCardFinal(setArr[0].cards, i);
+  //     });
+  //   }, 10000);
+  // }
+
+  // setArr[0].cards.forEach((x, i) => {
+  //   createCardFinal(setArr[0].cards, i);
+  // });
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,28 +522,29 @@ colorsBtn.addEventListener("click", function () {
 ///////////////////////////////////////////////////////////////////////////////////////////
 // Search by name
 
-const inputNameSearch = function () {
+const inputNameSearch = async function () {
   nameArr = [];
   container.innerHTML = "";
+
   spinner();
-  fetch(`https://api.magicthegathering.io/v1/cards?name=${inputName.value}`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      nameArr[0] = data;
-    });
-  setTimeout(() => {
-    container.innerHTML = "";
-    nameArr[0].cards.forEach((x, i) => {
-      createCardFinal(nameArr[0].cards, i);
-    });
-  }, 6000);
+
+  const data = await fetch(
+    `https://api.magicthegathering.io/v1/cards?name=${inputName.value}`
+  ).then((res) => res.json());
+
+  container.innerHTML = "";
+
+  nameArr[0] = data;
+
+  nameArr[0].cards.forEach((x, i) => {
+    createCardFinal(nameArr[0].cards, i);
+  });
+
   inputName.value = "";
 };
 
 nameBtn.addEventListener("click", inputNameSearch);
 
-// inputName.addEventListener("input", inputNameSearch);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Class prototype for every new created user
 
@@ -784,15 +760,45 @@ searchOptionsBtn.addEventListener("click", function () {
   }
 
   // Check if array with api is loaded if not put spinner in the middle and wait 10 seconds. There are better ways to do it, but this time I did it like this
-  if (!arr[0]) {
-    spinner();
-    setTimeout(() => {
-      container.innerHTML = "";
-      arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
-    }, 10000);
+
+  if (arr.length > 0) {
+    arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+    return;
   }
-  containerTextTimer(arr[0]);
-  arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+
+  const displayFirstCards = async function () {
+    if (arr.length < 1) {
+      spinner();
+      await fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=1")
+        .then((res) => res.json())
+        .then((x) => {
+          arr.push(x);
+          activeCardsArr.push(x);
+        });
+
+      await fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=2")
+        .then((res) => res.json())
+        .then((x) => {
+          arr.push(x);
+          activeCardsArr.push(x);
+        });
+
+      await fetch("https://api.magicthegathering.io/v1/cards?set=dom&page=3")
+        .then((res) => res.json())
+        .then((x) => {
+          arr.push(x);
+          activeCardsArr.push(x);
+        });
+    } else {
+      container.innerHTML = "";
+      return;
+    }
+
+    container.innerHTML = "";
+    arr[0].cards.forEach((x, i) => createCardFinal(arr[0].cards, i));
+  };
+
+  displayFirstCards();
 });
 
 ///////////////////////////////////////////////////////////////////////////////
