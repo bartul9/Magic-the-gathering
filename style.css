@@ -428,7 +428,7 @@ nav {
   transition: 1s;
   opacity: 1;
   background-color: rgb(255, 255, 255);
-  background-image: url(https://i.pinimg.com/originals/67/36/92/673692cc66ae5e721b0b58edfe2db571.jpg);
+  background-image: url(/imgs/first-background.jpg);
   background-size: cover;
   background-position: center;
   transition-timing-function: ease-out;
@@ -911,7 +911,7 @@ nav {
   opacity: 1;
   transform: skewY(-7deg);
   background-color: rgb(255, 255, 255);
-  background-image: url(https://images.wallpapersden.com/image/download/aurelia-magic-the-gathering_bGVqbWeUmZqaraWkpJRmbmdlrWZnZWU.jpg);
+  background-image: url(/imgs/second-background.jpg);
   background-size: cover;
   background-position: center;
 }
